@@ -19,16 +19,17 @@ export const Select = () => {
         <div className="select-box__value">
           <p className="select-box__text">Value</p>
         </div>
-        <img className="select-box__icon" src={ArrayIcon} alt="Array Icon" />
-      </div>
 
-      <ul className="select-box__list">
-        {mock.map((item, index) => (
-          <li key={index}>
-            <label className="select-box__option">{item}</label>
-          </li>
-        ))}
-      </ul>
+        <img className="select-box__icon" src={ArrayIcon} alt="Array Icon" />
+
+        <ul className="select-box__list">
+          {mock.map((item, index) => (
+            <li key={index}>
+              <label className="select-box__option">{item}</label>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
