@@ -12,15 +12,28 @@ import ArrayIcon from "../../assets/icons/array.svg";
 
 const mock = ["First", "Second", "Third", "Fourth", "Five"];
 
-export const Select = () => {
+export const Select = ({ value, label, type }) => {
+  const selectBoxClasses = ["select-box"];
+  const textClasses = ["select-box__text"];
+  const selectBoxIconClasses = ["select-box__icon"];
+
+  if (label) {
+    textClasses.push("select-box__text-black", "select-box__text-sm");
+    selectBoxIconClasses.push("select-box__icon-sm");
+  }
+
+  if (type && type === "green") {
+    selectBoxClasses.push("select-box-green");
+  }
+
   return (
-    <div className="select-box">
+    <div className={selectBoxClasses.join(" ")}>
+      {label && <div className="select-box__label">{label}</div>}
+
       <div className="select-box__current" tabIndex="1">
         <div className="select-box__value">
-          <p className="select-box__text">Value</p>
+          <p className={textClasses.join(" ")}>{value}</p>
         </div>
-
-        <img className="select-box__icon" src={ArrayIcon} alt="Array Icon" />
 
         <ul className="select-box__list">
           {mock.map((item, index) => (
@@ -30,6 +43,12 @@ export const Select = () => {
           ))}
         </ul>
       </div>
+
+      <img
+        className={selectBoxIconClasses.join(" ")}
+        src={ArrayIcon}
+        alt="Array Icon"
+      />
     </div>
   );
 };
