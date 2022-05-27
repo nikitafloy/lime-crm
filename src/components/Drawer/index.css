@@ -48,35 +48,30 @@
   padding: 16px 0;
 }
 
-.drawer-box__category__current {
+.drawer-box__category__wrapper {
   display: flex;
   padding: 24px 0;
 }
 
 .drawer-box__category__controls {
-  flex: 1 0 32px;
+  flex: 0 0 32px;
+  padding-right: 12px;
 }
 
 .drawer-box__category__block {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  flex-direction: column;
+  row-gap: 8px;
+  justify-content: space-between;
 }
 
-.drawer-box__category__article {
-  display: flex;
-}
-
+.drawer-box__category__article,
 .drawer-box__category__value {
-  display: flex;
+  flex: 0 0 140px;
 }
 
-.drawer-box__category__article-number,
-.drawer-box__category__value-number {
-  flex: 1 0 132px;
-}
-
-.drawer-box__category__article-name,
-.drawer-box__category__value-percent {
-  flex: 1 0 365px;
+.drawer-box__category__name,
+.drawer-box__category__percent {
+  flex: 0 0 365px;
 }

@@ -26,21 +26,16 @@ export const Drawer = () => {
           <hr />
 
           <div className="drawer-box__category">
-            <div className="drawer-box__category__current">
+            <div className="drawer-box__category__wrapper">
               <div className="drawer-box__category__controls">+</div>
+
               <div className="drawer-box__category__block">
-                <div className="drawer-box__category__article">
-                  <div className="drawer-box__category__article-number">
-                    000000
-                  </div>
-                  <div className="drawer-box__category__article-name">
-                    Поиск по наименованию
-                  </div>
+                <div className="drawer-box__category__article">000000</div>
+                <div className="drawer-box__category__name">
+                  Поиск по наименованию
                 </div>
-                <div className="drawer-box__category__value">
-                  <div className="drawer-box__category__value-number">0.00</div>
-                  <div className="drawer-box__category__value-percent">-0%</div>
-                </div>
+                <div className="drawer-box__category__value">0.00</div>
+                <div className="drawer-box__category__percent">-0%</div>
               </div>
             </div>
 
