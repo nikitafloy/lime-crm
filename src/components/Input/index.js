@@ -8,15 +8,15 @@
 
 import "./index.css";
 
-export const Input = ({ value, type, Icon }) => {
+export const Input = ({ value, type, theme, Icon }) => {
   const inputBoxClasses = ["input-box"];
   const inputBoxCurrentClasses = ["input-box__current"];
-  if (type) {
-    if (type === "dark") {
+  if (theme) {
+    if (theme === "dark") {
       inputBoxClasses.push("input-box-dark");
       inputBoxCurrentClasses.push("input-box__current-dark");
     }
-    if (type === "green") {
+    if (theme === "green") {
       inputBoxClasses.push("input-box-green");
       inputBoxCurrentClasses.push("input-box__current-dark");
       inputBoxCurrentClasses.push("input-box__current-bold");
