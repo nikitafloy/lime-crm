@@ -56,7 +56,6 @@
   display: block;
   padding: 8px 16px;
   color: #1f201c80;
-  font-family: "Raleway", sans-serif;
   margin: 0;
 }
 
@@ -81,7 +80,6 @@
   display: block;
   padding: 16px;
   background-color: #fff;
-  font-family: "Raleway", sans-serif;
 }
 
 .select-box__option:hover,
