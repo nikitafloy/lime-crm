@@ -1,0 +1,67 @@
+.select-box {
+  border-radius: 8px;
+  border: 1px solid #cdcdcb;
+}
+
+.select-box__current {
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+
+.select-box__current:focus + .select-box__list {
+  opacity: 1;
+}
+
+.select-box__current:focus + .select-box__list .select-box__option {
+  cursor: pointer;
+}
+
+.select-box__current:focus .select-box__icon {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.select-box__icon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 20px;
+  opacity: 0.3;
+  transition: 0.2s ease;
+}
+
+.select-box__value {
+  display: flex;
+}
+
+.select-box__text {
+  display: block;
+}
+
+.select-box__text {
+  padding: 8px 16px;
+  color: #0000007f;
+  font-family: "Raleway", sans-serif;
+  margin: 0;
+}
+
+.select-box__list {
+  position: absolute;
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  opacity: 0;
+}
+
+.select-box__option {
+  display: block;
+  padding: 16px;
+  background-color: #fff;
+}
+
+.select-box__option:hover,
+.select-box__option:focus {
+  color: #546c84;
+  background-color: #fbfbfb;
+}
