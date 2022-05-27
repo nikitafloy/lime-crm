@@ -1,9 +1,9 @@
 .select-box {
-  border-radius: 8px;
-  border: 1px solid #cdcdcb;
 }
 
 .select-box__current {
+  border: 1px solid #cdcdcb;
+  border-radius: 8px;
   position: relative;
   cursor: pointer;
   outline: none;
@@ -64,4 +64,8 @@
 .select-box__option:focus {
   color: #222222;
   background-color: #fbfbfb;
+}
+
+.select-box__current-green {
+  border-color: #7cce04;
 }
