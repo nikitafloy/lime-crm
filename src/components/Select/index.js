@@ -12,7 +12,7 @@ import ArrayIcon from "../../assets/icons/array.svg";
 
 const mock = ["First", "Second", "Third", "Fourth", "Five"];
 
-export const Select = ({ value, label, type }) => {
+export const Select = ({ value, label, theme }) => {
   const selectBoxClasses = ["select-box"];
   const textClasses = ["select-box__text"];
   const selectBoxIconClasses = ["select-box__icon"];
@@ -22,7 +22,7 @@ export const Select = ({ value, label, type }) => {
     selectBoxIconClasses.push("select-box__icon-sm");
   }
 
-  if (type && type === "green") {
+  if (theme && theme === "green") {
     selectBoxClasses.push("select-box-green");
   }
 
