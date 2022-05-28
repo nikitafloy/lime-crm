@@ -34,15 +34,15 @@ export const Select = ({ value, label, theme }) => {
         <div className="select-box__value">
           <p className={textClasses.join(" ")}>{value}</p>
         </div>
-
-        <ul className="select-box__list">
-          {mock.map((item, index) => (
-            <li key={index}>
-              <label className="select-box__option">{item}</label>
-            </li>
-          ))}
-        </ul>
       </div>
+
+      <ul className="select-box__list">
+        {mock.map((item, index) => (
+          <li key={index}>
+            <label className="select-box__option">{item}</label>
+          </li>
+        ))}
+      </ul>
 
       <img
         className={selectBoxIconClasses.join(" ")}
