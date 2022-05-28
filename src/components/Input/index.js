@@ -20,6 +20,7 @@ export const Input = ({
   Icon,
   className,
   onChange,
+  onClick,
 }) => {
   const [opts] = useState(getMask(type));
 
@@ -64,6 +65,7 @@ export const Input = ({
           setValue(value);
           return onChange(value);
         }}
+        onClick={onClick}
       />
     </div>
   );

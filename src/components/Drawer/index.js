@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import "./index.css";
 
 import { Input, Textarea, Select } from "..";
@@ -9,9 +9,13 @@ import PlusGreenBox from "../../assets/icons/plus_box_big_green.svg";
 
 import mocks from "../../__mocks__";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 export const Drawer = () => {
   const [type, setType] = useState(null);
-  const [date, setDate] = useState(null);
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
   const [category, setCategory] = useState(null);
   const [desc, setDesc] = useState("");
   const [products, setProducts] = useState([mocks.Drawer.product]);
@@ -28,6 +32,18 @@ export const Drawer = () => {
 
     setProducts(newProductsArray);
   };
+
+  const CustomDateInput = forwardRef(({ value, onClick }, ref) => (
+    <Input
+      ref={ref}
+      className="text-dark"
+      defaultValue={value || mocks.Drawer.period}
+      theme="dark"
+      Icon={CalendarIcon}
+      // onChange={setDate}
+      onClick={onClick}
+    />
+  ));
 
   const DrawProducts = () =>
     products.map((product, index) => {
@@ -99,12 +115,13 @@ export const Drawer = () => {
           <div className="drawer-box__form">
             <div className="drawer-box__form__label">Период акции</div>
             <div className="drawer-box__form__form">
-              <Input
-                className="text-dark"
-                defaultValue={date || mocks.Drawer.period}
-                theme="dark"
-                Icon={CalendarIcon}
-                onChange={setDate}
+              <DatePicker
+                selectsRange={true}
+                startDate={startDate}
+                endDate={endDate}
+                onChange={setDateRange}
+                isClearable={true}
+                customInput={<CustomDateInput />}
               />
             </div>
           </div>
