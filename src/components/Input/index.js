@@ -8,7 +8,7 @@
 
 import "./index.css";
 
-export const Input = ({ value, type, theme, Icon, className }) => {
+export const Input = ({ value, type, theme, Icon, className, onChange }) => {
   const inputBoxClasses = [className, "input-box"];
   const inputBoxCurrentClasses = ["input-box__current"];
   if (theme) {
@@ -30,6 +30,7 @@ export const Input = ({ value, type, theme, Icon, className }) => {
       <input
         className={inputBoxCurrentClasses.join(" ")}
         defaultValue={value}
+        onChange={({ target }) => onChange(target.value)}
       />
     </div>
   );

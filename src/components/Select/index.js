@@ -10,9 +10,14 @@ import "./index.css";
 
 import ArrayIcon from "../../assets/icons/array.svg";
 
-const mock = ["First", "Second", "Third", "Fourth", "Five"];
-
-export const Select = ({ value, label, theme, className }) => {
+export const Select = ({
+  value,
+  variants = [],
+  label,
+  theme,
+  className,
+  onChange,
+}) => {
   const selectBoxClasses = [className, "select-box"];
   const textClasses = ["select-box__text"];
   const selectBoxIconClasses = ["select-box__icon"];
@@ -37,8 +42,8 @@ export const Select = ({ value, label, theme, className }) => {
       </div>
 
       <ul className="select-box__list">
-        {mock.map((item, index) => (
-          <li key={index}>
+        {variants.map((item, index) => (
+          <li key={index} onClick={() => onChange(item)}>
             <label className="select-box__option">{item}</label>
           </li>
         ))}
