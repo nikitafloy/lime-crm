@@ -8,18 +8,18 @@
 
 import "./index.css";
 
-export const Input = ({ value, type, theme, Icon }) => {
-  const inputBoxClasses = ["input-box"];
+export const Input = ({ value, type, theme, Icon, className }) => {
+  const inputBoxClasses = [className, "input-box"];
   const inputBoxCurrentClasses = ["input-box__current"];
   if (theme) {
     if (theme === "dark") {
       inputBoxClasses.push("input-box-dark");
-      inputBoxCurrentClasses.push("input-box__current-dark");
+      // inputBoxCurrentClasses.push("input-box__current-dark");
     }
     if (theme === "green") {
       inputBoxClasses.push("input-box-green");
       inputBoxCurrentClasses.push("input-box__current-dark");
-      inputBoxCurrentClasses.push("input-box__current-bold");
+      // inputBoxCurrentClasses.push("input-box__current-bold");
     }
   }
 

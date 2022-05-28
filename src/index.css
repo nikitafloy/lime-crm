@@ -2,3 +2,9 @@ body {
   background: #222222;
   font-family: "Raleway", sans-serif;
 }
+
+.text-dark,
+.text-dark input,
+.text-dark p {
+  color: #1f201c;
+}

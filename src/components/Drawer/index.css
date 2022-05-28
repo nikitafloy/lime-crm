@@ -21,7 +21,7 @@
 
 .drawer-box__current hr {
   border: 1px solid #d9d9d9;
-  margin: 16px 0;
+  margin: 16px 0 0;
 }
 
 .drawer-box__title {
@@ -37,7 +37,7 @@
 }
 
 .drawer-box__content {
-  padding: 24px 0;
+  padding: 12px 0;
 }
 
 .drawer-box__textarea {
@@ -45,7 +45,7 @@
 }
 
 .drawer-box__category {
-  padding: 16px 0;
+  padding: 0 0 16px 0;
 }
 
 .drawer-box__category__wrapper {
@@ -74,4 +74,10 @@
 .drawer-box__category__name,
 .drawer-box__category__percent {
   flex: 0 0 365px;
+}
+
+.drawer-box__form__label {
+  color: #222222b2;
+  font-size: 13px;
+  padding: 12px 0;
 }

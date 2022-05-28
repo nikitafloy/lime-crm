@@ -12,8 +12,8 @@ import ArrayIcon from "../../assets/icons/array.svg";
 
 const mock = ["First", "Second", "Third", "Fourth", "Five"];
 
-export const Select = ({ value, label, theme }) => {
-  const selectBoxClasses = ["select-box"];
+export const Select = ({ value, label, theme, className }) => {
+  const selectBoxClasses = [className, "select-box"];
   const textClasses = ["select-box__text"];
   const selectBoxIconClasses = ["select-box__icon"];
 
