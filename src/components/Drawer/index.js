@@ -7,6 +7,8 @@ import PlusBox from "../../assets/icons/plus_box.svg";
 import PlusGreenBox from "../../assets/icons/plus_box_big_green.svg";
 import Se from "react-datepicker";
 
+import mocks from "../../__mocks__";
+
 export const Drawer = () => {
   // const [discountState, setDiscountState] = useState({
   //   type: null,
@@ -39,7 +41,7 @@ export const Drawer = () => {
             <div className="drawer-box__form__form">
               <Select
                 value={type || "Выберите тип скидки"}
-                variants={["1+1", "2+1", "3+1"]}
+                variants={mocks.Drawer.discountTypes}
                 onChange={setType}
               />
             </div>
@@ -50,7 +52,7 @@ export const Drawer = () => {
             <div className="drawer-box__form__form">
               <Input
                 className="text-dark"
-                value={date || "00.00.0000 - 00.00.0000"}
+                value={date || mocks.Drawer.period}
                 theme="dark"
                 Icon={CalendarIcon}
                 onChange={setDate}
@@ -68,7 +70,7 @@ export const Drawer = () => {
                   className="text-dark"
                   value={category || "Выберите категорию"}
                   theme="green"
-                  variants={["Полуфабрикаты", "Напитки", "Корм для животных"]}
+                  variants={mocks.Drawer.categories}
                   onChange={setCategory}
                 />
               </div>
@@ -86,7 +88,7 @@ export const Drawer = () => {
                 <div className="drawer-box__category__name">
                   <Select
                     value="Поиск по наименованию"
-                    variants={["Винегрет", "Snickers", "Пельмени Цезарь"]}
+                    variants={mocks.Drawer.products}
                     onChange={console.log}
                   />
                 </div>
@@ -112,10 +114,7 @@ export const Drawer = () => {
             <div className="drawer-box__form__form">
               <div className="drawer-box__textarea">
                 <Textarea
-                  value={
-                    desc ||
-                    "Состав креветки (Pandalus borealis), вода (защитная глазурь). Краткое описание Варено-мороженые водные беспозвоночные. Глазурь не более 14%. Зона вылова: Северные районы Атлантического океана."
-                  }
+                  value={desc || mocks.Drawer.desc}
                   onChange={setDesc}
                 />
               </div>
