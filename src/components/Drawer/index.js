@@ -48,7 +48,11 @@ export const Drawer = () => {
 
           <div className="drawer-box__category__block">
             <div className="drawer-box__category__article">
-              <Input value={product.article} theme="green" />
+              <Input
+                defaultValue={product.article}
+                theme="green"
+                onChange={console.log}
+              />
             </div>
             <div className="drawer-box__category__name">
               <Select
@@ -58,10 +62,14 @@ export const Drawer = () => {
               />
             </div>
             <div className="drawer-box__category__value">
-              <Input value="0.00" onChange={console.log} />
+              <Input type="float" defaultValue="0.00" onChange={console.log} />
             </div>
             <div className="drawer-box__category__percent">
-              <Input value={`${product.discount}%`} onChange={console.log} />
+              <Input
+                type="percent"
+                defaultValue={`${product.discount}%`}
+                onChange={console.log}
+              />
             </div>
           </div>
         </div>
@@ -93,7 +101,7 @@ export const Drawer = () => {
             <div className="drawer-box__form__form">
               <Input
                 className="text-dark"
-                value={date || mocks.Drawer.period}
+                defaultValue={date || mocks.Drawer.period}
                 theme="dark"
                 Icon={CalendarIcon}
                 onChange={setDate}
@@ -120,7 +128,7 @@ export const Drawer = () => {
             <DrawProducts />
 
             <Input
-              value="Добавить категорию"
+              defaultValue="Добавить категорию"
               theme="dark"
               Icon={PlusBox}
               onChange={console.log}

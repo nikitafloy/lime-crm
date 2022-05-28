@@ -6,9 +6,36 @@
  *
  * */
 
+import { useState } from "react";
 import "./index.css";
 
-export const Input = ({ value, type, theme, Icon, className, onChange }) => {
+import { useIMask } from "react-imask";
+
+import { getMask } from "./helpers";
+
+export const Input = ({
+  defaultValue,
+  type,
+  theme,
+  Icon,
+  className,
+  onChange,
+}) => {
+  const [opts] = useState(getMask(type));
+
+  console.log(opts);
+
+  const {
+    ref,
+    maskRef,
+    value,
+    setValue,
+    unmaskedValue,
+    setUnmaskedValue,
+    typedValue,
+    setTypedValue,
+  } = useIMask(opts);
+
   const inputBoxClasses = [className, "input-box"];
   const inputBoxCurrentClasses = ["input-box__current"];
   if (theme) {
@@ -28,9 +55,15 @@ export const Input = ({ value, type, theme, Icon, className, onChange }) => {
       {Icon && <img src={Icon} className="input-box__icon" alt="Input Icon" />}
 
       <input
+        ref={ref}
         className={inputBoxCurrentClasses.join(" ")}
-        defaultValue={value}
-        onChange={({ target }) => onChange(target.value)}
+        value={value || defaultValue}
+        onChange={(event) => {
+          const value = event.target.value;
+          console.log(value);
+          setValue(value);
+          return onChange(value);
+        }}
       />
     </div>
   );
