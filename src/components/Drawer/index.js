@@ -1,31 +1,72 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./index.css";
 
 import { Input, Textarea, Select } from "..";
+
 import CalendarIcon from "../../assets/icons/calendar.svg";
 import PlusBox from "../../assets/icons/plus_box.svg";
 import PlusGreenBox from "../../assets/icons/plus_box_big_green.svg";
-import Se from "react-datepicker";
 
 import mocks from "../../__mocks__";
 
 export const Drawer = () => {
-  // const [discountState, setDiscountState] = useState({
-  //   type: null,
-  //   date: null,
-  //   category: [],
-  //   desc: "",
-  // });
-
   const [type, setType] = useState(null);
   const [date, setDate] = useState(null);
   const [category, setCategory] = useState(null);
   const [desc, setDesc] = useState("");
+  const [products, setProducts] = useState([mocks.Drawer.product]);
 
-  useEffect(() => {
-    console.log("render");
-    console.log(date);
-  });
+  const addNewProduct = () => {
+    const newProductsArray = [...products, mocks.Drawer.product];
+    setProducts(newProductsArray);
+  };
+
+  const removeProduct = (index) => {
+    const newProductsArray = products.filter(
+      (_, productIndex) => productIndex !== index
+    );
+
+    setProducts(newProductsArray);
+  };
+
+  const DrawProducts = () =>
+    products.map((product, index) => {
+      const isRemoveButton = index !== products.length - 1;
+      return (
+        <div key={index} className="drawer-box__category__wrapper">
+          <div
+            className="drawer-box__category__controls"
+            onClick={() =>
+              isRemoveButton ? removeProduct(index) : addNewProduct()
+            }
+          >
+            <img
+              src={isRemoveButton ? PlusBox : PlusGreenBox}
+              alt="Plus Icon"
+            />
+          </div>
+
+          <div className="drawer-box__category__block">
+            <div className="drawer-box__category__article">
+              <Input value={product.article} theme="green" />
+            </div>
+            <div className="drawer-box__category__name">
+              <Select
+                value="Поиск по наименованию"
+                variants={mocks.Drawer.products}
+                onChange={console.log}
+              />
+            </div>
+            <div className="drawer-box__category__value">
+              <Input value="0.00" onChange={console.log} />
+            </div>
+            <div className="drawer-box__category__percent">
+              <Input value={`${product.discount}%`} onChange={console.log} />
+            </div>
+          </div>
+        </div>
+      );
+    });
 
   return (
     <div className="drawer-box">
@@ -76,30 +117,7 @@ export const Drawer = () => {
               </div>
             </div>
 
-            <div className="drawer-box__category__wrapper">
-              <div className="drawer-box__category__controls">
-                <img src={PlusGreenBox} alt="Plus Icon" />
-              </div>
-
-              <div className="drawer-box__category__block">
-                <div className="drawer-box__category__article">
-                  <Input value="000000" theme="green" />
-                </div>
-                <div className="drawer-box__category__name">
-                  <Select
-                    value="Поиск по наименованию"
-                    variants={mocks.Drawer.products}
-                    onChange={console.log}
-                  />
-                </div>
-                <div className="drawer-box__category__value">
-                  <Input value="0.00" onChange={console.log} />
-                </div>
-                <div className="drawer-box__category__percent">
-                  <Input value="-0%" onChange={console.log} />
-                </div>
-              </div>
-            </div>
+            <DrawProducts />
 
             <Input
               value="Добавить категорию"
