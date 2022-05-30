@@ -1,3 +1,4 @@
 import { Drawer } from "./Drawer";
+import { dates } from "./dates";
 
-export default { Drawer };
+export default { Drawer, dates };

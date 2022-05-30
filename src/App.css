@@ -1,0 +1,66 @@
+.main__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main__header__left__stats {
+  display: inline-flex;
+}
+
+.main__controls {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.main__controls__filters {
+  display: flex;
+  gap: 8px;
+}
+
+.main__board {
+  background: white;
+  border-radius: 8px;
+  max-width: 1140px;
+  overflow-x: auto;
+}
+
+.main__board__header {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ececec;
+  padding: 16px;
+}
+
+.main__board__left {
+  display: flex;
+  flex: 1 0 308px;
+}
+
+.main__board__right {
+  display: flex;
+}
+
+.main__board__header__dates {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 28px;
+}
+
+.main__board__header__dates__date {
+  color: #545454;
+  font-size: 13px;
+}
+
+.main__board__header__dates__weekday {
+  color: #b6b6b6;
+  font-size: 12px;
+}
+
+.main__board__body {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+}
