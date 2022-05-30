@@ -25,7 +25,7 @@ export const promos = [
       { date: "01/20/2022", status: null },
       { date: "01/21/2022", status: null },
       { date: "01/22/2022", status: null },
-      { date: "01/23/2022", status: null },
+      { date: "01/23/2022", status: "wait" },
       { date: "01/24/2022", status: null },
       { date: "01/25/2022", status: null },
       { date: "01/26/2022", status: null },

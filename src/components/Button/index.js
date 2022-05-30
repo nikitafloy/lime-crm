@@ -14,8 +14,19 @@
 
 import "./index.css";
 
-export const Button = ({ value, theme }) => {
+export const Button = ({
+  value,
+  type,
+  theme,
+  leftIcon,
+  secondText,
+  className,
+}) => {
   const btnClasses = ["btn"];
+  if (className) {
+    btnClasses.push(className);
+  }
+
   if (theme) {
     if (theme === "green") {
       btnClasses.push("btn-green");
@@ -28,5 +39,24 @@ export const Button = ({ value, theme }) => {
     }
   }
 
-  return <button className={btnClasses.join(" ")}>{value}</button>;
+  if (type) {
+    btnClasses.push(`btn-${type}`);
+  }
+
+  return (
+    <button className={btnClasses.join(" ")}>
+      {leftIcon && (
+        <div className="btn__icon-left">
+          <img src={leftIcon} alt="Button Icon" />
+        </div>
+      )}
+
+      {value && (
+        <div className="btn__text">
+          {value}
+          {secondText && <div className="btn__second-text">{secondText}</div>}
+        </div>
+      )}
+    </button>
+  );
 };

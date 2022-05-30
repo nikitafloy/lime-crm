@@ -1,20 +1,36 @@
 .btn {
+  display: flex;
+  min-width: 25px;
+  align-items: center;
+  gap: 8px;
   border: none;
   background: white;
-  padding: 5px 8px;
+  padding: 5px 7px;
   border-radius: 4px;
+  justify-content: center;
 }
 
 .btn-green {
   background: #7cce04;
-  color: white;
 }
 
 .btn-gray {
   background: #f2f2f2;
-  color: #b7b9b9;
 }
 
 .btn-black {
   background: #333333;
+}
+
+.btn__second-text {
+  color: #2222224d;
+  text-align: left;
+  font-size: 12px;
+}
+
+.btn-lg {
+  padding: 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  gap: 20px;
 }

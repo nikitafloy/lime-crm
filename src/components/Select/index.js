@@ -18,9 +18,13 @@ export const Select = ({
   className,
   onChange,
 }) => {
-  const selectBoxClasses = [className, "select-box"];
+  const selectBoxClasses = ["select-box"];
   const textClasses = ["select-box__text"];
   const selectBoxIconClasses = ["select-box__icon"];
+
+  if (className) {
+    selectBoxClasses.push(className);
+  }
 
   if (label) {
     textClasses.push("select-box__text-black", "select-box__text-sm");
