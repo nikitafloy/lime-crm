@@ -66,6 +66,11 @@
 .main__controls__filters {
   display: flex;
   gap: 8px;
+  flex: 1 1 auto;
+}
+
+.main__controls__filters > div {
+  flex: 1 0 auto;
 }
 
 .main__controls__active {
