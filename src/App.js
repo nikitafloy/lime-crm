@@ -233,7 +233,7 @@ export const App = () => {
           </div>
         </div>
 
-        {isSearchVisible ? <DrawControls /> : <DrawSearch />}
+        {!isSearchVisible ? <DrawControls /> : <DrawSearch />}
 
         <div className="main__board">
           <div className="main__board_inner">
