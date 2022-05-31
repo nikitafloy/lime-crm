@@ -217,3 +217,16 @@
   right: 0;
   box-shadow: 0 0 10px rgb(161 210 20 / 50%);
 }
+
+.main__search {
+  display: flex;
+  background: white;
+  height: 40px;
+  border-radius: 10px;
+  padding: 0 8px 0 4px;
+  flex: 1 0 auto;
+}
+
+.main__search > div {
+  flex: 1 0 auto;
+}

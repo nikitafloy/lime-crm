@@ -11,6 +11,7 @@ import BellIcon from "./bell.svg";
 import ArrayIcon from "./array.svg";
 import CalendarIcon from "./calendar.svg";
 import PlusGreenBox from "./plus_box_big_green.svg";
+import CrossIcon from "./cross.svg";
 
 export {
   SearchIcon,
@@ -26,4 +27,5 @@ export {
   ArrayIcon,
   CalendarIcon,
   PlusGreenBox,
+  CrossIcon,
 };

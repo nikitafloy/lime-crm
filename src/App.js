@@ -1,7 +1,7 @@
 import { forwardRef, useState } from "react";
 import "./App.css";
 
-import { Button, Drawer, Select } from "./components";
+import { Button, Drawer, Input, Select } from "./components";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,6 +17,7 @@ import {
   DotIcon,
   UserIcon,
   BellIcon,
+  CrossIcon,
 } from "./assets/icons";
 
 import mocks from "./__mocks__";
@@ -29,6 +30,9 @@ export const App = () => {
   const [desc, setDesc] = useState("");
   const [products, setProducts] = useState([mocks.Drawer.product]);
   const [discount, setDiscount] = useState(mocks.Drawer.discountPercents[0]);
+  const [isSearchVisible, setSearchVisible] = useState(false);
+
+  const toggleSearchVisible = () => setSearchVisible(!isSearchVisible);
 
   const CustomDateSelect = forwardRef(({ value, onClick }, ref) => (
     <Select
@@ -101,6 +105,91 @@ export const App = () => {
       );
     });
 
+  const DrawControls = () => (
+    <div className="main__controls">
+      <div className="main__controls__add">
+        <Button
+          theme="light-green"
+          value="Добавить скидку"
+          leftIcon={PlusBox}
+        />
+      </div>
+
+      <div className="main__controls__active">
+        <Button
+          className="btn-md font-weight-bold"
+          value="Активные"
+          type="outlined"
+        />
+        <Button
+          theme="light-gray"
+          className="btn-md font-weight-bold"
+          value="Неактивные"
+        />
+      </div>
+
+      <div className="main__controls__filters">
+        <div className="main__controls__filters__type">
+          <Select
+            value={type}
+            label="Тип скидки"
+            variants={mocks.Drawer.discountTypes}
+            onChange={(value) => {
+              setType(value);
+            }}
+          />
+        </div>
+        <div className="main__controls__filters__discount">
+          <Select
+            value={discount}
+            label="% скидки"
+            variants={mocks.Drawer.discountPercents}
+            onChange={(value) => {
+              setDiscount(value);
+            }}
+          />
+        </div>
+        <div className="main__controls__filters__period">
+          <DatePicker
+            selectsRange={true}
+            startDate={startDate}
+            endDate={endDate}
+            onChange={setDateRange}
+            isClearable={true}
+            customInput={<CustomDateSelect />}
+          />
+        </div>
+        <div className="main__controls__filters__category">
+          <Select
+            value={category}
+            label="Категория товаров"
+            variants={mocks.Drawer.categories}
+            onChange={(value) => {
+              setCategory(value);
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="main__controls__search">
+        <Button leftIcon={SearchIcon} onClick={toggleSearchVisible} />
+      </div>
+    </div>
+  );
+
+  const DrawSearch = () => (
+    <div className="main__controls">
+      <div className="main__search">
+        <Button
+          leftIcon={SearchIcon}
+          onClick={() => console.log("search...")}
+        />
+        <Input />
+        <Button leftIcon={CrossIcon} onClick={toggleSearchVisible} />
+      </div>
+    </div>
+  );
+
   return (
     <div className="App">
       <div className="main">
@@ -144,75 +233,7 @@ export const App = () => {
           </div>
         </div>
 
-        <div className="main__controls">
-          <div className="main__controls__add">
-            <Button
-              theme="light-green"
-              value="Добавить скидку"
-              leftIcon={PlusBox}
-            />
-          </div>
-
-          <div className="main__controls__active">
-            <Button
-              className="btn-md font-weight-bold"
-              value="Активные"
-              type="outlined"
-            />
-            <Button
-              theme="light-gray"
-              className="btn-md font-weight-bold"
-              value="Неактивные"
-            />
-          </div>
-
-          <div className="main__controls__filters">
-            <div className="main__controls__filters__type">
-              <Select
-                value={type}
-                label="Тип скидки"
-                variants={mocks.Drawer.discountTypes}
-                onChange={(value) => {
-                  setType(value);
-                }}
-              />
-            </div>
-            <div className="main__controls__filters__discount">
-              <Select
-                value={discount}
-                label="% скидки"
-                variants={mocks.Drawer.discountPercents}
-                onChange={(value) => {
-                  setDiscount(value);
-                }}
-              />
-            </div>
-            <div className="main__controls__filters__period">
-              <DatePicker
-                selectsRange={true}
-                startDate={startDate}
-                endDate={endDate}
-                onChange={setDateRange}
-                isClearable={true}
-                customInput={<CustomDateSelect />}
-              />
-            </div>
-            <div className="main__controls__filters__category">
-              <Select
-                value={category}
-                label="Категория товаров"
-                variants={mocks.Drawer.categories}
-                onChange={(value) => {
-                  setCategory(value);
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="main__controls__search">
-            <Button leftIcon={SearchIcon} />
-          </div>
-        </div>
+        {isSearchVisible ? <DrawControls /> : <DrawSearch />}
 
         <div className="main__board">
           <div className="main__board_inner">
