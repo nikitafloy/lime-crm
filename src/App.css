@@ -49,11 +49,24 @@
   align-items: flex-end;
 }
 
+.main__header__notification {
+  position: relative;
+}
+
+.main__header__notification .btn {
+  width: 70px;
+}
+
+.main__header__right {
+  height: 70px;
+}
+
 .main__controls {
   display: flex;
   gap: 8px;
   justify-content: space-between;
   padding: 16px 0 8px;
+  height: 40px;
 }
 
 .main__controls__add button {
@@ -75,6 +88,11 @@
 
 .main__controls__active {
   display: flex;
+}
+
+.main__controls__search .btn {
+  width: 40px;
+  height: 40px;
 }
 
 .main__board {
@@ -184,14 +202,13 @@
   font-size: 0.75rem;
   min-width: 20px;
   line-height: 1;
-  padding: 0px 6px;
+  padding: 0 6px;
   height: 20px;
   border-radius: 10px;
   z-index: 1;
   background-color: #a1d214;
   color: rgb(255, 255, 255);
-  top: 0px;
-  right: 0px;
-  transform: scale(1) translate(-10%, 80%);
-  box-shadow: 0px 0px 10px rgb(161 210 20 / 50%);
+  top: 0;
+  right: 0;
+  box-shadow: 0 0 10px rgb(161 210 20 / 50%);
 }
