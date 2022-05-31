@@ -17,6 +17,7 @@ export const Select = ({
   theme,
   className,
   onChange,
+  onClick,
 }) => {
   const selectBoxClasses = ["select-box"];
   const textClasses = ["select-box__text"];
@@ -36,7 +37,7 @@ export const Select = ({
   }
 
   return (
-    <div className={selectBoxClasses.join(" ")}>
+    <div className={selectBoxClasses.join(" ")} onClick={onClick}>
       {label && <div className="select-box__label">{label}</div>}
 
       <div className="select-box__current" tabIndex="1">

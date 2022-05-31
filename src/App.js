@@ -1,7 +1,7 @@
 import { forwardRef, useState } from "react";
 import "./App.css";
 
-import { Button, Drawer, Input, Select } from "./components";
+import { Button, Drawer, Select } from "./components";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -30,12 +30,11 @@ export const App = () => {
   const [products, setProducts] = useState([mocks.Drawer.product]);
   const [discount, setDiscount] = useState(mocks.Drawer.discountPercents[0]);
 
-  const CustomDateInput = forwardRef(({ value, onClick }, ref) => (
-    <Input
+  const CustomDateSelect = forwardRef(({ value, onClick }, ref) => (
+    <Select
       ref={ref}
-      className="text-dark"
-      defaultValue={value || mocks.Drawer.period}
-      Icon={CalendarIcon}
+      label="Период"
+      value={value || mocks.Drawer.period}
       onClick={onClick}
     />
   ));
@@ -195,7 +194,7 @@ export const App = () => {
                 endDate={endDate}
                 onChange={setDateRange}
                 isClearable={true}
-                customInput={<CustomDateInput />}
+                customInput={<CustomDateSelect />}
               />
             </div>
             <div className="main__controls__filters__category">
