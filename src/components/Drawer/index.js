@@ -3,9 +3,7 @@ import "./index.css";
 
 import { Input, Textarea, Select } from "..";
 
-import CalendarIcon from "../../assets/icons/calendar.svg";
-import PlusBox from "../../assets/icons/plus_box.svg";
-import PlusGreenBox from "../../assets/icons/plus_box_big_green.svg";
+import { CalendarIcon, PlusBox, PlusGreenBox } from "../../assets/icons";
 
 import mocks from "../../__mocks__";
 

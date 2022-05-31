@@ -8,7 +8,7 @@
 
 import "./index.css";
 
-import ArrayIcon from "../../assets/icons/array.svg";
+import { ArrayIcon } from "../../assets/icons";
 
 export const Select = ({
   value,

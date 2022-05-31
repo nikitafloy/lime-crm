@@ -6,18 +6,18 @@ import { Button, Drawer, Select } from "./components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import SearchIcon from "./assets/icons/search.svg";
-import CalendarIcon from "./assets/icons/calendar.svg";
-import TargetPoint from "./assets/icons/target_point.svg";
-import PlayIcon from "./assets/icons/play.svg";
-import PauseIcon from "./assets/icons/pause.svg";
-import EditPencil from "./assets/icons/edit_pencil.svg";
-import PlusIcon from "./assets/icons/plus.svg";
-import CheckIcon from "./assets/icons/check.svg";
-import PlusBox from "./assets/icons/plus_box.svg";
-import DotIcon from "./assets/icons/dot.svg";
-import UserIcon from "./assets/icons/user.svg";
-import BellIcon from "./assets/icons/bell.svg";
+import {
+  SearchIcon,
+  TargetPoint,
+  PlayIcon,
+  PauseIcon,
+  EditPencil,
+  CheckIcon,
+  PlusBox,
+  DotIcon,
+  UserIcon,
+  BellIcon,
+} from "./assets/icons";
 
 import mocks from "./__mocks__";
 
