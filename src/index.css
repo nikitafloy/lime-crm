@@ -9,3 +9,13 @@ body {
 .text-dark p {
   color: #1f201c;
 }
+
+.text-light-gray,
+.text-light-gray button {
+  color: #b7b9b9;
+}
+
+.text-white,
+.text-white button {
+  color: white;
+}

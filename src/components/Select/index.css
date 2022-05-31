@@ -2,7 +2,10 @@
   background: white;
   border-radius: 8px;
   position: relative;
-  /*border: 1px solid #cdcdcb;*/
+}
+
+.select-box-outlined {
+  border: 1px solid #cdcdcb;
 }
 
 .select-box-green {
@@ -16,6 +19,8 @@
 }
 
 .select-box__current {
+  display: flex;
+  align-items: center;
   border-radius: 8px;
   cursor: pointer;
   outline: none;
@@ -50,8 +55,12 @@
   width: 8px;
 }
 
+.select-box__icon-left{
+  padding: 0 0 0 12px;
+}
+
 .select-box__value {
-  display: flex;
+  flex: 1 0 auto;
 }
 
 .select-box__text {

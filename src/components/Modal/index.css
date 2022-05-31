@@ -28,3 +28,76 @@
   height: 40px;
   border-radius: 10px;
 }
+
+.modal__current__title {
+  font-size: 18px;
+}
+
+.modal__current__promotion {
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__current__promotion__left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-right: 1px solid #d9d9d9;
+  flex: 1 0 420px;
+  padding-right: 40px;
+}
+
+.modal__current__promotion__weekday {
+  display: flex;
+  gap: 4px;
+}
+
+.modal__current__promotion__weekday__filters,
+.modal__current__promotion__weekday__days {
+  display: flex;
+  gap: 4px;
+}
+
+.modal__current__promotion__weekday__filters button {
+  font-size: 15px;
+  border-radius: 8px;
+}
+
+.modal__current__promotion__weekday__days button {
+  border-radius: 8px;
+}
+
+.modal__current__promotion__period {
+  max-width: 330px;
+}
+
+.modal__current__promotion__period__text {
+  color: #222222;
+  font-size: 13px;
+  opacity: 0.7;
+  padding: 10px 0 12px;
+}
+
+.modal__current__promotion__promos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.modal__current__promotion__promos button {
+  border-radius: 8px;
+}
+
+.modal__current__promotion__right {
+  padding-left: 40px;
+  flex: 1 1 420px;
+}
+
+.modal__current__promotion__promos__text {
+  color: #222222;
+  font-size: 16px;
+  opacity: 0.7;
+  padding-bottom: 16px;
+}
