@@ -93,6 +93,7 @@
 .main__controls__search .btn {
   width: 40px;
   height: 40px;
+  border-radius: 8px;
 }
 
 .main__board {
