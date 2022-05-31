@@ -212,10 +212,10 @@
   border-radius: 10px;
   z-index: 1;
   background-color: #a1d214;
-  color: rgb(255, 255, 255);
   top: 0;
   right: 0;
   box-shadow: 0 0 10px rgb(161 210 20 / 50%);
+  color: black;
 }
 
 .main__search {
