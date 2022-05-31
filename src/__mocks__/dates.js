@@ -34,4 +34,11 @@ export const dates = [
   { date: 2, weekday: "Пт" },
   { date: 3, weekday: "Сб" },
   { date: 4, weekday: "Вс" },
+  { date: 5, weekday: "Пн" },
+  { date: 6, weekday: "Вт" },
+  { date: 7, weekday: "Ср" },
+  { date: 8, weekday: "Чт" },
+  { date: 9, weekday: "Пт" },
+  { date: 10, weekday: "Сб" },
+  { date: 11, weekday: "Вс" },
 ];
