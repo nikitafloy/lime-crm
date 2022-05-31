@@ -110,7 +110,6 @@
   height: 54px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #ececec;
   padding: 0 16px;
 }
 
@@ -128,6 +127,16 @@
   display: flex;
   flex: 0 0 308px;
   align-items: center;
+}
+
+.main__board__header__left {
+  border-bottom: 1px solid #ececec;
+  padding-bottom: 16px;
+}
+
+.main__board__header__dates {
+  border-bottom: 1px solid #ececec;
+  padding-bottom: 8px;
 }
 
 .main__board__header__right {
@@ -159,10 +168,9 @@
 .main__board__body {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 12px 16px 8px;
   flex-wrap: wrap;
   gap: 8px 0;
-  border-bottom: 1px solid #ececec;
 }
 
 .main__board__body__item {
