@@ -1,7 +1,7 @@
 import { forwardRef, useState } from "react";
 import "./App.css";
 
-import { Button, Drawer, Input, Select } from "./components";
+import { Button, Drawer, Input, Modal, Select } from "./components";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -278,6 +278,8 @@ export const App = () => {
       {/*<Select value="Полуфабрикаты" label="Категория товаров" />*/}
 
       {/*<Drawer />*/}
+
+      <Modal />
     </div>
   );
 };

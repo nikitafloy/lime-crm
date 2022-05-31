@@ -1,0 +1,30 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #0000004d;
+  z-index: 10;
+}
+
+.modal__current {
+  position: relative;
+  margin: 20px auto;
+  width: 960px;
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+}
+
+.modal__close-button {
+  position: fixed;
+  right: 44px;
+  top: 28px;
+}
+
+.modal__close-button button {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
