@@ -172,6 +172,10 @@
   font-weight: 600;
 }
 
+.main__board__name-disabled {
+  color: #b7b9b9;
+}
+
 .main__board_inner::-webkit-scrollbar {
   height: 4px;
 }

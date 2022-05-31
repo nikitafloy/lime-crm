@@ -10,6 +10,10 @@
   justify-content: center;
 }
 
+.btn-lighter-green {
+  background: #eef3e0;
+}
+
 .btn-light-green {
   background: #a1d214;
 }
@@ -51,4 +55,8 @@
 
 .btn-outlined {
   border: 2px solid #a1d214;
+}
+
+.btn-disabled {
+  opacity: 0.3;
 }

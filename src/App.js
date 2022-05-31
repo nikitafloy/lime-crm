@@ -48,8 +48,18 @@ export const App = () => {
       </div>
     ));
 
-  const DrawPromos = ({ promos }) =>
-    promos.map(({ status }, index) => {
+  const DrawPromos = ({ promos, promoStatus }) =>
+    promos.map(({ status, date }, index) => {
+      const weekday = new Date(date).getDay();
+      const buttonTheme =
+        weekday === 5 || weekday === 6 ? "lighter-green" : "gray";
+
+      if (!promoStatus) {
+        return (
+          <Button key={index} type="disabled" theme={buttonTheme} value="н" />
+        );
+      }
+
       if (status) {
         return (
           <Button
@@ -60,30 +70,37 @@ export const App = () => {
         );
       }
 
-      return <Button key={index} theme={"gray"} value="н" />;
+      return <Button key={index} theme={buttonTheme} value="н" />;
     });
 
   const DrawActionData = () =>
-    mocks.promos.map(({ name, status, promos }, index) => (
-      <div key={index} className="main__board__body__item">
-        <div className="main__board__body__left">
-          <div className="main__board__icon">
-            {status ? (
-              <Button theme="green" leftIcon={PlayIcon} />
-            ) : (
-              <Button theme="gray" leftIcon={PauseIcon} />
-            )}
+    mocks.promos.map(({ name, status, promos }, index) => {
+      const mainBoardNameClasses = ["main__board__name"];
+      if (!status) {
+        mainBoardNameClasses.push("main__board__name-disabled");
+      }
+
+      return (
+        <div key={index} className="main__board__body__item">
+          <div className="main__board__body__left">
+            <div className="main__board__icon">
+              {status ? (
+                <Button theme="green" leftIcon={PlayIcon} />
+              ) : (
+                <Button theme="gray" leftIcon={PauseIcon} />
+              )}
+            </div>
+            <div className={mainBoardNameClasses.join(" ")}>{name}</div>
+            <div className="main__board__icon">
+              <img src={EditPencil} alt="Edit Pencil" />
+            </div>
           </div>
-          <div className="main__board__name">{name}</div>
-          <div className="main__board__icon">
-            <img src={EditPencil} alt="Edit Pencil" />
+          <div className="main__board__body__right">
+            <DrawPromos promoStatus={status} promos={promos} />
           </div>
         </div>
-        <div className="main__board__body__right">
-          <DrawPromos promos={promos} />
-        </div>
-      </div>
-    ));
+      );
+    });
 
   return (
     <div className="App">
