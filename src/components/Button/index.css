@@ -10,8 +10,17 @@
   justify-content: center;
 }
 
+.btn-light-green {
+  background: #a1d214;
+}
+
 .btn-green {
   background: #7cce04;
+}
+
+.btn-light-gray {
+  background: #e4e4e4;
+  color: #222222b2;
 }
 
 .btn-gray {
@@ -33,4 +42,13 @@
   font-size: 16px;
   border-radius: 10px;
   gap: 20px;
+}
+
+.btn-md {
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.btn-outlined {
+  border: 2px solid #a1d214;
 }

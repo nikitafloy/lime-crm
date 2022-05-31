@@ -28,8 +28,14 @@ export const Button = ({
   }
 
   if (theme) {
+    if (theme === "light-green") {
+      btnClasses.push("btn-light-green");
+    }
     if (theme === "green") {
       btnClasses.push("btn-green");
+    }
+    if (theme === "light-gray") {
+      btnClasses.push("btn-light-gray");
     }
     if (theme === "gray") {
       btnClasses.push("btn-gray");
