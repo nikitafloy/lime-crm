@@ -90,6 +90,10 @@
   display: flex;
 }
 
+.main__controls__active button:first-child {
+  border: 2px solid #a1d214;
+}
+
 .main__controls__search .btn {
   width: 40px;
   height: 40px;
