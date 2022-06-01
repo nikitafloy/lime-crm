@@ -15,6 +15,7 @@ import { getMask } from "./helpers";
 
 export const Input = ({
   defaultValue,
+  maskType,
   type,
   theme,
   Icon,
@@ -22,7 +23,7 @@ export const Input = ({
   onChange,
   onClick,
 }) => {
-  const [opts] = useState(getMask(type));
+  const [opts] = useState(getMask(maskType));
 
   console.log(opts);
 
@@ -37,8 +38,13 @@ export const Input = ({
     setTypedValue,
   } = useIMask(opts);
 
-  const inputBoxClasses = [className, "input-box"];
+  const inputBoxClasses = ["input-box"];
   const inputBoxCurrentClasses = ["input-box__current"];
+
+  if (className) {
+    inputBoxClasses.push(className);
+  }
+
   if (theme) {
     if (theme === "dark") {
       inputBoxClasses.push("input-box-dark");
@@ -49,6 +55,10 @@ export const Input = ({
       inputBoxCurrentClasses.push("input-box__current-dark");
       // inputBoxCurrentClasses.push("input-box__current-bold");
     }
+  }
+
+  if (type) {
+    inputBoxClasses.push(`input-box-${type}`);
   }
 
   return (

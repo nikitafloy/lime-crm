@@ -8,14 +8,16 @@
 
 import "./index.css";
 
-import ArrayIcon from "../../assets/icons/array.svg";
+import { ArrayIcon } from "../../assets/icons";
 
 export const Select = ({
   value,
+  type,
   variants = [],
   label,
   theme,
   className,
+  leftIcon,
   onChange,
   onClick,
 }) => {
@@ -25,6 +27,10 @@ export const Select = ({
 
   if (className) {
     selectBoxClasses.push(className);
+  }
+
+  if (type) {
+    selectBoxClasses.push(`select-box-${type}`);
   }
 
   if (label) {
@@ -41,6 +47,12 @@ export const Select = ({
       {label && <div className="select-box__label">{label}</div>}
 
       <div className="select-box__current" tabIndex="1">
+        {leftIcon && (
+          <div className="select-box__icon-left">
+            <img src={leftIcon} alt="Select Icon" />
+          </div>
+        )}
+
         <div className="select-box__value">
           <p className={textClasses.join(" ")}>{value}</p>
         </div>

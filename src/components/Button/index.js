@@ -21,6 +21,7 @@ export const Button = ({
   leftIcon,
   secondText,
   className,
+  onClick,
 }) => {
   const btnClasses = ["btn"];
   if (className) {
@@ -53,7 +54,7 @@ export const Button = ({
   }
 
   return (
-    <button className={btnClasses.join(" ")}>
+    <button className={btnClasses.join(" ")} onClick={onClick}>
       {leftIcon && (
         <div className="btn__icon-left">
           <img src={leftIcon} alt="Button Icon" />

@@ -3,9 +3,7 @@ import "./index.css";
 
 import { Input, Textarea, Select } from "..";
 
-import CalendarIcon from "../../assets/icons/calendar.svg";
-import PlusBox from "../../assets/icons/plus_box.svg";
-import PlusGreenBox from "../../assets/icons/plus_box_big_green.svg";
+import { CalendarIcon, PlusBox, PlusGreenBox } from "../../assets/icons";
 
 import mocks from "../../__mocks__";
 
@@ -78,11 +76,15 @@ export const Drawer = () => {
               />
             </div>
             <div className="drawer-box__category__value">
-              <Input type="float" defaultValue="0.00" onChange={console.log} />
+              <Input
+                maskType="float"
+                defaultValue="0.00"
+                onChange={console.log}
+              />
             </div>
             <div className="drawer-box__category__percent">
               <Input
-                type="percent"
+                maskType="percent"
                 defaultValue={`${product.discount}%`}
                 onChange={console.log}
               />

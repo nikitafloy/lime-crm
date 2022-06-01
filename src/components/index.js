@@ -3,5 +3,6 @@ import { Select } from "./Select";
 import { Drawer } from "./Drawer";
 import { Textarea } from "./Textarea";
 import { Button } from "./Button";
+import { Modal } from "./Modal";
 
-export { Input, Select, Drawer, Textarea, Button };
+export { Input, Select, Drawer, Textarea, Button, Modal };
