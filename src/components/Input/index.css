@@ -37,3 +37,7 @@
 .input-box__icon {
   padding-right: 12px;
 }
+
+.input-box-outlined {
+  border: 1px solid #cdcdcb;
+}

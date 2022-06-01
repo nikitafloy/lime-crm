@@ -31,6 +31,7 @@ export const App = () => {
   const [products, setProducts] = useState([mocks.Drawer.product]);
   const [discount, setDiscount] = useState(mocks.Drawer.discountPercents[0]);
   const [isSearchVisible, setSearchVisible] = useState(false);
+  const [showModal, toggleModal] = useState(false);
 
   const toggleSearchVisible = () => setSearchVisible(!isSearchVisible);
 
@@ -112,6 +113,7 @@ export const App = () => {
           theme="light-green"
           value="Добавить скидку"
           leftIcon={PlusBox}
+          onClick={() => toggleModal(true)}
         />
       </div>
 
@@ -279,7 +281,7 @@ export const App = () => {
 
       {/*<Drawer />*/}
 
-      <Modal />
+      {showModal && <Modal toggleModal={toggleModal} />}
     </div>
   );
 };

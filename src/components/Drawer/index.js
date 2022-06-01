@@ -76,11 +76,15 @@ export const Drawer = () => {
               />
             </div>
             <div className="drawer-box__category__value">
-              <Input type="float" defaultValue="0.00" onChange={console.log} />
+              <Input
+                maskType="float"
+                defaultValue="0.00"
+                onChange={console.log}
+              />
             </div>
             <div className="drawer-box__category__percent">
               <Input
-                type="percent"
+                maskType="percent"
                 defaultValue={`${product.discount}%`}
                 onChange={console.log}
               />
