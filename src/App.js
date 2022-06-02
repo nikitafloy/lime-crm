@@ -1,7 +1,7 @@
 import { forwardRef, useState } from "react";
 import "./App.css";
 
-import { Button, Drawer, Input, Modal, Select } from "./components";
+import { Button, Input, Modal, Select } from "./components";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -280,8 +280,6 @@ export const App = () => {
       {/*<Select theme="dark" value="Выберите тип скидки" />*/}
       {/*<Select theme="green" value="Выберите тип скидки" />*/}
       {/*<Select value="Полуфабрикаты" label="Категория товаров" />*/}
-
-      {/*<Drawer />*/}
 
       {showModal && <Modal toggleModal={toggleModal} />}
     </div>
