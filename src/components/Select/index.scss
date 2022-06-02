@@ -30,7 +30,7 @@
   }
 
   &__current:focus + &__list {
-    opacity: 1;
+    visibility: unset;
   }
 
   &__current:focus + &__list &__option {
@@ -82,7 +82,7 @@
     padding: 0;
     margin: 4px 0;
     list-style: none;
-    opacity: 0;
+    visibility: hidden;
     z-index: 1;
   }
 
