@@ -1,8 +1,17 @@
 import { forwardRef, useState } from "react";
-import "./index.css";
+import "./index.scss";
 
+// Components
 import { Button, Input, Select, Textarea } from "../";
 
+// Date Picker
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+// Inline SVG
+import InlineSVG from "svg-inline-react";
+
+// Icons
 import {
   CrossIcon,
   CalendarIcon,
@@ -11,26 +20,21 @@ import {
   SearchIcon,
 } from "../../assets/icons";
 
+// Mocks
 import mocks from "../../__mocks__";
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import InlineSVG from "svg-inline-react";
-
 export const Modal = ({ toggleModal }) => {
-  const [type, setType] = useState(null);
+  // Date
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
+
+  const [type, setType] = useState(null);
   const [weekdays, setWeekdays] = useState([1]);
   const [showDesc, toggleDesc] = useState(false);
 
-  const descriptionSwitchingClasses = [
-    "modal__current__description__switching",
-  ];
-
-  if (showDesc) {
-    descriptionSwitchingClasses.push("open");
-  }
+  const descriptionSwitchClasses = `modal__current-description-switching ${
+    showDesc ? "open" : ""
+  }`;
 
   const CustomDateSelect = forwardRef(({ value, onClick }, ref) => (
     <Select
@@ -49,7 +53,7 @@ export const Modal = ({ toggleModal }) => {
   };
 
   const DrawProductsButton = () => (
-    <div className="modal__current__products__button">
+    <div className="modal__current-products-button">
       <Button
         className="text-white"
         theme="light-green"
@@ -57,7 +61,7 @@ export const Modal = ({ toggleModal }) => {
         LeftIcon={PlusBox}
       />
 
-      <div className="modal__current__products__button__dropdown">
+      <div className="modal__current-products-button-dropdown">
         <ul className="font-weight-bold">
           {mocks.Modal.dropdown.map((item, index) => (
             <li key={index} onClick={onDropDownClickHandler}>
@@ -72,13 +76,13 @@ export const Modal = ({ toggleModal }) => {
   return (
     <div className="modal">
       <div className="modal__current">
-        <div className="modal__current__title font-weight-bold">
+        <div className="modal__current-title font-weight-bold">
           Добавление скидки
         </div>
 
-        <div className="modal__current__promotion">
-          <div className="modal__current__promotion__left">
-            <div className="modal__current__promotion__discount">
+        <div className="modal__current-promotion">
+          <div className="modal__current-promotion-left">
+            <div className="modal__current-promotion-discount">
               <Select
                 type="outlined"
                 value={type || "Выберите тип скидки"}
@@ -87,12 +91,12 @@ export const Modal = ({ toggleModal }) => {
               />
             </div>
 
-            <div className="modal__current__promotion__period">
-              <div className="modal__current__promotion__period__text">
+            <div className="modal__current-promotion-period">
+              <div className="modal__current-promotion-period-text">
                 Период акции
               </div>
 
-              <div className="modal__current__promotion__period__select">
+              <div className="modal__current-promotion-period-select">
                 <DatePicker
                   selectsRange={true}
                   startDate={startDate}
@@ -104,8 +108,8 @@ export const Modal = ({ toggleModal }) => {
               </div>
             </div>
 
-            <div className="modal__current__promotion__weekday">
-              <div className="modal__current__promotion__weekday__filters">
+            <div className="modal__current-promotion-weekday">
+              <div className="modal__current-promotion-weekday-filters">
                 <Button className="text-light-gray" theme="gray" value="Все" />
                 <Button className="text-light-gray" theme="gray" value="Чет." />
                 <Button
@@ -115,23 +119,22 @@ export const Modal = ({ toggleModal }) => {
                 />
               </div>
 
-              <div className="modal__current__promotion__weekday__days">
+              <div className="modal__current-promotion-weekday-days">
                 {mocks.Modal.weekdays.map((weekday, index) => {
                   const candidate = weekdays.findIndex(
                     (_weekday) => index === _weekday
                   );
 
                   const isCandidate = candidate !== -1;
-                  const buttonClasses = ["font-weight-bold"];
 
-                  buttonClasses.push(
+                  const buttonClasses = `font-weight-bold ${
                     isCandidate ? "text-white" : "text-light-gray"
-                  );
+                  }`;
 
                   return (
                     <Button
                       key={index}
-                      className={buttonClasses.join(" ")}
+                      className={buttonClasses}
                       theme={isCandidate ? "light-green" : "gray"}
                       value={weekday}
                     />
@@ -141,12 +144,12 @@ export const Modal = ({ toggleModal }) => {
             </div>
           </div>
 
-          <div className="modal__current__promotion__right">
-            <div className="modal__current__promotion__promos__text">
+          <div className="modal__current-promotion-right">
+            <div className="modal__current-promotion-promos-text">
               Использовать текущие акции
             </div>
 
-            <div className="modal__current__promotion__promos">
+            <div className="modal__current-promotion-promos">
               {mocks.Modal.discountTypes.map((discount, index) => (
                 <Button
                   key={index}
@@ -159,59 +162,59 @@ export const Modal = ({ toggleModal }) => {
           </div>
         </div>
 
-        <div className="modal__current_description">
+        <div className="modal__current-description">
           <div
-            className={descriptionSwitchingClasses.join(" ")}
+            className={descriptionSwitchClasses}
             onClick={() => toggleDesc(!showDesc)}
           >
-            <div className="modal__current__description__switching__label">
+            <div className="modal__current-description-switching-label">
               {showDesc ? "Скрыть" : "Добавить описание"}
             </div>
 
-            <div className="modal__current_description__switching__array">
+            <div className="modal__current-description-switching-array">
               <InlineSVG src={ArrayIcon} />
             </div>
           </div>
 
           {showDesc && (
-            <div className="modal__current__description__textarea">
+            <div className="modal__current-description-textarea">
               <Textarea />
             </div>
           )}
         </div>
 
-        <div className="modal__current__products">
+        <div className="modal__current-products">
           <DrawProductsButton />
 
-          <div className="modal__current__products__list">
-            <div className="modal__current__products__list__header">
-              <div className="modal__current__products__list__header__article">
-                <div className="modal__current__products__list__header__text">
+          <div className="modal__current-products-list">
+            <div className="modal__current-products-list-header">
+              <div className="modal__current-products-list-header-article">
+                <div className="modal__current-products-list-header-text">
                   Артикул
                 </div>
 
-                <div className="modal__current__products__list__header__array">
+                <div className="modal__current-products-list-header-array">
                   <InlineSVG src={ArrayIcon} />
                 </div>
               </div>
 
-              <div className="modal__current__products__list__header__article">
-                <div className="modal__current__products__list__header__text">
+              <div className="modal__current-products-list-header-article">
+                <div className="modal__current-products-list-header-text">
                   Фикс. прайс
                 </div>
 
-                <div className="modal__current__products__list__header__array">
+                <div className="modal__current-products-list-header-array">
                   <InlineSVG src={ArrayIcon} />
                 </div>
               </div>
             </div>
 
-            <div className="modal__current__products__list__item">
-              <div className="modal__current__products__list__action-button">
+            <div className="modal__current-products-list-item">
+              <div className="modal__current-products-list-action-button">
                 <Button LeftIcon={CrossIcon} />
               </div>
 
-              <div className="modal__current__products__list__article">
+              <div className="modal__current-products-list-article">
                 <Input
                   className="font-weight-bold text-dark"
                   type="outlined"
@@ -219,7 +222,7 @@ export const Modal = ({ toggleModal }) => {
                 />
               </div>
 
-              <div className="modal__current__products__list__search">
+              <div className="modal__current-products-list-search">
                 <Select
                   type="outlined"
                   value="Поиск по наименованию"
@@ -227,7 +230,7 @@ export const Modal = ({ toggleModal }) => {
                 />
               </div>
 
-              <div className="modal__current__products__list__values">
+              <div className="modal__current-products-list-values">
                 <Input type="outlined" defaultValue="0" />
                 <Input type="outlined" defaultValue="0" />
               </div>
@@ -239,7 +242,7 @@ export const Modal = ({ toggleModal }) => {
 
         <hr />
 
-        <div className="modal__current__action-buttons">
+        <div className="modal__current-action-buttons">
           <Button
             className="text-white font-weight-bold"
             type="lg"
