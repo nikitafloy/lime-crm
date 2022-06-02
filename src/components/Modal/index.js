@@ -15,6 +15,7 @@ import mocks from "../../__mocks__";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import InlineSVG from "svg-inline-react";
 
 export const Modal = ({ toggleModal }) => {
   const [type, setType] = useState(null);
@@ -35,7 +36,7 @@ export const Modal = ({ toggleModal }) => {
     <Select
       type="outlined"
       ref={ref}
-      leftIcon={CalendarIcon}
+      LeftIcon={CalendarIcon}
       value={value || mocks.Drawer.period}
       onClick={onClick}
     />
@@ -53,7 +54,7 @@ export const Modal = ({ toggleModal }) => {
         className="text-white"
         theme="light-green"
         value="Добавить"
-        leftIcon={PlusBox}
+        LeftIcon={PlusBox}
       />
 
       <div className="modal__current__products__button__dropdown">
@@ -168,7 +169,7 @@ export const Modal = ({ toggleModal }) => {
             </div>
 
             <div className="modal__current_description__switching__array">
-              <img src={ArrayIcon} alt="Array Icon" />
+              <InlineSVG src={ArrayIcon} />
             </div>
           </div>
 
@@ -190,7 +191,7 @@ export const Modal = ({ toggleModal }) => {
                 </div>
 
                 <div className="modal__current__products__list__header__array">
-                  <img src={ArrayIcon} alt="Array Icon" />
+                  <InlineSVG src={ArrayIcon} />
                 </div>
               </div>
 
@@ -200,14 +201,14 @@ export const Modal = ({ toggleModal }) => {
                 </div>
 
                 <div className="modal__current__products__list__header__array">
-                  <img src={ArrayIcon} alt="Array Icon" />
+                  <InlineSVG src={ArrayIcon} />
                 </div>
               </div>
             </div>
 
             <div className="modal__current__products__list__item">
               <div className="modal__current__products__list__action-button">
-                <Button leftIcon={CrossIcon} />
+                <Button LeftIcon={CrossIcon} />
               </div>
 
               <div className="modal__current__products__list__article">
@@ -222,7 +223,7 @@ export const Modal = ({ toggleModal }) => {
                 <Select
                   type="outlined"
                   value="Поиск по наименованию"
-                  leftIcon={SearchIcon}
+                  LeftIcon={SearchIcon}
                 />
               </div>
 
@@ -260,7 +261,7 @@ export const Modal = ({ toggleModal }) => {
       </div>
 
       <div className="modal__close-button" onClick={() => toggleModal()}>
-        <Button leftIcon={CrossIcon} />
+        <Button LeftIcon={CrossIcon} />
       </div>
     </div>
   );

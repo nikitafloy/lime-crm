@@ -9,6 +9,7 @@
 import "./index.css";
 
 import { ArrayIcon } from "../../assets/icons";
+import InlineSVG from "svg-inline-react";
 
 export const Select = ({
   value,
@@ -17,7 +18,7 @@ export const Select = ({
   label,
   theme,
   className,
-  leftIcon,
+  LeftIcon,
   onChange,
   onClick,
 }) => {
@@ -47,9 +48,9 @@ export const Select = ({
       {label && <div className="select-box__label">{label}</div>}
 
       <div className="select-box__current" tabIndex="1">
-        {leftIcon && (
+        {LeftIcon && (
           <div className="select-box__icon-left">
-            <img src={leftIcon} alt="Select Icon" />
+            <InlineSVG src={LeftIcon} />
           </div>
         )}
 
@@ -66,11 +67,7 @@ export const Select = ({
         ))}
       </ul>
 
-      <img
-        className={selectBoxIconClasses.join(" ")}
-        src={ArrayIcon}
-        alt="Array Icon"
-      />
+      <InlineSVG className={selectBoxIconClasses.join(" ")} src={ArrayIcon} />
     </div>
   );
 };

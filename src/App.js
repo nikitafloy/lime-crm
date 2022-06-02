@@ -18,9 +18,11 @@ import {
   UserIcon,
   BellIcon,
   CrossIcon,
+  ArrayIcon,
 } from "./assets/icons";
 
 import mocks from "./__mocks__";
+import InlineSVG from "svg-inline-react";
 
 export const App = () => {
   const [type, setType] = useState(mocks.Drawer.discountTypes[0]);
@@ -69,7 +71,7 @@ export const App = () => {
           <Button
             key={index}
             theme={status === "active" ? "black" : "green"}
-            leftIcon={status === "active" ? CheckIcon : DotIcon}
+            LeftIcon={status === "active" ? CheckIcon : DotIcon}
           />
         );
       }
@@ -89,14 +91,14 @@ export const App = () => {
           <div className="main__board__body__left">
             <div className="main__board__icon">
               {status ? (
-                <Button theme="green" leftIcon={PlayIcon} />
+                <Button theme="green" LeftIcon={PlayIcon} />
               ) : (
-                <Button theme="gray" leftIcon={PauseIcon} />
+                <Button theme="gray" LeftIcon={PauseIcon} />
               )}
             </div>
             <div className={mainBoardNameClasses.join(" ")}>{name}</div>
             <div className="main__board__icon">
-              <img src={EditPencil} alt="Edit Pencil" />
+              <InlineSVG src={EditPencil} />
             </div>
           </div>
           <div className="main__board__body__right">
@@ -112,7 +114,7 @@ export const App = () => {
         <Button
           theme="light-green"
           value="Добавить скидку"
-          leftIcon={PlusBox}
+          LeftIcon={PlusBox}
           onClick={() => toggleModal(true)}
         />
       </div>
@@ -174,7 +176,7 @@ export const App = () => {
       </div>
 
       <div className="main__controls__search">
-        <Button leftIcon={SearchIcon} onClick={toggleSearchVisible} />
+        <Button LeftIcon={SearchIcon} onClick={toggleSearchVisible} />
       </div>
     </div>
   );
@@ -183,11 +185,11 @@ export const App = () => {
     <div className="main__controls">
       <div className="main__search">
         <Button
-          leftIcon={SearchIcon}
+          LeftIcon={SearchIcon}
           onClick={() => console.log("search...")}
         />
         <Input />
-        <Button leftIcon={CrossIcon} onClick={toggleSearchVisible} />
+        <Button LeftIcon={CrossIcon} onClick={toggleSearchVisible} />
       </div>
     </div>
   );
@@ -211,7 +213,7 @@ export const App = () => {
 
             <div className="main__header__left__bottom">
               <div className="main__header__left__bottom__icon">
-                <img src={TargetPoint} alt="Target Point" />
+                <InlineSVG src={TargetPoint} />
               </div>
               <div className="main__header__left__bottom__address">
                 г. Минск ул Беломорская дом 7
@@ -223,13 +225,13 @@ export const App = () => {
             <Button
               type="lg"
               className="font-weight-bold"
-              leftIcon={UserIcon}
+              LeftIcon={UserIcon}
               value="Владимировна И.А."
               secondText="Администратор"
             />
 
             <div className="main__header__notification">
-              <Button type="lg" leftIcon={BellIcon} />
+              <Button type="lg" LeftIcon={BellIcon} />
               <div className="main__notification">3</div>
             </div>
           </div>

@@ -14,11 +14,13 @@
 
 import "./index.css";
 
+import InlineSVG from "svg-inline-react";
+
 export const Button = ({
   value,
   type,
   theme,
-  leftIcon,
+  LeftIcon,
   secondText,
   className,
   onClick,
@@ -55,9 +57,9 @@ export const Button = ({
 
   return (
     <button className={btnClasses.join(" ")} onClick={onClick}>
-      {leftIcon && (
+      {LeftIcon && (
         <div className="btn__icon-left">
-          <img src={leftIcon} alt="Button Icon" />
+          <InlineSVG src={LeftIcon} />
         </div>
       )}
 
