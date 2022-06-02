@@ -15,6 +15,7 @@
 import "./index.css";
 
 import InlineSVG from "svg-inline-react";
+import { useEffect, useRef } from "react";
 
 export const Button = ({
   value,
@@ -25,21 +26,25 @@ export const Button = ({
   className,
   onClick,
 }) => {
-  const btnClasses = ["btn"];
-  if (className) {
-    btnClasses.push(className);
-  }
+  const ref = useRef();
 
-  if (theme) {
-    btnClasses.push(`btn-${theme}`);
-  }
+  useEffect(() => {
+    const $button = ref.current;
+    if (className) {
+      $button.classList.add(...className.split(" "));
+    }
 
-  if (type) {
-    btnClasses.push(`btn-${type}`);
-  }
+    if (theme) {
+      $button.classList.add(`btn-${theme}`);
+    }
+
+    if (type) {
+      $button.classList.add(`btn-${type}`);
+    }
+  }, []);
 
   return (
-    <button className={btnClasses.join(" ")} onClick={onClick}>
+    <button ref={ref} className="btn" onClick={onClick}>
       {LeftIcon && (
         <div className="btn__icon-left">
           <InlineSVG src={LeftIcon} />
