@@ -1,11 +1,3 @@
-/*
- *
- * Input с label
- * Input без label, модификатор light-green (салатовая обводка)
- * Input без label, модификатор gray (серый бэкграунд)
- *
- * */
-
 import { useEffect, useReducer, useRef } from "react";
 import "./index.scss";
 
@@ -38,7 +30,7 @@ export const Input = ({
 
     const $input = ref.current;
     if (theme && theme === "green") {
-      $input.classList.add("input-box__current-dark");
+      $input.classList.add("input-box__current_dark");
     }
 
     const $div = inputDivRef.current;
@@ -47,11 +39,11 @@ export const Input = ({
     }
 
     if (theme) {
-      $div.classList.add(`input-box-${theme}`);
+      $div.classList.add(`input-box_${theme}`);
     }
 
     if (type) {
-      $div.classList.add(`input-box-${type}`);
+      $div.classList.add(`input-box_${type}`);
     }
   }, []);
 
