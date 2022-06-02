@@ -1,4 +1,4 @@
-export const Drawer = {
+export const Modal = {
   discountTypes: ["1+1", "2+1", "Сумма чека", "По промокоду"],
   period: "00.00.0000 - 00.00.0000",
   categories: ["Полуфабрикаты", "Напитки", "Корм для животных"],

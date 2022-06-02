@@ -19,3 +19,8 @@ body {
 .text-white button {
   color: white;
 }
+
+.font-weight-bold,
+.font-weight-bold input {
+  font-weight: 700;
+}

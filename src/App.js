@@ -1,11 +1,17 @@
 import { forwardRef, useState } from "react";
-import "./App.css";
+import "./App.scss";
 
+// Components
 import { Button, Input, Modal, Select } from "./components";
 
+// Date Picker
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+// Inline SVG
+import InlineSVG from "svg-inline-react";
+
+// Icons
 import {
   SearchIcon,
   TargetPoint,
@@ -18,22 +24,34 @@ import {
   UserIcon,
   BellIcon,
   CrossIcon,
-  ArrayIcon,
 } from "./assets/icons";
 
+// Mocks
 import mocks from "./__mocks__";
-import InlineSVG from "svg-inline-react";
 
 export const App = () => {
-  const [type, setType] = useState(mocks.Drawer.discountTypes[0]);
+  // Date
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  const [category, setCategory] = useState(mocks.Drawer.categories[0]);
-  const [desc, setDesc] = useState("");
-  const [products, setProducts] = useState([mocks.Drawer.product]);
-  const [discount, setDiscount] = useState(mocks.Drawer.discountPercents[0]);
+
   const [isSearchVisible, setSearchVisible] = useState(false);
   const [showModal, toggleModal] = useState(false);
+
+  const [type, setType] = useState(mocks.Modal.discountTypes[0]);
+  const [category, setCategory] = useState(mocks.Modal.categories[0]);
+  const [discount, setDiscount] = useState(mocks.Modal.discountPercents[0]);
+
+  const [products, setProducts] = useState(19783);
+  const [discounts, setDiscounts] = useState(19783);
+
+  const [address, setAddress] = useState("г. Минск ул Беломорская дом 7");
+
+  const [user, setUser] = useState({
+    name: "Владимировна И.А.",
+    position: "Администратор",
+  });
+
+  const [notifications, setNotifications] = useState(3);
 
   const toggleSearchVisible = () => setSearchVisible(!isSearchVisible);
 
@@ -41,16 +59,16 @@ export const App = () => {
     <Select
       ref={ref}
       label="Период"
-      value={value || mocks.Drawer.period}
+      value={value || mocks.Modal.period}
       onClick={onClick}
     />
   ));
 
   const DrawDates = () =>
     mocks.dates.map(({ date, weekday }, index) => (
-      <div key={index} className="main__board__header__dates">
-        <div className="main__board__header__dates__date">{date}</div>
-        <div className="main__board__header__dates__weekday">{weekday}</div>
+      <div key={index} className="main__board-header-dates">
+        <div className="main__board-header-dates-date">{date}</div>
+        <div className="main__board-header-dates-weekday">{weekday}</div>
       </div>
     ));
 
@@ -81,27 +99,26 @@ export const App = () => {
 
   const DrawActionData = () =>
     mocks.promos.map(({ name, status, promos }, index) => {
-      const mainBoardNameClasses = ["main__board__name"];
-      if (!status) {
-        mainBoardNameClasses.push("main__board__name-disabled");
-      }
+      const nameClasses = `main__board-body-item-name ${
+        !status ? "main__board-body-item-name_disabled" : ""
+      }`;
 
       return (
-        <div key={index} className="main__board__body__item">
-          <div className="main__board__body__left">
-            <div className="main__board__icon">
+        <div key={index} className="main__board-body-item">
+          <div className="main__board-body-item-left">
+            <div className="main__board-body-item-icon">
               {status ? (
                 <Button theme="green" LeftIcon={PlayIcon} />
               ) : (
                 <Button theme="gray" LeftIcon={PauseIcon} />
               )}
             </div>
-            <div className={mainBoardNameClasses.join(" ")}>{name}</div>
-            <div className="main__board__icon">
+            <div className={nameClasses}>{name}</div>
+            <div className="main__board-body-item-icon">
               <InlineSVG src={EditPencil} />
             </div>
           </div>
-          <div className="main__board__body__right">
+          <div className="main__board-body-item-right">
             <DrawPromos promoStatus={status} promos={promos} />
           </div>
         </div>
@@ -110,7 +127,7 @@ export const App = () => {
 
   const DrawControls = () => (
     <div className="main__controls">
-      <div className="main__controls__add">
+      <div className="main__controls-add">
         <Button
           theme="light-green"
           value="Добавить скидку"
@@ -119,41 +136,41 @@ export const App = () => {
         />
       </div>
 
-      <div className="main__controls__active">
+      <div className="main__controls-active">
         <Button
-          className="btn-md font-weight-bold"
+          className="btn_md font-weight-bold"
           value="Активные"
           type="outlined"
         />
         <Button
           theme="light-gray"
-          className="btn-md font-weight-bold"
+          className="btn_md font-weight-bold"
           value="Неактивные"
         />
       </div>
 
-      <div className="main__controls__filters">
-        <div className="main__controls__filters__type">
+      <div className="main__controls-filters">
+        <div className="main__controls-filters-type">
           <Select
             value={type}
             label="Тип скидки"
-            variants={mocks.Drawer.discountTypes}
+            variants={mocks.Modal.discountTypes}
             onChange={(value) => {
               setType(value);
             }}
           />
         </div>
-        <div className="main__controls__filters__discount">
+        <div className="main__controls-filters-discount">
           <Select
             value={discount}
             label="% скидки"
-            variants={mocks.Drawer.discountPercents}
+            variants={mocks.Modal.discountPercents}
             onChange={(value) => {
               setDiscount(value);
             }}
           />
         </div>
-        <div className="main__controls__filters__period">
+        <div className="main__controls-filters-period">
           <DatePicker
             selectsRange={true}
             startDate={startDate}
@@ -163,11 +180,11 @@ export const App = () => {
             customInput={<CustomDateSelect />}
           />
         </div>
-        <div className="main__controls__filters__category">
+        <div className="main__controls-filters-category">
           <Select
             value={category}
             label="Категория товаров"
-            variants={mocks.Drawer.categories}
+            variants={mocks.Modal.categories}
             onChange={(value) => {
               setCategory(value);
             }}
@@ -175,7 +192,7 @@ export const App = () => {
         </div>
       </div>
 
-      <div className="main__controls__search">
+      <div className="main__controls-search">
         <Button LeftIcon={SearchIcon} onClick={toggleSearchVisible} />
       </div>
     </div>
@@ -198,41 +215,39 @@ export const App = () => {
     <div className="App">
       <div className="main">
         <div className="main__header">
-          <div className="main__header__left">
-            <div className="main__header__left__top">
-              <div className="main__header__left__stats main__header__left__stats-disabled">
-                <div className="main__header__left__stats__name">Товары</div>
-                <div className="main__header__left_stats__count">19783</div>
+          <div className="main__header-left">
+            <div className="main__header-left-top">
+              <div className="main__header-left-stats main__header-left-stats_disabled">
+                <div className="main__header-left-stats-name">Товары</div>
+                <div className="main__header-left-stats-count">{products}</div>
               </div>
 
-              <div className="main__header__left__stats">
-                <div className="main__header__left__stats__name">Скидки</div>
-                <div className="main__header__left_stats__count">19783</div>
+              <div className="main__header-left-stats">
+                <div className="main__header-left-stats-name">Скидки</div>
+                <div className="main__header-left_stats-count">{discounts}</div>
               </div>
             </div>
 
-            <div className="main__header__left__bottom">
-              <div className="main__header__left__bottom__icon">
+            <div className="main__header-left-bottom">
+              <div className="main__header-left-bottom-icon">
                 <InlineSVG src={TargetPoint} />
               </div>
-              <div className="main__header__left__bottom__address">
-                г. Минск ул Беломорская дом 7
-              </div>
+              <div className="main__header-left-bottom-address">{address}</div>
             </div>
           </div>
 
-          <div className="main__header__right">
+          <div className="main__header-right">
             <Button
               type="lg"
               className="font-weight-bold"
               LeftIcon={UserIcon}
-              value="Владимировна И.А."
-              secondText="Администратор"
+              value={user.name}
+              secondText={user.position}
             />
 
-            <div className="main__header__notification">
+            <div className="main__header-notification">
               <Button type="lg" LeftIcon={BellIcon} />
-              <div className="main__notification">3</div>
+              <div className="main__notification">{notifications}</div>
             </div>
           </div>
         </div>
@@ -240,46 +255,35 @@ export const App = () => {
         {!isSearchVisible ? <DrawControls /> : <DrawSearch />}
 
         <div className="main__board">
-          <div className="main__board_inner">
-            <div className="main__board__header">
-              <div className="main__board__header__left">
-                <div className="main__board__name">Сентябрь</div>
+          <div className="main__board-inner">
+            <div className="main__board-header">
+              <div className="main__board-header-left">
+                <div className="main__board-name">Сентябрь</div>
               </div>
-              <div className="main__board__header__right">
+              <div className="main__board-header-right">
                 <DrawDates />
               </div>
             </div>
 
-            <div className="main__board__body">
+            <div className="main__board-body">
               <DrawActionData />
             </div>
 
-            <div className="main__board__header">
-              <div className="main__board__header__left">
-                <div className="main__board__name">Сентябрь</div>
+            <div className="main__board-header">
+              <div className="main__board-header-left">
+                <div className="main__board-name">Сентябрь</div>
               </div>
-              <div className="main__board__header__right">
+              <div className="main__board-header-right">
                 <DrawDates />
               </div>
             </div>
 
-            <div className="main__board__body">
+            <div className="main__board-body">
               <DrawActionData />
             </div>
           </div>
         </div>
       </div>
-
-      {/*<Input theme="green" defaultValue="000000" />*/}
-      {/*<Input defaultValue="Добавить категорию" Icon={SearchIcon} />*/}
-      {/*<Input theme="dark" defaultValue="00.00.0000 - 00.00.0000" Icon={CalendarIcon} />*/}
-
-      {/*<Input defaultValue="Добавить категорию" />*/}
-
-      {/*<Select value="Выберите тип скидки" />*/}
-      {/*<Select theme="dark" value="Выберите тип скидки" />*/}
-      {/*<Select theme="green" value="Выберите тип скидки" />*/}
-      {/*<Select value="Полуфабрикаты" label="Категория товаров" />*/}
 
       {showModal && <Modal toggleModal={toggleModal} />}
     </div>

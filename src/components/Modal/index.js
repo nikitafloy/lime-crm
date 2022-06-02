@@ -37,7 +37,7 @@ export const Modal = ({ toggleModal }) => {
       type="outlined"
       ref={ref}
       LeftIcon={CalendarIcon}
-      value={value || mocks.Drawer.period}
+      value={value || mocks.Modal.period}
       onClick={onClick}
     />
   ));
@@ -82,7 +82,7 @@ export const Modal = ({ toggleModal }) => {
               <Select
                 type="outlined"
                 value={type || "Выберите тип скидки"}
-                variants={mocks.Drawer.discountTypes}
+                variants={mocks.Modal.discountTypes}
                 onChange={setType}
               />
             </div>
@@ -147,7 +147,7 @@ export const Modal = ({ toggleModal }) => {
             </div>
 
             <div className="modal__current__promotion__promos">
-              {mocks.Drawer.discountTypes.map((discount, index) => (
+              {mocks.Modal.discountTypes.map((discount, index) => (
                 <Button
                   key={index}
                   className="text-light-gray"
