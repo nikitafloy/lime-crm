@@ -6,12 +6,13 @@
  *
  * */
 
+import { forwardRef } from "react";
 import "./index.css";
 
 import { ArrayIcon } from "../../assets/icons";
 import InlineSVG from "svg-inline-react";
 
-export const Select = ({
+const SelectComponent = ({
   value,
   type,
   variants = [],
@@ -71,3 +72,7 @@ export const Select = ({
     </div>
   );
 };
+
+export const Select = forwardRef((props, ref) => (
+  <SelectComponent {...props} forwardedRef={ref} />
+));
