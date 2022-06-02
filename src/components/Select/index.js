@@ -1,15 +1,10 @@
-/*
- *
- * Select с типом date
- * Select с выбором вариантов с label и без label, модификатор light-green
- * Select с иконкой слева и без иконки
- *
- * */
-
 import { forwardRef } from "react";
-import "./index.css";
+import "./index.scss";
 
+// Icons
 import { ArrayIcon } from "../../assets/icons";
+
+// Inline SVG
 import InlineSVG from "svg-inline-react";
 
 const SelectComponent = ({
@@ -32,16 +27,16 @@ const SelectComponent = ({
   }
 
   if (type) {
-    selectBoxClasses.push(`select-box-${type}`);
+    selectBoxClasses.push(`select-box_${type}`);
   }
 
   if (label) {
-    textClasses.push("select-box__text-black", "select-box__text-sm");
-    selectBoxIconClasses.push("select-box__icon-sm");
+    textClasses.push("select-box__text_black", "select-box__text_sm");
+    selectBoxIconClasses.push("select-box__icon_sm");
   }
 
   if (theme && theme === "green") {
-    selectBoxClasses.push("select-box-green");
+    selectBoxClasses.push("select-box_green");
   }
 
   return (
