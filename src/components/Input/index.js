@@ -6,12 +6,18 @@
  *
  * */
 
-import { useState } from "react";
+import { useEffect, useReducer } from "react";
 import "./index.css";
 
 import { useIMask } from "react-imask";
 
 import { getMask } from "./helpers";
+
+const init = () => {
+  return {};
+};
+
+const reducer = (state, action) => getMask(action.type);
 
 export const Input = ({
   defaultValue,
@@ -23,9 +29,7 @@ export const Input = ({
   onChange,
   onClick,
 }) => {
-  const [opts] = useState(getMask(maskType));
-
-  console.log(opts);
+  const [state, dispatch] = useReducer(reducer, getMask, init);
 
   const {
     ref,
@@ -36,24 +40,21 @@ export const Input = ({
     setUnmaskedValue,
     typedValue,
     setTypedValue,
-  } = useIMask(opts);
+  } = useIMask(state);
+
+  useEffect(() => maskType && dispatch({ type: maskType }), []);
 
   const inputBoxClasses = ["input-box"];
   const inputBoxCurrentClasses = ["input-box__current"];
-
   if (className) {
     inputBoxClasses.push(className);
   }
 
   if (theme) {
-    if (theme === "dark") {
-      inputBoxClasses.push("input-box-dark");
-      // inputBoxCurrentClasses.push("input-box__current-dark");
-    }
+    inputBoxClasses.push(`input-box-${theme}`);
+
     if (theme === "green") {
-      inputBoxClasses.push("input-box-green");
       inputBoxCurrentClasses.push("input-box__current-dark");
-      // inputBoxCurrentClasses.push("input-box__current-bold");
     }
   }
 
