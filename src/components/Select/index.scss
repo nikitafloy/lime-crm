@@ -31,8 +31,6 @@
 
   &__current:focus + &__list {
     opacity: 1;
-    -webkit-animation-name: none;
-    animation-name: none;
   }
 
   &__current:focus + &__list &__option {
@@ -86,16 +84,6 @@
     list-style: none;
     opacity: 0;
     z-index: 1;
-    -webkit-animation-name: HideList;
-    animation-name: HideList;
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-delay: 0.5s;
-    animation-delay: 0.5s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-    -webkit-animation-timing-function: step-start;
-    animation-timing-function: step-start;
   }
 
   &__option {
@@ -108,23 +96,5 @@
       color: #222222;
       background-color: #fbfbfb;
     }
-  }
-}
-
-@-webkit-keyframes HideList {
-  from {
-    transform: scaleY(1);
-  }
-  to {
-    transform: scaleY(0);
-  }
-}
-
-@keyframes HideList {
-  from {
-    transform: scaleY(1);
-  }
-  to {
-    transform: scaleY(0);
   }
 }
