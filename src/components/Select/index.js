@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import "./index.scss";
 
 // Icons
@@ -18,29 +18,33 @@ const SelectComponent = ({
   onChange,
   onClick,
 }) => {
-  const selectBoxClasses = ["select-box"];
-  const textClasses = ["select-box__text"];
-  const selectBoxIconClasses = ["select-box__icon"];
+  const selectBoxRef = useRef();
 
-  if (className) {
-    selectBoxClasses.push(className);
-  }
+  const textClasses = `select-box__text ${
+    label ? "select-box__text_black select-box__text_sm" : ""
+  }`;
 
-  if (type) {
-    selectBoxClasses.push(`select-box_${type}`);
-  }
+  const selectBoxIconClasses = `select-box__icon ${
+    label ? "select-box__icon_sm" : ""
+  }`;
 
-  if (label) {
-    textClasses.push("select-box__text_black", "select-box__text_sm");
-    selectBoxIconClasses.push("select-box__icon_sm");
-  }
+  useEffect(() => {
+    const $selectBox = selectBoxRef.current;
+    if (className) {
+      $selectBox.classList.add(...className.split(" "));
+    }
 
-  if (theme && theme === "green") {
-    selectBoxClasses.push("select-box_green");
-  }
+    if (type) {
+      $selectBox.classList.add(`select-box_${type}`);
+    }
+
+    if (theme && theme === "green") {
+      $selectBox.classList.add("select-box_green");
+    }
+  }, []);
 
   return (
-    <div className={selectBoxClasses.join(" ")} onClick={onClick}>
+    <div ref={selectBoxRef} className="select-box" onClick={onClick}>
       {label && <div className="select-box__label">{label}</div>}
 
       <div className="select-box__current" tabIndex="1">
@@ -51,8 +55,10 @@ const SelectComponent = ({
         )}
 
         <div className="select-box__value">
-          <p className={textClasses.join(" ")}>{value}</p>
+          <p className={textClasses}>{value}</p>
         </div>
+
+        <InlineSVG className={selectBoxIconClasses} src={ArrayIcon} />
       </div>
 
       <ul className="select-box__list">
@@ -62,8 +68,6 @@ const SelectComponent = ({
           </li>
         ))}
       </ul>
-
-      <InlineSVG className={selectBoxIconClasses.join(" ")} src={ArrayIcon} />
     </div>
   );
 };
