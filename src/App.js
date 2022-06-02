@@ -126,8 +126,8 @@ export const App = () => {
     });
 
   const DrawControls = () => (
-    <aside className="controls">
-      <div className="controls-add">
+    <>
+      <div className="add">
         <Button
           theme="light-green"
           value="Добавить скидку"
@@ -136,7 +136,7 @@ export const App = () => {
         />
       </div>
 
-      <div className="controls-active">
+      <div className="active">
         <Button
           className="btn_md font-weight-bold"
           value="Активные"
@@ -149,8 +149,8 @@ export const App = () => {
         />
       </div>
 
-      <div className="controls-filters">
-        <div className="controls-filters-type">
+      <div className="filters">
+        <div className="filters__type">
           <Select
             value={type}
             label="Тип скидки"
@@ -160,7 +160,7 @@ export const App = () => {
             }}
           />
         </div>
-        <div className="controls-filters-discount">
+        <div className="filters__discount">
           <Select
             value={discount}
             label="% скидки"
@@ -170,7 +170,7 @@ export const App = () => {
             }}
           />
         </div>
-        <div className="controls-filters-period">
+        <div className="filters__period">
           <DatePicker
             selectsRange={true}
             startDate={startDate}
@@ -180,7 +180,7 @@ export const App = () => {
             customInput={<CustomDateSelect />}
           />
         </div>
-        <div className="controls-filters-category">
+        <div className="filters__category">
           <Select
             value={category}
             label="Категория товаров"
@@ -192,22 +192,17 @@ export const App = () => {
         </div>
       </div>
 
-      <div className="controls-search">
+      <div className="search-btn">
         <Button LeftIcon={SearchIcon} onClick={toggleSearchVisible} />
       </div>
-    </aside>
+    </>
   );
 
   const DrawSearch = () => (
-    <div className="controls">
-      <div className="main__search">
-        <Button
-          LeftIcon={SearchIcon}
-          onClick={() => console.log("search...")}
-        />
-        <Input />
-        <Button LeftIcon={CrossIcon} onClick={toggleSearchVisible} />
-      </div>
+    <div className="search">
+      <Button LeftIcon={SearchIcon} onClick={() => console.log("search...")} />
+      <Input />
+      <Button LeftIcon={CrossIcon} onClick={toggleSearchVisible} />
     </div>
   );
 
@@ -254,7 +249,9 @@ export const App = () => {
         </div>
       </header>
 
-      {!isSearchVisible ? <DrawControls /> : <DrawSearch />}
+      <aside className="controls">
+        {!isSearchVisible ? <DrawControls /> : <DrawSearch />}
+      </aside>
 
       <section className="board">
         <div className="board-inner">

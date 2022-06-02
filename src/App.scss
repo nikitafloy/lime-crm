@@ -90,11 +90,10 @@
   .controls {
     display: flex;
     gap: 8px;
-    justify-content: space-between;
     padding: 8px 0;
     height: 40px;
 
-    &-add {
+    .add {
       button {
         color: black;
         padding: 8px;
@@ -104,17 +103,25 @@
       }
     }
 
-    &-filters {
+    .filters {
       display: flex;
       gap: 8px;
       flex: 1 1 auto;
 
-      & > div {
-        flex: 1 0 208px;
+      & > div:nth-child(-n + 2) {
+        flex: 0 0 100px;
+      }
+
+      &__period {
+        flex: 0 0 208px;
+      }
+
+      &__category {
+        flex: 1 0 auto;
       }
     }
 
-    &-active {
+    .active {
       display: flex;
 
       & button:first-child {
@@ -122,10 +129,23 @@
       }
     }
 
-    &-search .btn {
+    .search-btn .btn {
       width: 40px;
       height: 40px;
       border-radius: 8px;
+    }
+
+    .search {
+      display: flex;
+      background: white;
+      height: 40px;
+      border-radius: 10px;
+      padding: 0 8px 0 4px;
+      flex: 1 0 auto;
+
+      & > div {
+        flex: 1 0 auto;
+      }
     }
   }
 
@@ -243,19 +263,6 @@
           cursor: pointer;
         }
       }
-    }
-  }
-
-  &__search {
-    display: flex;
-    background: white;
-    height: 40px;
-    border-radius: 10px;
-    padding: 0 8px 0 4px;
-    flex: 1 0 auto;
-
-    & > div {
-      flex: 1 0 auto;
     }
   }
 }
