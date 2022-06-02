@@ -66,9 +66,9 @@ export const App = () => {
 
   const DrawDates = () =>
     mocks.dates.map(({ date, weekday }, index) => (
-      <div key={index} className="board-header-dates">
-        <div className="board-header-dates-date">{date}</div>
-        <div className="board-header-dates-weekday">{weekday}</div>
+      <div key={index} className="board-inner__header-dates">
+        <div className="board-inner__header-dates-date">{date}</div>
+        <div className="board-inner__header-dates-weekday">{weekday}</div>
       </div>
     ));
 
@@ -99,14 +99,14 @@ export const App = () => {
 
   const DrawActionData = () =>
     mocks.promos.map(({ name, status, promos }, index) => {
-      const nameClasses = `board-body-item-name ${
-        !status ? "board-body-item-name_disabled" : ""
+      const nameClasses = `board-inner__body-item-left-name ${
+        !status ? "board-inner__body-item-left-name_disabled" : ""
       }`;
 
       return (
-        <div key={index} className="board-body-item">
-          <div className="board-body-item-left">
-            <div className="board-body-item-icon">
+        <div key={index} className="board-inner__body-item">
+          <div className="board-inner__body-item-left">
+            <div className="board-inner__body-item-left-icon">
               {status ? (
                 <Button theme="green" LeftIcon={PlayIcon} />
               ) : (
@@ -114,11 +114,11 @@ export const App = () => {
               )}
             </div>
             <div className={nameClasses}>{name}</div>
-            <div className="board-body-item-icon">
+            <div className="board-inner__body-item-left-icon">
               <InlineSVG src={EditPencil} />
             </div>
           </div>
-          <div className="board-body-item-right">
+          <div className="board-inner__body-item-right">
             <DrawPromos promoStatus={status} promos={promos} />
           </div>
         </div>
@@ -142,6 +142,7 @@ export const App = () => {
           value="Активные"
           type="outlined"
         />
+
         <Button
           theme="light-gray"
           className="btn_md font-weight-bold"
@@ -160,6 +161,7 @@ export const App = () => {
             }}
           />
         </div>
+
         <div className="filters__discount">
           <Select
             value={discount}
@@ -170,6 +172,7 @@ export const App = () => {
             }}
           />
         </div>
+
         <div className="filters__period">
           <DatePicker
             selectsRange={true}
@@ -180,6 +183,7 @@ export const App = () => {
             customInput={<CustomDateSelect />}
           />
         </div>
+
         <div className="filters__category">
           <Select
             value={category}
@@ -255,16 +259,17 @@ export const App = () => {
 
       <section className="board">
         <div className="board-inner">
-          <div className="board-header">
-            <div className="board-header-left">
-              <div className="board-name">Сентябрь</div>
+          <div className="board-inner__header">
+            <div className="board-inner__header-left">
+              <div className="board-inner__header-name">Сентябрь</div>
             </div>
-            <div className="board-header-right">
+
+            <div className="board-inner__header-right">
               <DrawDates />
             </div>
           </div>
 
-          <div className="board-body">
+          <div className="board-inner__body">
             <DrawActionData />
           </div>
         </div>
