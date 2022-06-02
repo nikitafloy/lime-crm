@@ -66,9 +66,9 @@ export const App = () => {
 
   const DrawDates = () =>
     mocks.dates.map(({ date, weekday }, index) => (
-      <div key={index} className="main__board-header-dates">
-        <div className="main__board-header-dates-date">{date}</div>
-        <div className="main__board-header-dates-weekday">{weekday}</div>
+      <div key={index} className="board-header-dates">
+        <div className="board-header-dates-date">{date}</div>
+        <div className="board-header-dates-weekday">{weekday}</div>
       </div>
     ));
 
@@ -99,14 +99,14 @@ export const App = () => {
 
   const DrawActionData = () =>
     mocks.promos.map(({ name, status, promos }, index) => {
-      const nameClasses = `main__board-body-item-name ${
-        !status ? "main__board-body-item-name_disabled" : ""
+      const nameClasses = `board-body-item-name ${
+        !status ? "board-body-item-name_disabled" : ""
       }`;
 
       return (
-        <div key={index} className="main__board-body-item">
-          <div className="main__board-body-item-left">
-            <div className="main__board-body-item-icon">
+        <div key={index} className="board-body-item">
+          <div className="board-body-item-left">
+            <div className="board-body-item-icon">
               {status ? (
                 <Button theme="green" LeftIcon={PlayIcon} />
               ) : (
@@ -114,11 +114,11 @@ export const App = () => {
               )}
             </div>
             <div className={nameClasses}>{name}</div>
-            <div className="main__board-body-item-icon">
+            <div className="board-body-item-icon">
               <InlineSVG src={EditPencil} />
             </div>
           </div>
-          <div className="main__board-body-item-right">
+          <div className="board-body-item-right">
             <DrawPromos promoStatus={status} promos={promos} />
           </div>
         </div>
@@ -126,8 +126,8 @@ export const App = () => {
     });
 
   const DrawControls = () => (
-    <div className="main__controls">
-      <div className="main__controls-add">
+    <aside className="controls">
+      <div className="controls-add">
         <Button
           theme="light-green"
           value="Добавить скидку"
@@ -136,7 +136,7 @@ export const App = () => {
         />
       </div>
 
-      <div className="main__controls-active">
+      <div className="controls-active">
         <Button
           className="btn_md font-weight-bold"
           value="Активные"
@@ -149,8 +149,8 @@ export const App = () => {
         />
       </div>
 
-      <div className="main__controls-filters">
-        <div className="main__controls-filters-type">
+      <div className="controls-filters">
+        <div className="controls-filters-type">
           <Select
             value={type}
             label="Тип скидки"
@@ -160,7 +160,7 @@ export const App = () => {
             }}
           />
         </div>
-        <div className="main__controls-filters-discount">
+        <div className="controls-filters-discount">
           <Select
             value={discount}
             label="% скидки"
@@ -170,7 +170,7 @@ export const App = () => {
             }}
           />
         </div>
-        <div className="main__controls-filters-period">
+        <div className="controls-filters-period">
           <DatePicker
             selectsRange={true}
             startDate={startDate}
@@ -180,7 +180,7 @@ export const App = () => {
             customInput={<CustomDateSelect />}
           />
         </div>
-        <div className="main__controls-filters-category">
+        <div className="controls-filters-category">
           <Select
             value={category}
             label="Категория товаров"
@@ -192,14 +192,14 @@ export const App = () => {
         </div>
       </div>
 
-      <div className="main__controls-search">
+      <div className="controls-search">
         <Button LeftIcon={SearchIcon} onClick={toggleSearchVisible} />
       </div>
-    </div>
+    </aside>
   );
 
   const DrawSearch = () => (
-    <div className="main__controls">
+    <div className="controls">
       <div className="main__search">
         <Button
           LeftIcon={SearchIcon}
@@ -212,31 +212,32 @@ export const App = () => {
   );
 
   return (
-    <div className="App">
-      <div className="main">
-        <div className="main__header">
-          <div className="main__header-left">
-            <div className="main__header-left-top">
-              <div className="main__header-left-stats main__header-left-stats_disabled">
-                <div className="main__header-left-stats-name">Товары</div>
-                <div className="main__header-left-stats-count">{products}</div>
-              </div>
-
-              <div className="main__header-left-stats">
-                <div className="main__header-left-stats-name">Скидки</div>
-                <div className="main__header-left_stats-count">{discounts}</div>
-              </div>
+    <main className="main">
+      <header className="header">
+        <div className="left">
+          <div className="top">
+            <div className="stats stats_disabled">
+              <div className="stats__name">Товары</div>
+              <div className="stats__count">{products}</div>
             </div>
 
-            <div className="main__header-left-bottom">
-              <div className="main__header-left-bottom-icon">
-                <InlineSVG src={TargetPoint} />
-              </div>
-              <div className="main__header-left-bottom-address">{address}</div>
+            <div className="stats">
+              <div className="stats__name">Скидки</div>
+              <div className="stats__count">{discounts}</div>
             </div>
           </div>
 
-          <div className="main__header-right">
+          <div className="bottom">
+            <div className="bottom__icon">
+              <InlineSVG src={TargetPoint} />
+            </div>
+
+            <div className="bottom__address">{address}</div>
+          </div>
+        </div>
+
+        <div className="right">
+          <div className="user">
             <Button
               type="lg"
               className="font-weight-bold"
@@ -244,48 +245,35 @@ export const App = () => {
               value={user.name}
               secondText={user.position}
             />
+          </div>
 
-            <div className="main__header-notification">
-              <Button type="lg" LeftIcon={BellIcon} />
-              <div className="main__notification">{notifications}</div>
-            </div>
+          <div className="notification">
+            <Button type="lg" LeftIcon={BellIcon} />
+            <div className="notification__icon">{notifications}</div>
           </div>
         </div>
+      </header>
 
-        {!isSearchVisible ? <DrawControls /> : <DrawSearch />}
+      {!isSearchVisible ? <DrawControls /> : <DrawSearch />}
 
-        <div className="main__board">
-          <div className="main__board-inner">
-            <div className="main__board-header">
-              <div className="main__board-header-left">
-                <div className="main__board-name">Сентябрь</div>
-              </div>
-              <div className="main__board-header-right">
-                <DrawDates />
-              </div>
+      <section className="board">
+        <div className="board-inner">
+          <div className="board-header">
+            <div className="board-header-left">
+              <div className="board-name">Сентябрь</div>
             </div>
-
-            <div className="main__board-body">
-              <DrawActionData />
-            </div>
-
-            <div className="main__board-header">
-              <div className="main__board-header-left">
-                <div className="main__board-name">Сентябрь</div>
-              </div>
-              <div className="main__board-header-right">
-                <DrawDates />
-              </div>
-            </div>
-
-            <div className="main__board-body">
-              <DrawActionData />
+            <div className="board-header-right">
+              <DrawDates />
             </div>
           </div>
+
+          <div className="board-body">
+            <DrawActionData />
+          </div>
         </div>
-      </div>
+      </section>
 
       {showModal && <Modal toggleModal={toggleModal} />}
-    </div>
+    </main>
   );
 };
