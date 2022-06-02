@@ -66,9 +66,9 @@ export const App = () => {
 
   const DrawDates = () =>
     mocks.dates.map(({ date, weekday }, index) => (
-      <div key={index} className="board-inner__header-dates">
-        <div className="board-inner__header-dates-date">{date}</div>
-        <div className="board-inner__header-dates-weekday">{weekday}</div>
+      <div key={index} className="board__header-dates">
+        <div className="board__header-dates-date">{date}</div>
+        <div className="board__header-dates-weekday">{weekday}</div>
       </div>
     ));
 
@@ -99,14 +99,14 @@ export const App = () => {
 
   const DrawActionData = () =>
     mocks.promos.map(({ name, status, promos }, index) => {
-      const nameClasses = `board-inner__body-item-left-name ${
-        !status ? "board-inner__body-item-left-name_disabled" : ""
+      const nameClasses = `board__body-item-left-name ${
+        !status ? "board__body-item-left-name_disabled" : ""
       }`;
 
       return (
-        <div key={index} className="board-inner__body-item">
-          <div className="board-inner__body-item-left">
-            <div className="board-inner__body-item-left-icon">
+        <div key={index} className="board__body-item">
+          <div className="board__body-item-left">
+            <div className="board__body-item-left-icon">
               {status ? (
                 <Button theme="green" LeftIcon={PlayIcon} />
               ) : (
@@ -114,11 +114,11 @@ export const App = () => {
               )}
             </div>
             <div className={nameClasses}>{name}</div>
-            <div className="board-inner__body-item-left-icon">
+            <div className="board__body-item-left-icon">
               <InlineSVG src={EditPencil} />
             </div>
           </div>
-          <div className="board-inner__body-item-right">
+          <div className="board__body-item-right">
             <DrawPromos promoStatus={status} promos={promos} />
           </div>
         </div>
@@ -259,17 +259,17 @@ export const App = () => {
 
       <section className="board">
         <div className="board-inner">
-          <div className="board-inner__header">
-            <div className="board-inner__header-left">
-              <div className="board-inner__header-name">Сентябрь</div>
+          <div className="board__header">
+            <div className="board__header-left">
+              <div className="board__header-name">Сентябрь</div>
             </div>
 
-            <div className="board-inner__header-right">
+            <div className="board__header-right">
               <DrawDates />
             </div>
           </div>
 
-          <div className="board-inner__body">
+          <div className="board__body">
             <DrawActionData />
           </div>
         </div>
