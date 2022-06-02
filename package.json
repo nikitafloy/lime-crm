@@ -137,6 +137,7 @@
     ]
   },
   "devDependencies": {
+    "sass": "^1.52.1",
     "svg-inline-react": "^3.2.1"
   }
 }
