@@ -30,7 +30,8 @@
   }
 
   &__current:focus + &__list {
-    visibility: unset;
+    opacity: 1;
+    animation-name: none;
   }
 
   &__current:focus + &__list &__option {
@@ -82,8 +83,13 @@
     padding: 0;
     margin: 4px 0;
     list-style: none;
-    visibility: hidden;
+    opacity: 0;
     z-index: 1;
+    animation-name: HideList;
+    animation-duration: 0.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: step-start;
   }
 
   &__option {
@@ -96,5 +102,14 @@
       color: #222222;
       background-color: #fbfbfb;
     }
+  }
+}
+
+@keyframes HideList {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
   }
 }
