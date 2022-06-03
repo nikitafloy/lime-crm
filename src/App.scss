@@ -223,15 +223,6 @@
       &-item {
         display: flex;
 
-        &:last-child &-left {
-          border-bottom: 1px solid #ececec;
-        }
-
-        &:last-child &-right:last-child {
-          border-bottom: 1px solid #ececec;
-          padding-bottom: 12px;
-        }
-
         &-left {
           display: flex;
           flex: 1 0 292px;
