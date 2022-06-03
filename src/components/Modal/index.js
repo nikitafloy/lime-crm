@@ -1,8 +1,17 @@
 import { forwardRef, useState } from "react";
-import "./index.css";
+import "./index.scss";
 
+// Components
 import { Button, Input, Select, Textarea } from "../";
 
+// Date Picker
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+// Inline SVG
+import InlineSVG from "svg-inline-react";
+
+// Icons
 import {
   CrossIcon,
   CalendarIcon,
@@ -11,32 +20,28 @@ import {
   SearchIcon,
 } from "../../assets/icons";
 
+// Mocks
 import mocks from "../../__mocks__";
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-
 export const Modal = ({ toggleModal }) => {
-  const [type, setType] = useState(null);
+  // Date
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
+
+  const [type, setType] = useState(null);
   const [weekdays, setWeekdays] = useState([1]);
   const [showDesc, toggleDesc] = useState(false);
 
-  const descriptionSwitchingClasses = [
-    "modal__current__description__switching",
-  ];
-
-  if (showDesc) {
-    descriptionSwitchingClasses.push("open");
-  }
+  const descriptionSwitchClasses = `description__toggle ${
+    showDesc ? "open" : ""
+  }`;
 
   const CustomDateSelect = forwardRef(({ value, onClick }, ref) => (
     <Select
       type="outlined"
       ref={ref}
-      leftIcon={CalendarIcon}
-      value={value || mocks.Drawer.period}
+      LeftIcon={CalendarIcon}
+      value={value || mocks.Modal.period}
       onClick={onClick}
     />
   ));
@@ -48,15 +53,15 @@ export const Modal = ({ toggleModal }) => {
   };
 
   const DrawProductsButton = () => (
-    <div className="modal__current__products__button">
+    <div className="modal__products-button">
       <Button
         className="text-white"
         theme="light-green"
         value="Добавить"
-        leftIcon={PlusBox}
+        LeftIcon={PlusBox}
       />
 
-      <div className="modal__current__products__button__dropdown">
+      <div className="modal__products-button-dropdown">
         <ul className="font-weight-bold">
           {mocks.Modal.dropdown.map((item, index) => (
             <li key={index} onClick={onDropDownClickHandler}>
@@ -71,27 +76,23 @@ export const Modal = ({ toggleModal }) => {
   return (
     <div className="modal">
       <div className="modal__current">
-        <div className="modal__current__title font-weight-bold">
-          Добавление скидки
-        </div>
+        <div className="modal__title font-weight-bold">Добавление скидки</div>
 
-        <div className="modal__current__promotion">
-          <div className="modal__current__promotion__left">
-            <div className="modal__current__promotion__discount">
+        <div className="modal__promotion">
+          <div className="modal__promotion-left">
+            <div className="modal__promotion-discount">
               <Select
                 type="outlined"
                 value={type || "Выберите тип скидки"}
-                variants={mocks.Drawer.discountTypes}
+                variants={mocks.Modal.discountTypes}
                 onChange={setType}
               />
             </div>
 
-            <div className="modal__current__promotion__period">
-              <div className="modal__current__promotion__period__text">
-                Период акции
-              </div>
+            <div className="modal__promotion-period">
+              <div className="modal__promotion-period-text">Период акции</div>
 
-              <div className="modal__current__promotion__period__select">
+              <div className="modal__promotion-period-select">
                 <DatePicker
                   selectsRange={true}
                   startDate={startDate}
@@ -103,8 +104,8 @@ export const Modal = ({ toggleModal }) => {
               </div>
             </div>
 
-            <div className="modal__current__promotion__weekday">
-              <div className="modal__current__promotion__weekday__filters">
+            <div className="modal__promotion-weekday">
+              <div className="modal__promotion-weekday-filters">
                 <Button className="text-light-gray" theme="gray" value="Все" />
                 <Button className="text-light-gray" theme="gray" value="Чет." />
                 <Button
@@ -114,23 +115,22 @@ export const Modal = ({ toggleModal }) => {
                 />
               </div>
 
-              <div className="modal__current__promotion__weekday__days">
+              <div className="modal__promotion-weekday-days">
                 {mocks.Modal.weekdays.map((weekday, index) => {
                   const candidate = weekdays.findIndex(
                     (_weekday) => index === _weekday
                   );
 
                   const isCandidate = candidate !== -1;
-                  const buttonClasses = ["font-weight-bold"];
 
-                  buttonClasses.push(
+                  const buttonClasses = `font-weight-bold ${
                     isCandidate ? "text-white" : "text-light-gray"
-                  );
+                  }`;
 
                   return (
                     <Button
                       key={index}
-                      className={buttonClasses.join(" ")}
+                      className={buttonClasses}
                       theme={isCandidate ? "light-green" : "gray"}
                       value={weekday}
                     />
@@ -140,77 +140,77 @@ export const Modal = ({ toggleModal }) => {
             </div>
           </div>
 
-          <div className="modal__current__promotion__right">
-            <div className="modal__current__promotion__promos__text">
-              Использовать текущие акции
-            </div>
+          <div className="modal__promotion-right">
+            <div className="modal__promotion-promos">
+              <div className="modal__promotion-promos-text">
+                Использовать текущие акции
+              </div>
 
-            <div className="modal__current__promotion__promos">
-              {mocks.Drawer.discountTypes.map((discount, index) => (
-                <Button
-                  key={index}
-                  className="text-light-gray"
-                  theme="gray"
-                  value={discount}
-                />
-              ))}
+              <div className="modal__promotion-promos-buttons">
+                {mocks.Modal.discountTypes.map((discount, index) => (
+                  <Button
+                    key={index}
+                    className="text-light-gray"
+                    theme="gray"
+                    value={discount}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="modal__current_description">
+        <div className="description">
           <div
-            className={descriptionSwitchingClasses.join(" ")}
+            className={descriptionSwitchClasses}
             onClick={() => toggleDesc(!showDesc)}
           >
-            <div className="modal__current__description__switching__label">
+            <div className="description__toggle-label">
               {showDesc ? "Скрыть" : "Добавить описание"}
             </div>
 
-            <div className="modal__current_description__switching__array">
-              <img src={ArrayIcon} alt="Array Icon" />
+            <div className="description__toggle-array">
+              <InlineSVG src={ArrayIcon} />
             </div>
           </div>
 
           {showDesc && (
-            <div className="modal__current__description__textarea">
+            <div className="description__textarea">
               <Textarea />
             </div>
           )}
         </div>
 
-        <div className="modal__current__products">
+        <div className="modal__products">
           <DrawProductsButton />
 
-          <div className="modal__current__products__list">
-            <div className="modal__current__products__list__header">
-              <div className="modal__current__products__list__header__article">
-                <div className="modal__current__products__list__header__text">
-                  Артикул
-                </div>
+          <div className="modal__products-list">
+            <div className="modal__products-list-header">
+              <div className="modal__products-list-header-article">
+                <div className="modal__products-list-header-text">Артикул</div>
 
-                <div className="modal__current__products__list__header__array">
-                  <img src={ArrayIcon} alt="Array Icon" />
+                <div className="modal__products-list-header-array">
+                  <InlineSVG src={ArrayIcon} />
                 </div>
               </div>
 
-              <div className="modal__current__products__list__header__article">
-                <div className="modal__current__products__list__header__text">
+              <div className="modal__products-list-header-article">
+                <div className="modal__products-list-header-text">
                   Фикс. прайс
                 </div>
 
-                <div className="modal__current__products__list__header__array">
-                  <img src={ArrayIcon} alt="Array Icon" />
+                <div className="modal__products-list-header-array">
+                  <InlineSVG src={ArrayIcon} />
                 </div>
               </div>
             </div>
 
-            <div className="modal__current__products__list__item">
-              <div className="modal__current__products__list__action-button">
-                <Button leftIcon={CrossIcon} />
+            <div className="modal__products-list-item">
+              <div className="modal__products-list-action-button">
+                <Button LeftIcon={CrossIcon} />
               </div>
 
-              <div className="modal__current__products__list__article">
+              <div className="modal__products-list-article">
                 <Input
                   className="font-weight-bold text-dark"
                   type="outlined"
@@ -218,15 +218,15 @@ export const Modal = ({ toggleModal }) => {
                 />
               </div>
 
-              <div className="modal__current__products__list__search">
+              <div className="modal__products-list-search">
                 <Select
                   type="outlined"
                   value="Поиск по наименованию"
-                  leftIcon={SearchIcon}
+                  LeftIcon={SearchIcon}
                 />
               </div>
 
-              <div className="modal__current__products__list__values">
+              <div className="modal__products-list-values">
                 <Input type="outlined" defaultValue="0" />
                 <Input type="outlined" defaultValue="0" />
               </div>
@@ -238,7 +238,7 @@ export const Modal = ({ toggleModal }) => {
 
         <hr />
 
-        <div className="modal__current__action-buttons">
+        <div className="modal__action-buttons">
           <Button
             className="text-white font-weight-bold"
             type="lg"
@@ -260,7 +260,7 @@ export const Modal = ({ toggleModal }) => {
       </div>
 
       <div className="modal__close-button" onClick={() => toggleModal()}>
-        <Button leftIcon={CrossIcon} />
+        <Button LeftIcon={CrossIcon} />
       </div>
     </div>
   );

@@ -1,61 +1,64 @@
-/*
- *
- * Select с типом date
- * Select с выбором вариантов с label и без label, модификатор light-green
- * Select с иконкой слева и без иконки
- *
- * */
+import { forwardRef, useEffect, useRef } from "react";
+import "./index.scss";
 
-import "./index.css";
-
+// Icons
 import { ArrayIcon } from "../../assets/icons";
 
-export const Select = ({
+// Inline SVG
+import InlineSVG from "svg-inline-react";
+
+const SelectComponent = ({
   value,
   type,
   variants = [],
   label,
   theme,
   className,
-  leftIcon,
+  LeftIcon,
   onChange,
   onClick,
 }) => {
-  const selectBoxClasses = ["select-box"];
-  const textClasses = ["select-box__text"];
-  const selectBoxIconClasses = ["select-box__icon"];
+  const selectBoxRef = useRef();
 
-  if (className) {
-    selectBoxClasses.push(className);
-  }
+  const textClasses = `select-box__text ${
+    label ? "select-box__text_black select-box__text_sm" : ""
+  }`;
 
-  if (type) {
-    selectBoxClasses.push(`select-box-${type}`);
-  }
+  const selectBoxIconClasses = `select-box__icon ${
+    label ? "select-box__icon_sm" : ""
+  }`;
 
-  if (label) {
-    textClasses.push("select-box__text-black", "select-box__text-sm");
-    selectBoxIconClasses.push("select-box__icon-sm");
-  }
+  useEffect(() => {
+    const $selectBox = selectBoxRef.current;
+    if (className) {
+      $selectBox.classList.add(...className.split(" "));
+    }
 
-  if (theme && theme === "green") {
-    selectBoxClasses.push("select-box-green");
-  }
+    if (type) {
+      $selectBox.classList.add(`select-box_${type}`);
+    }
+
+    if (theme && theme === "green") {
+      $selectBox.classList.add("select-box_green");
+    }
+  }, []);
 
   return (
-    <div className={selectBoxClasses.join(" ")} onClick={onClick}>
+    <div ref={selectBoxRef} className="select-box" onClick={onClick}>
       {label && <div className="select-box__label">{label}</div>}
 
       <div className="select-box__current" tabIndex="1">
-        {leftIcon && (
+        {LeftIcon && (
           <div className="select-box__icon-left">
-            <img src={leftIcon} alt="Select Icon" />
+            <InlineSVG src={LeftIcon} />
           </div>
         )}
 
         <div className="select-box__value">
-          <p className={textClasses.join(" ")}>{value}</p>
+          <p className={textClasses}>{value}</p>
         </div>
+
+        <InlineSVG className={selectBoxIconClasses} src={ArrayIcon} />
       </div>
 
       <ul className="select-box__list">
@@ -65,12 +68,10 @@ export const Select = ({
           </li>
         ))}
       </ul>
-
-      <img
-        className={selectBoxIconClasses.join(" ")}
-        src={ArrayIcon}
-        alt="Array Icon"
-      />
     </div>
   );
 };
+
+export const Select = forwardRef((props, ref) => (
+  <SelectComponent {...props} forwardedRef={ref} />
+));
