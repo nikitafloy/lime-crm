@@ -63,6 +63,12 @@ export const App = () => {
     setPromosData(newArrayPromosData);
   };
 
+  const changePromoStatusDate = (promoId, promoListId, status) => {
+    const newArrayPromosData = [...promosData];
+    newArrayPromosData[promoId].promos[promoListId].status = status;
+    setPromosData(newArrayPromosData);
+  };
+
   const CustomDateSelect = forwardRef(({ value, onClick }, ref) => (
     <Select
       ref={ref}
@@ -80,24 +86,30 @@ export const App = () => {
       </div>
     ));
 
-  const DrawPromos = ({ promos, promoStatus }) =>
+  const DrawPromos = ({ promoId, promos, promoStatus }) =>
     promos.map(({ status, date }, index) => {
       const weekday = new Date(date).getDay();
-      const buttonTheme =
-        weekday === 5 || weekday === 6 ? "lighter-green" : "gray";
 
-      if (status) {
-        return (
-          <Button
-            key={index}
-            type={!promoStatus && "disabled"}
-            theme={status === "active" ? "black" : "green"}
-            LeftIcon={status === "active" ? CheckIcon : DotIcon}
-          />
-        );
-      }
-
-      return <Button key={index} theme={buttonTheme} value="н" />;
+      return (
+        <Button
+          key={index}
+          type={status && !promoStatus && "disabled"}
+          theme={
+            status
+              ? status === "active"
+                ? "black"
+                : "green"
+              : weekday === 4 || weekday === 5
+              ? "lighter-green"
+              : "gray"
+          }
+          LeftIcon={status && (status === "active" ? CheckIcon : DotIcon)}
+          value={!status && "н"}
+          onClick={() => {
+            changePromoStatusDate(promoId, index, !status ? "active" : null);
+          }}
+        />
+      );
     });
 
   const DrawActionData = () =>
@@ -130,7 +142,7 @@ export const App = () => {
             </div>
           </div>
           <div className="board__body-item-right">
-            <DrawPromos promoStatus={status} promos={promos} />
+            <DrawPromos promoId={index} promoStatus={status} promos={promos} />
           </div>
         </div>
       );
