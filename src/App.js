@@ -86,16 +86,11 @@ export const App = () => {
       const buttonTheme =
         weekday === 5 || weekday === 6 ? "lighter-green" : "gray";
 
-      if (!promoStatus) {
-        return (
-          <Button key={index} type="disabled" theme={buttonTheme} value="н" />
-        );
-      }
-
       if (status) {
         return (
           <Button
             key={index}
+            type={!promoStatus && "disabled"}
             theme={status === "active" ? "black" : "green"}
             LeftIcon={status === "active" ? CheckIcon : DotIcon}
           />
