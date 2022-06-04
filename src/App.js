@@ -122,19 +122,11 @@ export const App = () => {
         <div key={index} className="board__body-item">
           <div className="board__body-item-left">
             <div className="board__body-item-left-icon">
-              {status ? (
-                <Button
-                  theme="green"
-                  LeftIcon={PlayIcon}
-                  onClick={() => changePromoStatus(index)}
-                />
-              ) : (
-                <Button
-                  theme="gray"
-                  LeftIcon={PauseIcon}
-                  onClick={() => changePromoStatus(index)}
-                />
-              )}
+              <Button
+                theme={status ? "green" : "gray"}
+                LeftIcon={status ? PlayIcon : PauseIcon}
+                onClick={() => changePromoStatus(index)}
+              />
             </div>
             <div className={nameClasses}>{name}</div>
             <div className="board__body-item-left-icon">
