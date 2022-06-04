@@ -51,7 +51,11 @@ const SelectComponent = ({
         <div className="select-box__current" tabIndex="1">
           {LeftIcon && (
             <div className="select-box__icon-left">
-              <InlineSVG src={LeftIcon} />
+              <InlineSVG
+                element="div"
+                style={{ display: "flex" }}
+                src={LeftIcon}
+              />
             </div>
           )}
 
@@ -59,7 +63,12 @@ const SelectComponent = ({
             <p className={textClasses}>{value}</p>
           </div>
 
-          <InlineSVG className={selectBoxIconClasses} src={ArrayIcon} />
+          <InlineSVG
+            element="div"
+            style={{ display: "flex" }}
+            className={selectBoxIconClasses}
+            src={ArrayIcon}
+          />
         </div>
 
         <ul className="select-box__list">

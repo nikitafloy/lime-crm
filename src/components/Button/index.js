@@ -34,7 +34,7 @@ export const Button = ({
     <button ref={ref} className="btn" style={style} onClick={onClick}>
       {LeftIcon && (
         <div className="btn__icon-left">
-          <InlineSVG src={LeftIcon} />
+          <InlineSVG element="div" style={{ display: "flex" }} src={LeftIcon} />
         </div>
       )}
 

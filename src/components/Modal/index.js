@@ -170,7 +170,11 @@ export const Modal = ({ toggleModal }) => {
             </div>
 
             <div className="description__toggle-array">
-              <InlineSVG src={ArrayIcon} />
+              <InlineSVG
+                element="div"
+                style={{ display: "flex" }}
+                src={ArrayIcon}
+              />
             </div>
           </div>
 
@@ -190,7 +194,11 @@ export const Modal = ({ toggleModal }) => {
                 <div className="modal__products-list-header-text">Артикул</div>
 
                 <div className="modal__products-list-header-array">
-                  <InlineSVG src={ArrayIcon} />
+                  <InlineSVG
+                    element="div"
+                    style={{ display: "flex" }}
+                    src={ArrayIcon}
+                  />
                 </div>
               </div>
 
@@ -200,7 +208,11 @@ export const Modal = ({ toggleModal }) => {
                 </div>
 
                 <div className="modal__products-list-header-array">
-                  <InlineSVG src={ArrayIcon} />
+                  <InlineSVG
+                    element="div"
+                    style={{ display: "flex" }}
+                    src={ArrayIcon}
+                  />
                 </div>
               </div>
             </div>

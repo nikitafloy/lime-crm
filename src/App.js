@@ -148,7 +148,11 @@ export const App = () => {
             </div>
             <div className={nameClasses}>{name}</div>
             <div className="board__body-item-left-icon">
-              <InlineSVG src={EditPencil} />
+              <InlineSVG
+                element="div"
+                style={{ display: "flex" }}
+                src={EditPencil}
+              />
             </div>
           </div>
           <div className="board__body-item-right">
@@ -266,7 +270,11 @@ export const App = () => {
 
           <div className="bottom">
             <div className="bottom__icon">
-              <InlineSVG src={TargetPoint} />
+              <InlineSVG
+                element="div"
+                style={{ display: "flex" }}
+                src={TargetPoint}
+              />
             </div>
 
             <div className="bottom__address">{address}</div>
