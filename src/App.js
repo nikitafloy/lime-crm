@@ -32,6 +32,9 @@ import {
 // Mocks
 import mocks from "./__mocks__";
 
+// Constants
+import constants from "./const";
+
 export const App = () => {
   // Date
   const [dateRange, setDateRange] = useState([null, null]);
@@ -50,6 +53,7 @@ export const App = () => {
   const [address] = useState("г. Минск ул Беломорская дом 7");
 
   const [promosData, setPromosData] = useState(List(mocks.promos));
+  const [statusFilter, setStatusFilter] = useState("Активные");
 
   const [user] = useState({
     name: "Владимировна И.А.",
@@ -166,17 +170,22 @@ export const App = () => {
       </div>
 
       <div className="active">
-        <Button
-          className="btn_md font-weight-bold"
-          value="Активные"
-          type="outlined"
-        />
-
-        <Button
-          theme="light-gray"
-          className="btn_md font-weight-bold"
-          value="Неактивные"
-        />
+        {constants.activeButtonsName.map((name, index) => {
+          const isActiveButton = statusFilter === name;
+          return (
+            <Button
+              key={index}
+              style={isActiveButton ? { border: "2px solid #a1d214" } : {}}
+              type={isActiveButton && "outlined"}
+              className="btn_md font-weight-bold"
+              theme={!isActiveButton && "light-gray"}
+              value={name}
+              onClick={() => {
+                setStatusFilter(name);
+              }}
+            />
+          );
+        })}
       </div>
 
       <div className="filters">

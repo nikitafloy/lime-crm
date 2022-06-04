@@ -4,6 +4,7 @@ import "./index.scss";
 import InlineSVG from "svg-inline-react";
 
 export const Button = ({
+  style,
   value,
   type,
   theme,
@@ -30,7 +31,7 @@ export const Button = ({
   }, []);
 
   return (
-    <button ref={ref} className="btn" onClick={onClick}>
+    <button ref={ref} className="btn" style={style} onClick={onClick}>
       {LeftIcon && (
         <div className="btn__icon-left">
           <InlineSVG src={LeftIcon} />
