@@ -46,6 +46,8 @@ export const App = () => {
 
   const [address] = useState("г. Минск ул Беломорская дом 7");
 
+  const [promosData, setPromosData] = useState(mocks.promos);
+
   const [user] = useState({
     name: "Владимировна И.А.",
     position: "Администратор",
@@ -54,6 +56,12 @@ export const App = () => {
   const [notifications] = useState(3);
 
   const toggleSearchVisible = () => setSearchVisible(!isSearchVisible);
+
+  const changePromoStatus = (promoId) => {
+    const newArrayPromosData = [...promosData];
+    newArrayPromosData[promoId].status = !newArrayPromosData[promoId].status;
+    setPromosData(newArrayPromosData);
+  };
 
   const CustomDateSelect = forwardRef(({ value, onClick }, ref) => (
     <Select
@@ -98,7 +106,7 @@ export const App = () => {
     });
 
   const DrawActionData = () =>
-    mocks.promos.map(({ name, status, promos }, index) => {
+    promosData.map(({ name, status, promos }, index) => {
       const nameClasses = `board__body-item-left-name ${
         !status ? "board__body-item-left-name_disabled" : ""
       }`;
@@ -108,9 +116,17 @@ export const App = () => {
           <div className="board__body-item-left">
             <div className="board__body-item-left-icon">
               {status ? (
-                <Button theme="green" LeftIcon={PlayIcon} />
+                <Button
+                  theme="green"
+                  LeftIcon={PlayIcon}
+                  onClick={() => changePromoStatus(index)}
+                />
               ) : (
-                <Button theme="gray" LeftIcon={PauseIcon} />
+                <Button
+                  theme="gray"
+                  LeftIcon={PauseIcon}
+                  onClick={() => changePromoStatus(index)}
+                />
               )}
             </div>
             <div className={nameClasses}>{name}</div>
