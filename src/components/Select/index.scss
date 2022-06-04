@@ -1,7 +1,10 @@
 .select-box {
   background: white;
   border-radius: 8px;
-  position: relative;
+
+  &-inner {
+    position: relative;
+  }
 
   &_outlined {
     border: 1px solid #cdcdcb;

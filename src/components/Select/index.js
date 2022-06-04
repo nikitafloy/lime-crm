@@ -45,29 +45,31 @@ const SelectComponent = ({
 
   return (
     <div ref={selectBoxRef} className="select-box" onClick={onClick}>
-      {label && <div className="select-box__label">{label}</div>}
+      <div className="select-box-inner">
+        {label && <div className="select-box__label">{label}</div>}
 
-      <div className="select-box__current" tabIndex="1">
-        {LeftIcon && (
-          <div className="select-box__icon-left">
-            <InlineSVG src={LeftIcon} />
+        <div className="select-box__current" tabIndex="1">
+          {LeftIcon && (
+            <div className="select-box__icon-left">
+              <InlineSVG src={LeftIcon} />
+            </div>
+          )}
+
+          <div className="select-box__value">
+            <p className={textClasses}>{value}</p>
           </div>
-        )}
 
-        <div className="select-box__value">
-          <p className={textClasses}>{value}</p>
+          <InlineSVG className={selectBoxIconClasses} src={ArrayIcon} />
         </div>
 
-        <InlineSVG className={selectBoxIconClasses} src={ArrayIcon} />
+        <ul className="select-box__list">
+          {variants.map((item, index) => (
+            <li key={index} onClick={() => onChange(item)}>
+              <label className="select-box__option">{item}</label>
+            </li>
+          ))}
+        </ul>
       </div>
-
-      <ul className="select-box__list">
-        {variants.map((item, index) => (
-          <li key={index} onClick={() => onChange(item)}>
-            <label className="select-box__option">{item}</label>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
