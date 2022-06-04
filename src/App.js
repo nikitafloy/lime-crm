@@ -101,11 +101,10 @@ export const App = () => {
   const DrawPromos = ({ promoId, promos, promoStatus }) =>
     promos.map(({ status, date }, index) => {
       const weekday = new Date(date).getDay();
-
       return (
         <Button
           key={index}
-          type={status && !promoStatus && "disabled"}
+          type={!promoStatus && "disabled"}
           theme={
             status
               ? status === "active"
@@ -118,6 +117,9 @@ export const App = () => {
           LeftIcon={status && (status === "active" ? CheckIcon : DotIcon)}
           value={!status && "н"}
           onClick={() => {
+            if (!promoStatus) return;
+            if (status && status !== "active") return;
+
             changePromoStatusDate(promoId, index, !status ? "active" : null);
           }}
         />
