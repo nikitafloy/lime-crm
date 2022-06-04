@@ -241,7 +241,6 @@ export const Modal = ({ toggleModal }) => {
         <div className="modal__action-buttons">
           <Button
             className="text-white font-weight-bold"
-            type="lg"
             theme="light-green"
             value="Сохранить"
           />
