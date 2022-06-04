@@ -8,6 +8,9 @@ import { Button, Input, Modal, Select } from "./components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+// Immutable JS
+import { List, Map } from "immutable";
+
 // Inline SVG
 import InlineSVG from "svg-inline-react";
 
@@ -46,7 +49,7 @@ export const App = () => {
 
   const [address] = useState("г. Минск ул Беломорская дом 7");
 
-  const [promosData, setPromosData] = useState(mocks.promos);
+  const [promosData, setPromosData] = useState(List(mocks.promos));
 
   const [user] = useState({
     name: "Владимировна И.А.",
@@ -58,15 +61,24 @@ export const App = () => {
   const toggleSearchVisible = () => setSearchVisible(!isSearchVisible);
 
   const changePromoStatus = (promoId) => {
-    const newArrayPromosData = [...promosData];
-    newArrayPromosData[promoId].status = !newArrayPromosData[promoId].status;
-    setPromosData(newArrayPromosData);
+    setPromosData(
+      promosData.set(promoId, {
+        ...promosData.get(promoId),
+        status: !promosData.get(promoId).status,
+      })
+    );
   };
 
   const changePromoStatusDate = (promoId, promoListId, status) => {
-    const newArrayPromosData = [...promosData];
-    newArrayPromosData[promoId].promos[promoListId].status = status;
-    setPromosData(newArrayPromosData);
+    const promos = promosData.get(promoId).promos;
+    promos[promoListId].status = status;
+
+    setPromosData(
+      promosData.set(promoId, {
+        ...promosData.get(promoId),
+        promos,
+      })
+    );
   };
 
   const CustomDateSelect = forwardRef(({ value, onClick }, ref) => (
