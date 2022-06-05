@@ -8,6 +8,9 @@ import { Button, Input, Select, Textarea } from "../";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+// Immutable JS
+import { List } from "immutable";
+
 // Inline SVG
 import InlineSVG from "svg-inline-react";
 
@@ -29,29 +32,22 @@ export const Modal = ({ toggleModal }) => {
   const [startDate, endDate] = dateRange;
 
   const [type, setType] = useState(null);
-  const [weekdays, setWeekdays] = useState([1]);
   const [showDesc, toggleDesc] = useState(false);
+  const [weekdays, setWeekdays] = useState(mocks.Modal.weekdays);
 
-  const selectDays = (days) => {
-    const newArrayOfDays = [...weekdays];
-    for (const day of days) {
-      if (!weekdays.some((weekday) => day === weekday)) {
-        newArrayOfDays.push(day);
-      }
-    }
-
-    setWeekdays(newArrayOfDays);
+  const selectDay = (day) => {
+    setWeekdays((prevState) => {
+      return prevState.map((item, index) => {
+        if (index === day) {
+          return {
+            ...item,
+            selected: !item.selected,
+          };
+        }
+        return item;
+      });
+    });
   };
-
-  const unselectDays = (days) => {
-    const newArrayOfDays = weekdays.filter(
-      (weekday) => !days.some((day) => day === weekday)
-    );
-
-    setWeekdays(newArrayOfDays);
-  };
-
-  console.log(weekdays);
 
   const descriptionSwitchClasses = `description__toggle ${
     showDesc ? "open" : ""
@@ -131,7 +127,9 @@ export const Modal = ({ toggleModal }) => {
                   className="text-light-gray"
                   theme="gray"
                   value="Все"
-                  onClick={() => selectDays([0, 1, 2, 3, 4, 5, 6])}
+                  onClick={() => {
+                    [0, 1, 2, 3, 4, 5, 6].map((day) => selectDay(day));
+                  }}
                 />
 
                 <Button
@@ -139,8 +137,7 @@ export const Modal = ({ toggleModal }) => {
                   theme="gray"
                   value="Чет."
                   onClick={() => {
-                    unselectDays([0, 2, 4, 6]);
-                    selectDays([1, 3, 5]);
+                    [1, 3, 5].map((day) => selectDay(day));
                   }}
                 />
 
@@ -149,37 +146,24 @@ export const Modal = ({ toggleModal }) => {
                   theme="gray"
                   value="Нечет."
                   onClick={() => {
-                    unselectDays([1, 3, 5]);
-                    selectDays([0, 2, 4, 6]);
+                    [0, 2, 4, 6].map((day) => selectDay(day));
                   }}
                 />
               </div>
 
               <div className="modal__promotion-weekday-days">
-                {mocks.Modal.weekdays.map((weekday, index) => {
-                  const candidate = weekdays.findIndex(
-                    (_weekday) => index === _weekday
-                  );
-
-                  const isCandidate = candidate !== -1;
-
+                {weekdays.map(({ weekday, selected }, index) => {
                   const buttonClasses = `font-weight-bold ${
-                    isCandidate ? "text-white" : "text-light-gray"
+                    selected ? "text-white" : "text-light-gray"
                   }`;
 
                   return (
                     <Button
                       key={index}
                       className={buttonClasses}
-                      theme={isCandidate ? "light-green" : "gray"}
+                      theme={selected ? "light-green" : "gray"}
                       value={weekday}
-                      onClick={() => {
-                        if (isCandidate) {
-                          return unselectDays([index]);
-                        }
-
-                        selectDays([index]);
-                      }}
+                      onClick={() => selectDay(index)}
                     />
                   );
                 })}

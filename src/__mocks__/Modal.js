@@ -1,5 +1,13 @@
 export const Modal = {
-  weekdays: ["П", "В", "С", "Ч", "П", "С", "В"],
+  weekdays: [
+    { weekday: "П", selected: false },
+    { weekday: "В", selected: false },
+    { weekday: "С", selected: false },
+    { weekday: "Ч", selected: false },
+    { weekday: "П", selected: false },
+    { weekday: "С", selected: false },
+    { weekday: "В", selected: false },
+  ],
   dropdown: ["Категория", "Товар"],
   discountTypes: ["1+1", "2+1", "Сумма чека", "По промокоду"],
   period: "00.00.0000 - 00.00.0000",
