@@ -224,7 +224,7 @@ export const App = () => {
             startDate={startDate}
             endDate={endDate}
             onChange={setDateRange}
-            isClearable={true}
+            dateFormat="d.MM.y"
             customInput={<CustomDateSelect />}
           />
         </div>
