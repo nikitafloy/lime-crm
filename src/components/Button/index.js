@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import "./index.scss";
 
 import InlineSVG from "svg-inline-react";
@@ -13,25 +12,21 @@ export const Button = ({
   className,
   onClick,
 }) => {
-  const ref = useRef();
+  const buttonClasses = ["btn"];
+  if (className) {
+    buttonClasses.push(...className.split(" "));
+  }
 
-  useEffect(() => {
-    const $button = ref.current;
-    if (className) {
-      $button.classList.add(...className.split(" "));
-    }
+  if (theme) {
+    buttonClasses.push(`btn_${theme}`);
+  }
 
-    if (theme) {
-      $button.classList.add(`btn_${theme}`);
-    }
-
-    if (type) {
-      $button.classList.add(`btn_${type}`);
-    }
-  }, []);
+  if (type) {
+    buttonClasses.push(`btn_${type}`);
+  }
 
   return (
-    <button ref={ref} className="btn" style={style} onClick={onClick}>
+    <button className={buttonClasses.join(" ")} style={style} onClick={onClick}>
       {LeftIcon && (
         <div className="btn__icon-left">
           <InlineSVG element="div" style={{ display: "flex" }} src={LeftIcon} />
