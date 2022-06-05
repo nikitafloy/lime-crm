@@ -30,3 +30,19 @@ body {
 .font-weight-bold button {
   font-weight: 700;
 }
+
+.react-datepicker {
+  .react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range) {
+    background-color: #7cce047f;
+    color: black;
+  }
+
+  .react-datepicker__day--in-range,
+  .react-datepicker__day--keyboard-selected {
+    background-color: #7cce04;
+
+    &:hover {
+      background-color: #6eb704;
+    }
+  }
+}
