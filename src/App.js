@@ -163,91 +163,6 @@ export const App = () => {
       );
     });
 
-  const DrawControls = () => (
-    <>
-      <div className="add">
-        <Button
-          theme="light-green"
-          value="Добавить скидку"
-          LeftIcon={PlusBox}
-          onClick={() => toggleModal(true)}
-        />
-      </div>
-
-      <div className="active">
-        {constants.activeButtonsName.map((name, index) => {
-          const isActiveButton = statusFilter === name;
-          return (
-            <Button
-              key={index}
-              style={isActiveButton ? { border: "2px solid #a1d214" } : {}}
-              type={isActiveButton && "outlined"}
-              className="btn_md font-weight-bold"
-              theme={!isActiveButton && "light-gray"}
-              value={name}
-              onClick={() => {
-                setStatusFilter(name);
-              }}
-            />
-          );
-        })}
-      </div>
-
-      <div className="filters">
-        <div className="filters__type">
-          <Select
-            value={type}
-            className="font-weight-medium"
-            label="Тип скидки"
-            variants={mocks.Modal.discountTypes}
-            onChange={(value) => {
-              setType(value);
-            }}
-          />
-        </div>
-
-        <div className="filters__discount">
-          <Select
-            value={discount}
-            className="font-weight-medium"
-            label="% скидки"
-            variants={mocks.Modal.discountPercents}
-            onChange={(value) => {
-              setDiscount(value);
-            }}
-          />
-        </div>
-
-        <div className="filters__period">
-          <DatePicker
-            selectsRange={true}
-            startDate={startDate}
-            endDate={endDate}
-            onChange={setDateRange}
-            dateFormat="d.MM.y"
-            customInput={<CustomDateSelect />}
-          />
-        </div>
-
-        <div className="filters__category">
-          <Select
-            value={category}
-            className="font-weight-medium"
-            label="Категория товаров"
-            variants={mocks.Modal.categories}
-            onChange={(value) => {
-              setCategory(value);
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="search-btn">
-        <Button LeftIcon={SearchIcon} onClick={toggleSearchVisible} />
-      </div>
-    </>
-  );
-
   const DrawSearch = () => (
     <div className="search">
       <Button LeftIcon={SearchIcon} onClick={() => console.log("search...")} />
@@ -304,7 +219,91 @@ export const App = () => {
       </header>
 
       <aside className="controls">
-        {!isSearchVisible ? <DrawControls /> : <DrawSearch />}
+        {!isSearchVisible ? (
+          <>
+            <div className="add">
+              <Button
+                theme="light-green"
+                value="Добавить скидку"
+                LeftIcon={PlusBox}
+                onClick={() => toggleModal(true)}
+              />
+            </div>
+            <div className="active">
+              {constants.activeButtonsName.map((name, index) => {
+                const isActiveButton = statusFilter === name;
+                return (
+                  <Button
+                    key={index}
+                    style={
+                      isActiveButton ? { border: "2px solid #a1d214" } : {}
+                    }
+                    type={isActiveButton && "outlined"}
+                    className="btn_md font-weight-bold"
+                    theme={!isActiveButton && "light-gray"}
+                    value={name}
+                    onClick={() => {
+                      setStatusFilter(name);
+                    }}
+                  />
+                );
+              })}
+            </div>
+            <div className="filters">
+              <div className="filters__type">
+                <Select
+                  value={type}
+                  className="font-weight-medium"
+                  label="Тип скидки"
+                  variants={mocks.Modal.discountTypes}
+                  onChange={(value) => {
+                    setType(value);
+                  }}
+                />
+              </div>
+
+              <div className="filters__discount">
+                <Select
+                  value={discount}
+                  className="font-weight-medium"
+                  label="% скидки"
+                  variants={mocks.Modal.discountPercents}
+                  onChange={(value) => {
+                    setDiscount(value);
+                  }}
+                />
+              </div>
+
+              <div className="filters__period">
+                <DatePicker
+                  selectsRange={true}
+                  startDate={startDate}
+                  endDate={endDate}
+                  onChange={setDateRange}
+                  dateFormat="d.MM.y"
+                  customInput={<CustomDateSelect />}
+                />
+              </div>
+
+              <div className="filters__category">
+                <Select
+                  value={category}
+                  className="font-weight-medium"
+                  label="Категория товаров"
+                  variants={mocks.Modal.categories}
+                  onChange={(value) => {
+                    setCategory(value);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="search-btn">
+              <Button LeftIcon={SearchIcon} onClick={toggleSearchVisible} />
+            </div>
+          </>
+        ) : (
+          <DrawSearch />
+        )}
       </aside>
 
       <section className="board">
