@@ -88,6 +88,7 @@ export const App = () => {
   const CustomDateSelect = forwardRef(({ value, onClick }, ref) => (
     <Select
       ref={ref}
+      className="font-weight-medium"
       label="Период"
       value={value || mocks.Modal.period}
       onClick={onClick}
@@ -196,6 +197,7 @@ export const App = () => {
         <div className="filters__type">
           <Select
             value={type}
+            className="font-weight-medium"
             label="Тип скидки"
             variants={mocks.Modal.discountTypes}
             onChange={(value) => {
@@ -207,6 +209,7 @@ export const App = () => {
         <div className="filters__discount">
           <Select
             value={discount}
+            className="font-weight-medium"
             label="% скидки"
             variants={mocks.Modal.discountPercents}
             onChange={(value) => {
@@ -229,6 +232,7 @@ export const App = () => {
         <div className="filters__category">
           <Select
             value={category}
+            className="font-weight-medium"
             label="Категория товаров"
             variants={mocks.Modal.categories}
             onChange={(value) => {

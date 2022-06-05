@@ -19,6 +19,12 @@ body {
   color: white;
 }
 
+.font-weight-medium,
+.font-weight-medium input,
+.font-weight-medium button {
+  font-weight: 500;
+}
+
 .font-weight-bold,
 .font-weight-bold input,
 .font-weight-bold button {

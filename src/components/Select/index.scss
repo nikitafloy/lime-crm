@@ -70,6 +70,7 @@
     padding: 8px 16px;
     color: #1f201c80;
     margin: 0;
+    font-feature-settings: "pnum" on, "lnum" on;
 
     &_black {
       color: black;
