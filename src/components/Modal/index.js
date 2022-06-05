@@ -32,6 +32,27 @@ export const Modal = ({ toggleModal }) => {
   const [weekdays, setWeekdays] = useState([1]);
   const [showDesc, toggleDesc] = useState(false);
 
+  const selectDays = (days) => {
+    const newArrayOfDays = [...weekdays];
+    for (const day of days) {
+      if (!weekdays.some((weekday) => day === weekday)) {
+        newArrayOfDays.push(day);
+      }
+    }
+
+    setWeekdays(newArrayOfDays);
+  };
+
+  const unselectDays = (days) => {
+    const newArrayOfDays = weekdays.filter(
+      (weekday) => !days.some((day) => day === weekday)
+    );
+
+    setWeekdays(newArrayOfDays);
+  };
+
+  console.log(weekdays);
+
   const descriptionSwitchClasses = `description__toggle ${
     showDesc ? "open" : ""
   }`;
@@ -106,12 +127,31 @@ export const Modal = ({ toggleModal }) => {
 
             <div className="modal__promotion-weekday">
               <div className="modal__promotion-weekday-filters">
-                <Button className="text-light-gray" theme="gray" value="Все" />
-                <Button className="text-light-gray" theme="gray" value="Чет." />
+                <Button
+                  className="text-light-gray"
+                  theme="gray"
+                  value="Все"
+                  onClick={() => selectDays([0, 1, 2, 3, 4, 5, 6])}
+                />
+
+                <Button
+                  className="text-light-gray"
+                  theme="gray"
+                  value="Чет."
+                  onClick={() => {
+                    unselectDays([0, 2, 4, 6]);
+                    selectDays([1, 3, 5]);
+                  }}
+                />
+
                 <Button
                   className="text-light-gray"
                   theme="gray"
                   value="Нечет."
+                  onClick={() => {
+                    unselectDays([1, 3, 5]);
+                    selectDays([0, 2, 4, 6]);
+                  }}
                 />
               </div>
 
@@ -133,6 +173,13 @@ export const Modal = ({ toggleModal }) => {
                       className={buttonClasses}
                       theme={isCandidate ? "light-green" : "gray"}
                       value={weekday}
+                      onClick={() => {
+                        if (isCandidate) {
+                          return unselectDays([index]);
+                        }
+
+                        selectDays([index]);
+                      }}
                     />
                   );
                 })}
