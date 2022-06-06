@@ -94,26 +94,26 @@ export const Item = ({
         </div>
 
         {nameType === "text" ? (
-          <div className={nameClasses}>{name}</div>
+          <>
+            <div className={nameClasses}>{name}</div>
+
+            <div className="board__body-item-left-icon">
+              <InlineSVG
+                element="div"
+                style={{ display: "flex" }}
+                src={EditPencil}
+                onClick={changeNameTypeHandler}
+              />
+            </div>
+          </>
         ) : (
           <div className="board__body-item-left-name-input">
             <Input
               ref={inputRef}
               autoSize
-              className="text-dark"
+              className={!status ? "text-gray" : "text-dark"}
               defaultValue={name}
               onBlur={changeNameTypeHandler}
-            />
-          </div>
-        )}
-
-        {nameType === "text" && (
-          <div className="board__body-item-left-icon">
-            <InlineSVG
-              element="div"
-              style={{ display: "flex" }}
-              src={EditPencil}
-              onClick={changeNameTypeHandler}
             />
           </div>
         )}

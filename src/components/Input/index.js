@@ -60,7 +60,7 @@ export const Input = forwardRef((props, ref) => {
         ref={ref}
         style={
           autoSize
-            ? { width: (value || defaultValue).length * 8, maxWidth: 200 }
+            ? { width: (value || defaultValue).length * 10, maxWidth: 200 }
             : {}
         }
         onBlur={onBlur}
