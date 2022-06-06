@@ -70,34 +70,5 @@
     padding: 12px 0;
     flex-wrap: wrap;
     gap: 8px 0;
-
-    &-item {
-      display: flex;
-
-      &-left {
-        display: flex;
-        flex: 1 0 292px;
-        align-items: center;
-        padding-left: 16px;
-
-        &-name {
-          padding: 0 12px 0 16px;
-          font-weight: 500;
-
-          &_disabled {
-            color: #b7b9b9;
-          }
-        }
-
-        &-icon {
-          cursor: pointer;
-        }
-      }
-
-      &-right {
-        display: flex;
-        gap: 2px;
-      }
-    }
   }
 }

@@ -13,6 +13,7 @@ const reducer = (state, action) => getMask(action.type);
 
 export const Input = ({
   defaultValue,
+  style,
   maskType,
   type,
   theme,
@@ -38,17 +39,13 @@ export const Input = ({
       $div.classList.add(...className.split(" "));
     }
 
-    if (theme) {
-      $div.classList.add(`input-box_${theme}`);
-    }
-
-    if (type) {
-      $div.classList.add(`input-box_${type}`);
+    if (theme || type) {
+      $div.classList.add(`input-box_${theme || type}`);
     }
   }, []);
 
   return (
-    <div ref={inputDivRef} className="input-box">
+    <div ref={inputDivRef} style={style ? style : {}} className="input-box">
       {Icon && <img src={Icon} className="input-box__icon" alt="Input Icon" />}
 
       <input

@@ -2,7 +2,6 @@
   display: flex;
   background: white;
   border-radius: 8px;
-  padding: 8px 16px 8px 12px;
 
   &_green {
     border: 1px solid #7cce04;
@@ -22,6 +21,8 @@
     border: none;
     outline: none;
     width: 1%;
+    padding: 8px 16px 8px 12px;
+    font-family: "Raleway", sans-serif;
 
     &_dark {
       color: black;

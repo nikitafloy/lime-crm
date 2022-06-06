@@ -1,5 +1,8 @@
+import { useState } from "react";
+import "./index.scss";
+
 // Components
-import { Button } from "../../Button";
+import { Button, Input } from "../../";
 
 // Icons
 import {
@@ -22,6 +25,13 @@ export const Item = ({
   setPromosData,
   changePromoStatus,
 }) => {
+  const [nameType, setNameType] = useState("text");
+
+  const changeNameTypeHandler = () => {
+    const value = nameType === "text" ? "input" : "text";
+    setNameType(value);
+  };
+
   const nameClasses = `board__body-item-left-name ${
     !status ? "board__body-item-left-name_disabled" : ""
   }`;
@@ -76,16 +86,25 @@ export const Item = ({
             onClick={() => changePromoStatus(index)}
           />
         </div>
-        <div className={nameClasses}>{name}</div>
-        {/*<Input className="text-dark" />*/}
+
+        {nameType === "text" ? (
+          <div className={nameClasses}>{name}</div>
+        ) : (
+          <div className="board__body-item-left-name-input">
+            <Input className="text-dark" defaultValue={name} />
+          </div>
+        )}
+
         <div className="board__body-item-left-icon">
           <InlineSVG
             element="div"
             style={{ display: "flex" }}
             src={EditPencil}
+            onClick={changeNameTypeHandler}
           />
         </div>
       </div>
+
       <div className="board__body-item-right">
         <DrawPromos promoId={index} promoStatus={status} promos={promos} />
       </div>

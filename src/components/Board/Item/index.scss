@@ -1,0 +1,37 @@
+.board__body-item {
+  display: flex;
+
+  &-left {
+    display: flex;
+    flex: 1 0 292px;
+    align-items: center;
+    padding-left: 16px;
+
+    &-name {
+      padding: 0 12px 0 16px;
+      font-weight: 500;
+
+      &-input {
+        padding: 0 12px 0 16px;
+
+        input {
+          padding: 0;
+          font-weight: 500;
+        }
+      }
+
+      &_disabled {
+        color: #b7b9b9;
+      }
+    }
+
+    &-icon {
+      cursor: pointer;
+    }
+  }
+
+  &-right {
+    display: flex;
+    gap: 2px;
+  }
+}
