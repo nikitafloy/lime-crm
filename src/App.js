@@ -2,14 +2,11 @@ import { forwardRef, useState } from "react";
 import "./App.scss";
 
 // Components
-import { Button, Input, Modal, Select } from "./components";
+import { Board, Button, Input, Modal, Select } from "./components";
 
 // Date Picker
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-// Immutable JS
-import { List, Map } from "immutable";
 
 // Inline SVG
 import InlineSVG from "svg-inline-react";
@@ -18,12 +15,7 @@ import InlineSVG from "svg-inline-react";
 import {
   SearchIcon,
   TargetPoint,
-  PlayIcon,
-  PauseIcon,
-  EditPencil,
-  CheckIcon,
   PlusBox,
-  DotIcon,
   UserIcon,
   BellIcon,
   CrossIcon,
@@ -52,7 +44,6 @@ export const App = () => {
 
   const [address] = useState("г. Минск ул Беломорская дом 7");
 
-  const [promosData, setPromosData] = useState(List(mocks.promos));
   const [statusFilter, setStatusFilter] = useState("Активные");
 
   const [user] = useState({
@@ -64,27 +55,6 @@ export const App = () => {
 
   const toggleSearchVisible = () => setSearchVisible(!isSearchVisible);
 
-  const changePromoStatus = (promoId) => {
-    setPromosData(
-      promosData.set(promoId, {
-        ...promosData.get(promoId),
-        status: !promosData.get(promoId).status,
-      })
-    );
-  };
-
-  const changePromoStatusDate = (promoId, promoListId, status) => {
-    const promos = promosData.get(promoId).promos;
-    promos[promoListId].status = status;
-
-    setPromosData(
-      promosData.set(promoId, {
-        ...promosData.get(promoId),
-        promos,
-      })
-    );
-  };
-
   const CustomDateSelect = forwardRef(({ value, onClick }, ref) => (
     <Select
       ref={ref}
@@ -94,74 +64,6 @@ export const App = () => {
       onClick={onClick}
     />
   ));
-
-  const DrawDates = () =>
-    mocks.dates.map(({ date, weekday }, index) => (
-      <div key={index} className="board__header-dates">
-        <div className="board__header-dates-date">{date}</div>
-        <div className="board__header-dates-weekday">{weekday}</div>
-      </div>
-    ));
-
-  const DrawPromos = ({ promoId, promos, promoStatus }) =>
-    promos.map(({ status, date }, index) => {
-      const weekday = new Date(date).getDay();
-      return (
-        <Button
-          key={index}
-          type={!promoStatus && "disabled"}
-          theme={
-            status
-              ? status === "active"
-                ? "black"
-                : "green"
-              : weekday === 4 || weekday === 5
-              ? "lighter-green"
-              : "gray"
-          }
-          LeftIcon={status && (status === "active" ? CheckIcon : DotIcon)}
-          value={!status && "н"}
-          onClick={() => {
-            if (!promoStatus) return;
-            if (status && status !== "active") return;
-
-            changePromoStatusDate(promoId, index, !status ? "active" : null);
-          }}
-        />
-      );
-    });
-
-  const DrawActionData = () =>
-    promosData.map(({ name, status, promos }, index) => {
-      const nameClasses = `board__body-item-left-name ${
-        !status ? "board__body-item-left-name_disabled" : ""
-      }`;
-
-      return (
-        <div key={index} className="board__body-item">
-          <div className="board__body-item-left">
-            <div className="board__body-item-left-icon">
-              <Button
-                theme={status ? "green" : "gray"}
-                LeftIcon={status ? PlayIcon : PauseIcon}
-                onClick={() => changePromoStatus(index)}
-              />
-            </div>
-            <div className={nameClasses}>{name}</div>
-            <div className="board__body-item-left-icon">
-              <InlineSVG
-                element="div"
-                style={{ display: "flex" }}
-                src={EditPencil}
-              />
-            </div>
-          </div>
-          <div className="board__body-item-right">
-            <DrawPromos promoId={index} promoStatus={status} promos={promos} />
-          </div>
-        </div>
-      );
-    });
 
   const DrawSearch = () => (
     <div className="search">
@@ -306,23 +208,7 @@ export const App = () => {
         )}
       </aside>
 
-      <section className="board">
-        <div className="board-inner">
-          <div className="board__header">
-            <div className="board__header-left">
-              <div className="board__header-name">Сентябрь</div>
-            </div>
-
-            <div className="board__header-right">
-              <DrawDates />
-            </div>
-          </div>
-
-          <div className="board__body">
-            <DrawActionData />
-          </div>
-        </div>
-      </section>
+      <Board />
 
       {showModal && <Modal toggleModal={toggleModal} />}
     </main>
