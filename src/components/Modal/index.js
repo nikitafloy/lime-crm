@@ -9,16 +9,15 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 // Immutable JS
-import { List } from "immutable";
 
 // Inline SVG
 import InlineSVG from "svg-inline-react";
 
 // Icons
 import {
-  CrossIcon,
-  CalendarIcon,
   ArrayIcon,
+  CalendarIcon,
+  CrossIcon,
   PlusBox,
   SearchIcon,
 } from "../../assets/icons";
@@ -35,18 +34,19 @@ export const Modal = ({ toggleModal }) => {
   const [showDesc, toggleDesc] = useState(false);
   const [weekdays, setWeekdays] = useState(mocks.Modal.weekdays);
 
-  const selectDay = (day) => {
-    setWeekdays((prevState) => {
-      return prevState.map((item, index) => {
-        if (index === day) {
-          return {
-            ...item,
-            selected: !item.selected,
-          };
+  const selectDays = (days) => {
+    setWeekdays((prevState) =>
+      prevState.map((item, index) => {
+        if (days.length === 1) {
+          if (days[0] === index) {
+            return { ...item, selected: !item.selected };
+          }
+          return item;
         }
-        return item;
-      });
-    });
+
+        return { ...item, selected: days.some((day) => index === day) };
+      })
+    );
   };
 
   const descriptionSwitchClasses = `description__toggle ${
@@ -127,27 +127,21 @@ export const Modal = ({ toggleModal }) => {
                   className="text-light-gray"
                   theme="gray"
                   value="Все"
-                  onClick={() => {
-                    [0, 1, 2, 3, 4, 5, 6].map((day) => selectDay(day));
-                  }}
+                  onClick={() => selectDays([0, 1, 2, 3, 4, 5, 6], true)}
                 />
 
                 <Button
                   className="text-light-gray"
                   theme="gray"
                   value="Чет."
-                  onClick={() => {
-                    [1, 3, 5].map((day) => selectDay(day));
-                  }}
+                  onClick={() => selectDays([1, 3, 5], true)}
                 />
 
                 <Button
                   className="text-light-gray"
                   theme="gray"
                   value="Нечет."
-                  onClick={() => {
-                    [0, 2, 4, 6].map((day) => selectDay(day));
-                  }}
+                  onClick={() => selectDays([0, 2, 4, 6], true)}
                 />
               </div>
 
@@ -163,7 +157,7 @@ export const Modal = ({ toggleModal }) => {
                       className={buttonClasses}
                       theme={selected ? "light-green" : "gray"}
                       value={weekday}
-                      onClick={() => selectDay(index)}
+                      onClick={() => selectDays([index])}
                     />
                   );
                 })}
