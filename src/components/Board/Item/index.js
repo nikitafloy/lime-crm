@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { createRef, forwardRef, useEffect, useState } from "react";
 import "./index.scss";
 
 // Components
@@ -25,16 +25,22 @@ export const Item = ({
   setPromosData,
   changePromoStatus,
 }) => {
+  const inputRef = createRef();
   const [nameType, setNameType] = useState("text");
+
+  useEffect(() => {
+    if (!inputRef.current) return;
+    inputRef.current.focus();
+  }, [nameType]);
+
+  const nameClasses = `board__body-item-left-name ${
+    !status ? "board__body-item-left-name_disabled" : ""
+  }`;
 
   const changeNameTypeHandler = () => {
     const value = nameType === "text" ? "input" : "text";
     setNameType(value);
   };
-
-  const nameClasses = `board__body-item-left-name ${
-    !status ? "board__body-item-left-name_disabled" : ""
-  }`;
 
   const changePromoStatusDate = (promoId, promoListId, status) => {
     const promos = promosData.get(promoId).promos;
@@ -91,18 +97,26 @@ export const Item = ({
           <div className={nameClasses}>{name}</div>
         ) : (
           <div className="board__body-item-left-name-input">
-            <Input className="text-dark" defaultValue={name} />
+            <Input
+              ref={inputRef}
+              autoSize
+              className="text-dark"
+              defaultValue={name}
+              onBlur={changeNameTypeHandler}
+            />
           </div>
         )}
 
-        <div className="board__body-item-left-icon">
-          <InlineSVG
-            element="div"
-            style={{ display: "flex" }}
-            src={EditPencil}
-            onClick={changeNameTypeHandler}
-          />
-        </div>
+        {nameType === "text" && (
+          <div className="board__body-item-left-icon">
+            <InlineSVG
+              element="div"
+              style={{ display: "flex" }}
+              src={EditPencil}
+              onClick={changeNameTypeHandler}
+            />
+          </div>
+        )}
       </div>
 
       <div className="board__body-item-right">

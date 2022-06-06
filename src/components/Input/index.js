@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef } from "react";
+import { forwardRef, useEffect, useReducer, useRef } from "react";
 import "./index.scss";
 
 import { useIMask } from "react-imask";
@@ -11,19 +11,27 @@ const init = () => {
 
 const reducer = (state, action) => getMask(action.type);
 
-export const Input = ({
-  defaultValue,
-  style,
-  maskType,
-  type,
-  theme,
-  Icon,
-  className,
-  onChange,
-  onClick,
-}) => {
+export const Input = forwardRef((props, ref) => {
+  const {
+    defaultValue,
+    style,
+    maskType,
+    type,
+    theme,
+    Icon,
+    className,
+    onChange,
+    onClick,
+    autoSize,
+    onBlur,
+  } = props;
+
   const [state, dispatch] = useReducer(reducer, getMask, init);
-  const { ref, value, setValue } = useIMask(state);
+
+  const imask = useIMask(state);
+  const { value, setValue } = imask;
+
+  // const ref = props.inputRef || imask.ref;
   const inputDivRef = useRef();
 
   useEffect(() => {
@@ -50,6 +58,12 @@ export const Input = ({
 
       <input
         ref={ref}
+        style={
+          autoSize
+            ? { width: (value || defaultValue).length * 8, maxWidth: 200 }
+            : {}
+        }
+        onBlur={onBlur}
         className="input-box__current"
         value={value || defaultValue}
         onChange={(event) => {
@@ -62,4 +76,4 @@ export const Input = ({
       />
     </div>
   );
-};
+});
