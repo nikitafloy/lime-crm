@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useReducer, useRef } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import "./index.scss";
 
 import { useIMask } from "react-imask";
@@ -11,7 +11,7 @@ const init = () => {
 
 const reducer = (state, action) => getMask(action.type);
 
-export const Input = forwardRef((props, ref) => {
+export const Input = (props) => {
   const {
     defaultValue,
     style,
@@ -24,6 +24,7 @@ export const Input = forwardRef((props, ref) => {
     onClick,
     autoSize,
     onBlur,
+    forwardedRef,
   } = props;
 
   const [state, dispatch] = useReducer(reducer, getMask, init);
@@ -37,7 +38,7 @@ export const Input = forwardRef((props, ref) => {
   useEffect(() => {
     maskType && dispatch({ type: maskType });
 
-    const $input = ref.current;
+    const $input = (forwardedRef || imask.ref).current;
     if (theme && theme === "green") {
       $input.classList.add("input-box__current_dark");
     }
@@ -57,7 +58,7 @@ export const Input = forwardRef((props, ref) => {
       {Icon && <img src={Icon} className="input-box__icon" alt="Input Icon" />}
 
       <input
-        ref={ref}
+        ref={forwardedRef}
         style={
           autoSize
             ? { width: (value || defaultValue).length * 10, maxWidth: 200 }
@@ -76,4 +77,4 @@ export const Input = forwardRef((props, ref) => {
       />
     </div>
   );
-});
+};

@@ -82,6 +82,16 @@ export const Item = ({
       );
     });
 
+  const RefInput = forwardRef((props, ref) => (
+    <Input
+      forwardedRef={ref}
+      autoSize
+      className={!status ? "text-gray" : "text-dark"}
+      defaultValue={name}
+      onBlur={changeNameTypeHandler}
+    />
+  ));
+
   return (
     <div key={index} className="board__body-item">
       <div className="board__body-item-left">
@@ -108,13 +118,7 @@ export const Item = ({
           </>
         ) : (
           <div className="board__body-item-left-name-input">
-            <Input
-              ref={inputRef}
-              autoSize
-              className={!status ? "text-gray" : "text-dark"}
-              defaultValue={name}
-              onBlur={changeNameTypeHandler}
-            />
+            <RefInput ref={inputRef} />
           </div>
         )}
       </div>
