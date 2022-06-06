@@ -121,91 +121,120 @@ export const App = () => {
       </header>
 
       <aside className="controls">
-        {!isSearchVisible ? (
-          <>
-            <div className="add">
-              <Button
-                theme="light-green"
-                value="Добавить скидку"
-                LeftIcon={PlusBox}
-                onClick={() => toggleModal(true)}
+        <div className="controls-inner">
+          <div className={`add ${isSearchVisible ? "add_hide" : ""}`}>
+            <Button
+              theme="light-green"
+              value="Добавить скидку"
+              LeftIcon={PlusBox}
+              onClick={() => toggleModal(true)}
+            />
+          </div>
+          <div className={`active ${isSearchVisible ? "active_hide" : ""}`}>
+            {constants.activeButtonsName.map((name, index) => {
+              const isActiveButton = statusFilter === name;
+              return (
+                <Button
+                  key={index}
+                  style={isActiveButton ? { border: "2px solid #a1d214" } : {}}
+                  type={isActiveButton && "outlined"}
+                  className="btn_md font-weight-bold"
+                  theme={!isActiveButton && "light-gray"}
+                  value={name}
+                  onClick={() => {
+                    setStatusFilter(name);
+                  }}
+                />
+              );
+            })}
+          </div>
+
+          <div className={`filters ${isSearchVisible ? "filters_hide" : ""}`}>
+            <div className="filters__type">
+              <Select
+                value={type}
+                className="font-weight-medium"
+                label="Тип скидки"
+                variants={mocks.Modal.discountTypes}
+                onChange={(value) => {
+                  setType(value);
+                }}
               />
             </div>
-            <div className="active">
-              {constants.activeButtonsName.map((name, index) => {
-                const isActiveButton = statusFilter === name;
-                return (
+
+            <div className="filters__discount">
+              <Select
+                value={discount}
+                className="font-weight-medium"
+                label="% скидки"
+                variants={mocks.Modal.discountPercents}
+                onChange={(value) => {
+                  setDiscount(value);
+                }}
+              />
+            </div>
+
+            <div className="filters__period">
+              <DatePicker
+                selectsRange={true}
+                startDate={startDate}
+                endDate={endDate}
+                onChange={setDateRange}
+                dateFormat="d.MM.y"
+                customInput={<CustomDateSelect />}
+              />
+            </div>
+
+            <div className="filters__category">
+              <Select
+                value={category}
+                className="font-weight-medium"
+                label="Категория товаров"
+                variants={mocks.Modal.categories}
+                onChange={(value) => {
+                  setCategory(value);
+                }}
+              />
+            </div>
+          </div>
+
+          <div
+            className={`search-btn ${isSearchVisible ? "search-btn_lg" : ""}`}
+          >
+            <div className="search-btn-inner">
+              <div className="search">
+                <div
+                  className="search__search-button"
+                  onClick={toggleSearchVisible}
+                >
                   <Button
-                    key={index}
-                    style={
-                      isActiveButton ? { border: "2px solid #a1d214" } : {}
-                    }
-                    type={isActiveButton && "outlined"}
-                    className="btn_md font-weight-bold"
-                    theme={!isActiveButton && "light-gray"}
-                    value={name}
-                    onClick={() => {
-                      setStatusFilter(name);
-                    }}
+                    LeftIcon={SearchIcon}
+                    onClick={() => console.log("search...")}
                   />
-                );
-              })}
-            </div>
-            <div className="filters">
-              <div className="filters__type">
-                <Select
-                  value={type}
-                  className="font-weight-medium"
-                  label="Тип скидки"
-                  variants={mocks.Modal.discountTypes}
-                  onChange={(value) => {
-                    setType(value);
-                  }}
-                />
+                </div>
+
+                <div
+                  className={`search__input ${
+                    isSearchVisible ? "search__input_show" : ""
+                  }`}
+                >
+                  <Input />
+                </div>
+
+                <div
+                  className={`search__close-button ${
+                    isSearchVisible ? "search__close-button_show" : ""
+                  }`}
+                  onClick={toggleSearchVisible}
+                >
+                  <Button LeftIcon={CrossIcon} />
+                </div>
               </div>
 
-              <div className="filters__discount">
-                <Select
-                  value={discount}
-                  className="font-weight-medium"
-                  label="% скидки"
-                  variants={mocks.Modal.discountPercents}
-                  onChange={(value) => {
-                    setDiscount(value);
-                  }}
-                />
-              </div>
-
-              <div className="filters__period">
-                <DatePicker
-                  selectsRange={true}
-                  startDate={startDate}
-                  endDate={endDate}
-                  onChange={setDateRange}
-                  dateFormat="d.MM.y"
-                  customInput={<CustomDateSelect />}
-                />
-              </div>
-
-              <div className="filters__category">
-                <Select
-                  value={category}
-                  className="font-weight-medium"
-                  label="Категория товаров"
-                  variants={mocks.Modal.categories}
-                  onChange={(value) => {
-                    setCategory(value);
-                  }}
-                />
-              </div>
+              {/*<Button LeftIcon={SearchIcon} onClick={toggleSearchVisible} />*/}
             </div>
-            <div className="search-btn">
-              <Button LeftIcon={SearchIcon} onClick={toggleSearchVisible} />
-            </div>
-          </>
-        ) : (
-          <DrawSearch />
-        )}
+          </div>
+        </div>
       </aside>
 
       <Board />

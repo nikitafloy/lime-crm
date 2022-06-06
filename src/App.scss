@@ -89,63 +89,116 @@
   }
 
   .controls {
-    display: flex;
-    gap: 8px;
-    padding: 8px 0;
-    height: 40px;
-
-    .add {
-      button {
-        color: black;
-        padding: 8px;
-        border-radius: 10px;
-        font-size: 16px;
-        width: 180px;
-      }
-    }
-
-    .filters {
+    &-inner {
       display: flex;
       gap: 8px;
-      flex: 1 1 auto;
-
-      & > div:nth-child(-n + 2) {
-        flex: 0 0 150px;
-      }
-
-      &__period {
-        flex: 0 0 270px;
-      }
-
-      &__category {
-        flex: 1 0 auto;
-      }
-    }
-
-    .active {
-      display: flex;
-
-      & button {
-        font-size: 16px;
-      }
-    }
-
-    .search-btn .btn {
-      width: 40px;
+      padding: 8px 0;
       height: 40px;
-      border-radius: 8px;
-    }
+      position: relative;
 
-    .search {
-      display: flex;
-      background: white;
-      height: 40px;
-      border-radius: 10px;
-      padding: 0 8px 0 4px;
-      flex: 1 0 auto;
+      .add {
+        button {
+          color: black;
+          padding: 8px;
+          border-radius: 10px;
+          font-size: 16px;
+          width: 180px;
+        }
 
-      & > div {
-        flex: 1 0 auto;
+        &_hide {
+          display: none;
+        }
+      }
+
+      .filters {
+        display: flex;
+        gap: 8px;
+        flex: 1 1 auto;
+
+        & > div:nth-child(-n + 2) {
+          flex: 0 0 150px;
+        }
+
+        &__period {
+          flex: 0 0 270px;
+        }
+
+        &__category {
+          flex: 1 0 auto;
+        }
+
+        &_hide {
+          display: none;
+        }
+      }
+
+      .active {
+        display: flex;
+
+        & button {
+          font-size: 16px;
+        }
+
+        &_hide {
+          display: none;
+        }
+      }
+
+      .search-btn {
+        flex: 0 1 40px;
+        transition: flex 0.25s;
+        z-index: 1;
+        margin-left: auto;
+
+        &_lg {
+          flex: 1 1 100%;
+        }
+
+        &-inner {
+          .btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+          }
+
+          .search {
+            display: flex;
+            background: white;
+            height: 40px;
+            border-radius: 10px;
+            //padding: 0 8px 0 4px;
+            flex: 1 0 auto;
+            align-items: center;
+
+            &__search-button {
+              flex: 0 1;
+            }
+
+            &__input {
+              flex: 2 1;
+              display: none;
+              width: 1%;
+              transition: width 0.25s;
+
+              &_show {
+                display: unset;
+                width: 100%;
+              }
+            }
+
+            &__close-button {
+              flex: 0 1;
+              display: none;
+              width: 1%;
+              transition: width 0.25s;
+
+              &_show {
+                display: unset;
+                width: 100%;
+              }
+            }
+          }
+        }
       }
     }
   }
