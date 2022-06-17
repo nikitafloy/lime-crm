@@ -28,16 +28,16 @@
     outline: none;
   }
 
-  &__current:focus &__icon {
+  &__current.open &__icon {
     transform: translateY(-50%) rotate(180deg);
   }
 
-  &__current:focus + &__list {
+  &__current.open + &__list {
     opacity: 1;
     animation-name: none;
   }
 
-  &__current:focus + &__list &__option {
+  &__current.open + &__list &__option {
     cursor: pointer;
   }
 

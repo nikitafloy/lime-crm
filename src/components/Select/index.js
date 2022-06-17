@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import "./index.scss";
 
 // Icons
@@ -19,6 +19,7 @@ const SelectComponent = ({
   onClick,
 }) => {
   const selectBoxRef = useRef();
+  const [open, setOpen] = useState(false);
 
   const textClasses = `select-box__text ${
     label ? "select-box__text_black select-box__text_sm" : ""
@@ -48,7 +49,12 @@ const SelectComponent = ({
       <div className="select-box-inner">
         {label && <div className="select-box__label">{label}</div>}
 
-        <div className="select-box__current" tabIndex="1">
+        <div
+          className={`select-box__current ${open ? "open" : ""}`}
+          tabIndex="1"
+          onClick={() => setOpen(!open)}
+          onBlur={() => setOpen(false)}
+        >
           {LeftIcon && (
             <div className="select-box__icon-left">
               <InlineSVG
