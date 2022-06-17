@@ -25,6 +25,8 @@ import {
 // Mocks
 import mocks from "../../__mocks__";
 
+let lastUsedFilter = null;
+
 export const Modal = ({ toggleModal }) => {
   // Date
   const [dateRange, setDateRange] = useState([null, null]);
@@ -34,20 +36,85 @@ export const Modal = ({ toggleModal }) => {
   const [showDesc, toggleDesc] = useState(false);
   const [weekdays, setWeekdays] = useState(mocks.Modal.weekdays);
 
-  const selectDays = (days) => {
-    setWeekdays((prevState) =>
-      prevState.map((item, index) => {
-        if (days.length === 1) {
-          if (days[0] === index) {
-            return { ...item, selected: !item.selected };
-          }
-          return item;
+  const setLastUsedFilter = (filterName) => {
+    if (lastUsedFilter && lastUsedFilter === filterName) {
+      lastUsedFilter = null;
+      return;
+    }
+
+    lastUsedFilter = filterName;
+  };
+
+  const daysFilters = [
+    {
+      label: "Все",
+      condition: () => {
+        if (lastUsedFilter && lastUsedFilter === "all") {
+          setLastUsedFilter("all");
+
+          return mocks.Modal.weekdays;
         }
 
-        return { ...item, selected: days.some((day) => index === day) };
-      })
-    );
-  };
+        const weekdaysArray = weekdays.map((item) => {
+          return { ...item, selected: true };
+        });
+
+        setLastUsedFilter("all");
+
+        return weekdaysArray;
+      },
+    },
+    {
+      label: "Чет.",
+      condition: () => {
+        if (lastUsedFilter && lastUsedFilter === "even") {
+          setLastUsedFilter("even");
+
+          return mocks.Modal.weekdays;
+        }
+
+        const weekdaysArray = weekdays.map((item, index) => {
+          return { ...item, selected: index % 2 !== 0 };
+        });
+
+        setLastUsedFilter("even");
+
+        return weekdaysArray;
+      },
+    },
+    {
+      label: "Нечет.",
+      condition: () => {
+        if (lastUsedFilter && lastUsedFilter === "odd") {
+          setLastUsedFilter("odd");
+
+          return mocks.Modal.weekdays;
+        }
+
+        const weekdaysArray = weekdays.map((item, index) => {
+          return { ...item, selected: index % 2 === 0 };
+        });
+
+        setLastUsedFilter("odd");
+
+        return weekdaysArray;
+      },
+    },
+  ];
+
+  const DrawDaysFilters = () => (
+    <div className="modal__promotion-weekday-filters">
+      {daysFilters.map(({ label, condition }, index) => (
+        <Button
+          key={index}
+          className="text-light-gray"
+          theme="gray"
+          value={label}
+          onClick={() => setWeekdays(condition())}
+        />
+      ))}
+    </div>
+  );
 
   const descriptionSwitchClasses = `description__toggle ${
     showDesc ? "open" : ""
@@ -122,28 +189,7 @@ export const Modal = ({ toggleModal }) => {
             </div>
 
             <div className="modal__promotion-weekday">
-              <div className="modal__promotion-weekday-filters">
-                <Button
-                  className="text-light-gray"
-                  theme="gray"
-                  value="Все"
-                  onClick={() => selectDays([0, 1, 2, 3, 4, 5, 6], true)}
-                />
-
-                <Button
-                  className="text-light-gray"
-                  theme="gray"
-                  value="Чет."
-                  onClick={() => selectDays([1, 3, 5], true)}
-                />
-
-                <Button
-                  className="text-light-gray"
-                  theme="gray"
-                  value="Нечет."
-                  onClick={() => selectDays([0, 2, 4, 6], true)}
-                />
-              </div>
+              <DrawDaysFilters />
 
               <div className="modal__promotion-weekday-days">
                 {weekdays.map(({ weekday, selected }, index) => {
@@ -157,7 +203,19 @@ export const Modal = ({ toggleModal }) => {
                       className={buttonClasses}
                       theme={selected ? "light-green" : "gray"}
                       value={weekday}
-                      onClick={() => selectDays([index])}
+                      onClick={() =>
+                        setWeekdays(
+                          weekdays.map((item, _index) => {
+                            return {
+                              ...item,
+                              selected:
+                                _index === index
+                                  ? !item.selected
+                                  : item.selected,
+                            };
+                          })
+                        )
+                      }
                     />
                   );
                 })}
