@@ -107,6 +107,7 @@
       width: fit-content;
       cursor: pointer;
       padding-bottom: 20px;
+      align-items: center;
 
       &.open .description__toggle-array {
         transform: rotate(180deg);
