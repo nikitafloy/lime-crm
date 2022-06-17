@@ -30,7 +30,8 @@ export const Input = (props) => {
   const [state, dispatch] = useReducer(reducer, getMask, init);
 
   const imask = useIMask(state);
-  const { value, setValue } = imask;
+  const { value = "", setValue } = imask;
+  console.log(value);
 
   // const ref = props.inputRef || imask.ref;
   const inputDivRef = useRef();
@@ -53,6 +54,10 @@ export const Input = (props) => {
     }
   }, []);
 
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
+
   return (
     <div ref={inputDivRef} style={style ? style : {}} className="input-box">
       {Icon && <img src={Icon} className="input-box__icon" alt="Input Icon" />}
@@ -61,17 +66,17 @@ export const Input = (props) => {
         ref={forwardedRef}
         style={
           autoSize
-            ? { width: (value || defaultValue).length * 10, maxWidth: 200 }
+            ? { width: value.length * 10, maxWidth: 200, minWidth: "1rem" }
             : {}
         }
         onBlur={onBlur}
         className="input-box__current"
-        value={value || defaultValue}
-        onChange={(event) => {
-          const value = event.target.value;
-          console.log(value);
+        value={value}
+        onChange={(e) => {
+          const value = e.target.value;
           setValue(value);
-          return onChange(value);
+
+          if (typeof onChange === "function") onChange(value);
         }}
         onClick={onClick}
       />
