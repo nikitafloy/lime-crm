@@ -55,12 +55,12 @@ export const App = () => {
 
   const toggleSearchVisible = () => setSearchVisible(!isSearchVisible);
 
-  const CustomDateSelect = forwardRef(({ value, onClick }, ref) => (
-    <Select
-      ref={ref}
+  const CustomDateInput = forwardRef(({ value, onClick }, ref) => (
+    <Input
+      forwardedRef={ref}
       className="font-weight-medium"
       label="Период"
-      value={value || mocks.Modal.period}
+      defaultValue={value || mocks.Modal.period}
       onClick={onClick}
     />
   ));
@@ -173,7 +173,7 @@ export const App = () => {
                 endDate={endDate}
                 onChange={setDateRange}
                 dateFormat="d.MM.y"
-                customInput={<CustomDateSelect />}
+                customInput={<CustomDateInput />}
               />
             </div>
 

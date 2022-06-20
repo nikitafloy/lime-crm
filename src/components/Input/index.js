@@ -14,9 +14,10 @@ const reducer = (state, action) => getMask(action.type);
 export const Input = (props) => {
   const {
     defaultValue,
-    style,
+    style = {},
     maskType,
     type,
+    label,
     theme,
     Icon,
     className,
@@ -24,22 +25,21 @@ export const Input = (props) => {
     onClick,
     autoSize,
     onBlur,
-    forwardedRef,
   } = props;
 
   const [state, dispatch] = useReducer(reducer, getMask, init);
 
   const imask = useIMask(state);
   const { value = "", setValue } = imask;
-  console.log(value);
 
-  // const ref = props.inputRef || imask.ref;
   const inputDivRef = useRef();
+  const customDateInputRef = useRef();
 
   useEffect(() => {
     maskType && dispatch({ type: maskType });
 
-    const $input = (forwardedRef || imask.ref).current;
+    const $input = (customDateInputRef || imask.ref).current;
+
     if (theme && theme === "green") {
       $input.classList.add("input-box__current_dark");
     }
@@ -49,26 +49,33 @@ export const Input = (props) => {
       $div.classList.add(...className.split(" "));
     }
 
+    if (label) {
+      $div.style.flexDirection = "column";
+      $input.style.width = "unset";
+      $input.style.padding = "2px 16px 3px";
+    }
+
     if (theme || type) {
       $div.classList.add(`input-box_${theme || type}`);
     }
+
+    if (autoSize) {
+      $input.style.width = value.length * 10;
+      $input.style.maxWidth = 200;
+      $input.style.minWidth = "1rem";
+    }
   }, []);
 
-  useEffect(() => {
-    setValue(defaultValue);
-  }, [defaultValue]);
+  useEffect(() => setValue(defaultValue), [defaultValue]);
 
   return (
-    <div ref={inputDivRef} style={style ? style : {}} className="input-box">
+    <div ref={inputDivRef} style={style} className="input-box">
       {Icon && <img src={Icon} className="input-box__icon" alt="Input Icon" />}
 
+      {label && <div className="input-box__label">{label}</div>}
+
       <input
-        ref={forwardedRef}
-        style={
-          autoSize
-            ? { width: value.length * 10, maxWidth: 200, minWidth: "1rem" }
-            : {}
-        }
+        ref={customDateInputRef}
         onBlur={onBlur}
         className="input-box__current"
         value={value}

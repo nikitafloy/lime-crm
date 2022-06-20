@@ -2,6 +2,7 @@
   display: flex;
   background: white;
   border-radius: 8px;
+  position: relative;
 
   &_green {
     border: 1px solid #7cce04;
@@ -12,8 +13,13 @@
     border: none;
   }
 
+  &__label {
+    color: #c4c4c4;
+    padding: 4px 16px 0;
+    font-size: 10px;
+  }
+
   &__current {
-    position: relative;
     flex: 1 1 auto;
     background: transparent;
     color: #1f201c80;
