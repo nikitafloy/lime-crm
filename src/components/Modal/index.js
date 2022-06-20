@@ -36,6 +36,20 @@ export const Modal = ({ toggleModal }) => {
   const [showDesc, toggleDesc] = useState(false);
   const [weekdays, setWeekdays] = useState(mocks.Modal.weekdays);
 
+  const _setWeekdays = (type, condition) => {
+    if (lastUsedFilter && lastUsedFilter === type) {
+      setLastUsedFilter(type);
+
+      return mocks.Modal.weekdays;
+    }
+
+    const weekdaysArray = condition();
+
+    setLastUsedFilter(type);
+
+    return weekdaysArray;
+  };
+
   const setLastUsedFilter = (filterName) => {
     if (lastUsedFilter && lastUsedFilter === filterName) {
       lastUsedFilter = null;
@@ -48,69 +62,39 @@ export const Modal = ({ toggleModal }) => {
   const daysFilters = [
     {
       label: "Все",
-      condition: () => {
-        if (lastUsedFilter && lastUsedFilter === "all") {
-          setLastUsedFilter("all");
-
-          return mocks.Modal.weekdays;
-        }
-
-        const weekdaysArray = weekdays.map((item) => {
+      type: "all",
+      condition: () =>
+        weekdays.map((item) => {
           return { ...item, selected: true };
-        });
-
-        setLastUsedFilter("all");
-
-        return weekdaysArray;
-      },
+        }),
     },
     {
       label: "Чет.",
-      condition: () => {
-        if (lastUsedFilter && lastUsedFilter === "even") {
-          setLastUsedFilter("even");
-
-          return mocks.Modal.weekdays;
-        }
-
-        const weekdaysArray = weekdays.map((item, index) => {
+      type: "even",
+      condition: () =>
+        weekdays.map((item, index) => {
           return { ...item, selected: index % 2 !== 0 };
-        });
-
-        setLastUsedFilter("even");
-
-        return weekdaysArray;
-      },
+        }),
     },
     {
       label: "Нечет.",
-      condition: () => {
-        if (lastUsedFilter && lastUsedFilter === "odd") {
-          setLastUsedFilter("odd");
-
-          return mocks.Modal.weekdays;
-        }
-
-        const weekdaysArray = weekdays.map((item, index) => {
+      type: "odd",
+      condition: () =>
+        weekdays.map((item, index) => {
           return { ...item, selected: index % 2 === 0 };
-        });
-
-        setLastUsedFilter("odd");
-
-        return weekdaysArray;
-      },
+        }),
     },
   ];
 
   const DrawDaysFilters = () => (
     <div className="modal__promotion-weekday-filters">
-      {daysFilters.map(({ label, condition }, index) => (
+      {daysFilters.map(({ label, type, condition }, index) => (
         <Button
           key={index}
           className="text-light-gray"
           theme="gray"
           value={label}
-          onClick={() => setWeekdays(condition())}
+          onClick={() => setWeekdays(_setWeekdays(type, condition))}
         />
       ))}
     </div>
