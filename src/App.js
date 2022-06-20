@@ -58,7 +58,7 @@ export const App = () => {
   const CustomDateInput = forwardRef(({ value, onClick }, ref) => (
     <Input
       forwardedRef={ref}
-      className="font-weight-medium"
+      className="font-weight-medium text-dark"
       label="Период"
       defaultValue={value || mocks.Modal.period}
       onClick={onClick}
