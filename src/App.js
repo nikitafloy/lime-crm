@@ -65,14 +65,6 @@ export const App = () => {
     />
   ));
 
-  const DrawSearch = () => (
-    <div className="search">
-      <Button LeftIcon={SearchIcon} onClick={() => console.log("search...")} />
-      <Input />
-      <Button LeftIcon={CrossIcon} onClick={toggleSearchVisible} />
-    </div>
-  );
-
   return (
     <main className="main">
       <header className="header">
