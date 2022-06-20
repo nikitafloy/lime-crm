@@ -39,8 +39,7 @@ export const Input = (props) => {
     maskType && dispatch({ type: maskType });
 
     const $input = (customDateInputRef || imask.ref).current;
-
-    if (theme && theme === "green") {
+    if ((theme && theme === "green") || label) {
       $input.classList.add("input-box__current_dark");
     }
 
