@@ -32,23 +32,47 @@ export const App = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
 
+  // Toggles
   const [isSearchVisible, setSearchVisible] = useState(false);
   const [showModal, toggleModal] = useState(false);
 
+  // Controls
   const [type, setType] = useState(mocks.Modal.discountTypes[0]);
   const [category, setCategory] = useState(mocks.Modal.categories[0]);
   const [discount, setDiscount] = useState(mocks.Modal.discountPercents[0]);
-
-  const [products] = useState(mocks.Modal.productsCount);
-  const [discounts] = useState(mocks.Modal.discountsCount);
-
-  const [address] = useState(mocks.Modal.address);
-
   const [statusFilter, setStatusFilter] = useState(mocks.Modal.statusFilter);
 
+  // Header
+  const [products] = useState(mocks.Modal.productsCount);
+  const [discounts] = useState(mocks.Modal.discountsCount);
+  const [address] = useState(mocks.Modal.address);
   const [user] = useState(mocks.Modal.user);
-
   const [notifications] = useState(mocks.Modal.notifications);
+
+  // Classes
+  const activeClasses = `discount-active ${
+    isSearchVisible ? "discount-active_hide" : ""
+  }`;
+
+  const addClasses = `discount-add ${
+    isSearchVisible ? "discount-add_hide" : ""
+  }`;
+
+  const filtersClasses = `discount-filters ${
+    isSearchVisible ? "discount-filters_hide" : ""
+  }`;
+
+  const searchBtnClasses = `discount-search-btn ${
+    isSearchVisible ? "discount-search-btn_lg" : ""
+  }`;
+
+  const searchInputClasses = `discount-search__input ${
+    isSearchVisible ? "discount-search__input_show" : ""
+  }`;
+
+  const searchBtnCloseClasses = `discount-search__close-button ${
+    isSearchVisible ? "discount-search__close-button_show" : ""
+  }`;
 
   const toggleSearchVisible = () => setSearchVisible(!isSearchVisible);
 
@@ -111,11 +135,7 @@ export const App = () => {
 
       <aside className="discount-controls">
         <div className="discount-controls-inner">
-          <div
-            className={`discount-add ${
-              isSearchVisible ? "discount-add_hide" : ""
-            }`}
-          >
+          <div className={addClasses}>
             <Button
               theme="light-green"
               value="Добавить скидку"
@@ -124,11 +144,7 @@ export const App = () => {
             />
           </div>
 
-          <div
-            className={`discount-active ${
-              isSearchVisible ? "discount-active_hide" : ""
-            }`}
-          >
+          <div className={activeClasses}>
             {constants.activeButtonsName.map((name, index) => {
               const isActiveButton = statusFilter === name;
               return (
@@ -147,11 +163,7 @@ export const App = () => {
             })}
           </div>
 
-          <div
-            className={`discount-filters ${
-              isSearchVisible ? "discount-filters_hide" : ""
-            }`}
-          >
+          <div className={filtersClasses}>
             <div className="discount-filters__type">
               <Select
                 value={type}
@@ -200,11 +212,7 @@ export const App = () => {
             </div>
           </div>
 
-          <div
-            className={`discount-search-btn ${
-              isSearchVisible ? "discount-search-btn_lg" : ""
-            }`}
-          >
+          <div className={searchBtnClasses}>
             <div className="discount-search-btn-inner">
               <div className="discount-search">
                 <div
@@ -217,18 +225,12 @@ export const App = () => {
                   />
                 </div>
 
-                <div
-                  className={`discount-search__input ${
-                    isSearchVisible ? "discount-search__input_show" : ""
-                  }`}
-                >
+                <div className={searchInputClasses}>
                   <Input />
                 </div>
 
                 <div
-                  className={`discount-search__close-button ${
-                    isSearchVisible ? "discount-search__close-button_show" : ""
-                  }`}
+                  className={searchBtnCloseClasses}
                   onClick={toggleSearchVisible}
                 >
                   <Button LeftIcon={CrossIcon} />
