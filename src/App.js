@@ -98,7 +98,7 @@ export const App = () => {
           <div className="discount-user">
             <Button
               type="lg"
-              className="font-weight-bold"
+              className="discount-font-weight-bold"
               LeftIcon={UserIcon}
               value={user.name}
               secondText={user.position}
@@ -139,7 +139,7 @@ export const App = () => {
                   key={index}
                   style={isActiveButton ? { border: "2px solid #a1d214" } : {}}
                   type={isActiveButton && "outlined"}
-                  className="discount-btn_md font-weight-bold"
+                  className="discount-btn_md discount-font-weight-bold"
                   theme={!isActiveButton && "light-gray"}
                   value={name}
                   onClick={() => {

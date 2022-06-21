@@ -144,7 +144,7 @@ export const Modal = ({ toggleModal }) => {
   return (
     <div className="discount-modal">
       <div className="discount-modal__current">
-        <div className="discount-modal__title font-weight-bold">
+        <div className="discount-modal__title discount-font-weight-bold">
           Добавление скидки
         </div>
 
@@ -181,7 +181,7 @@ export const Modal = ({ toggleModal }) => {
 
               <div className="discount-modal__promotion-weekday-days">
                 {weekdays.map(({ weekday, selected }, index) => {
-                  const buttonClasses = `font-weight-bold ${
+                  const buttonClasses = `discount-font-weight-bold ${
                     selected ? "text-white" : "text-light-gray"
                   }`;
 
