@@ -1,0 +1,82 @@
+.discount-header {
+  display: flex;
+  justify-content: space-between;
+
+  .discount-left {
+    .discount-top {
+      display: flex;
+      gap: 40px;
+
+      .discount-stats {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+
+        &_disabled {
+          color: #979797;
+        }
+
+        &__name {
+          font-size: 30px;
+        }
+
+        &__count {
+          padding-top: 4px;
+          font-size: 16px;
+          font-feature-settings: "pnum" on, "lnum" on;
+        }
+      }
+    }
+
+    .discount-bottom {
+      display: flex;
+      gap: 12px;
+      padding: 8px 0 0;
+
+      &__address {
+        font-weight: 600;
+        color: #333333;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .discount-right {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+  }
+
+  .discount-notification {
+    position: relative;
+
+    & .discount-btn {
+      width: 70px;
+      height: 70px;
+    }
+
+    &__icon {
+      display: flex;
+      flex-flow: row wrap;
+      place-content: center;
+      align-items: center;
+      position: absolute;
+      box-sizing: border-box;
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 500;
+      font-size: 0.75rem;
+      min-width: 20px;
+      line-height: 1;
+      padding: 0 6px;
+      height: 20px;
+      border-radius: 10px;
+      z-index: 1;
+      background-color: #a1d214;
+      top: -3px;
+      right: -5px;
+      box-shadow: 0 0 10px rgb(161 210 20 / 50%);
+      color: black;
+    }
+  }
+}

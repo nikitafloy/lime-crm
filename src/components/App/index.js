@@ -1,31 +1,22 @@
 import { forwardRef, useState } from "react";
-import "./App.scss";
+import "./index.scss";
 
 // Components
-import { Board, Button, Input, Modal, Select } from "./components";
+import { Header } from "./Header";
+import { Board, Button, Input, Modal, Select } from "../";
 
 // Date Picker
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-// Inline SVG
-import InlineSVG from "svg-inline-react";
-
 // Icons
-import {
-  SearchIcon,
-  TargetPoint,
-  PlusBox,
-  UserIcon,
-  BellIcon,
-  CrossIcon,
-} from "./assets/icons";
+import { SearchIcon, PlusBox, CrossIcon } from "../../assets/icons";
 
 // Mocks
-import mocks from "./__mocks__";
+import mocks from "../../__mocks__";
 
 // Constants
-import constants from "./const";
+import constants from "../../const";
 
 export const App = () => {
   // Date
@@ -41,13 +32,6 @@ export const App = () => {
   const [category, setCategory] = useState(mocks.Modal.categories[0]);
   const [discount, setDiscount] = useState(mocks.Modal.discountPercents[0]);
   const [statusFilter, setStatusFilter] = useState(mocks.Modal.statusFilter);
-
-  // Header
-  const [products] = useState(mocks.Modal.productsCount);
-  const [discounts] = useState(mocks.Modal.discountsCount);
-  const [address] = useState(mocks.Modal.address);
-  const [user] = useState(mocks.Modal.user);
-  const [notifications] = useState(mocks.Modal.notifications);
 
   // Classes
   const activeClasses = `discount-active ${
@@ -88,50 +72,7 @@ export const App = () => {
 
   return (
     <main className="discount-main">
-      <header className="discount-header">
-        <div className="discount-left">
-          <div className="discount-top">
-            <div className="discount-stats discount-stats_disabled">
-              <div className="discount-stats__name">Товары</div>
-              <div className="discount-stats__count">{products}</div>
-            </div>
-
-            <div className="discount-stats">
-              <div className="discount-stats__name">Скидки</div>
-              <div className="discount-stats__count">{discounts}</div>
-            </div>
-          </div>
-
-          <div className="discount-bottom">
-            <div className="discount-bottom__icon">
-              <InlineSVG
-                element="div"
-                style={{ display: "flex" }}
-                src={TargetPoint}
-              />
-            </div>
-
-            <div className="discount-bottom__address">{address}</div>
-          </div>
-        </div>
-
-        <div className="discount-right">
-          <div className="discount-user">
-            <Button
-              type="lg"
-              className="discount-font-weight-bold"
-              LeftIcon={UserIcon}
-              value={user.name}
-              secondText={user.position}
-            />
-          </div>
-
-          <div className="discount-notification">
-            <Button type="lg" LeftIcon={BellIcon} />
-            <div className="discount-notification__icon">{notifications}</div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <aside className="discount-controls">
         <div className="discount-controls-inner">

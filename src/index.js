@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import "./index.scss";
 import "./fonts.scss";
 
-import { App } from "./App";
+import { App } from "./components";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
