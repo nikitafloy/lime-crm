@@ -1,4 +1,5 @@
 import { forwardRef, useState } from "react";
+import "./index.scss";
 
 // Components
 import { Button, Input, Select } from "../../";
