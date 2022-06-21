@@ -39,19 +39,16 @@ export const App = () => {
   const [category, setCategory] = useState(mocks.Modal.categories[0]);
   const [discount, setDiscount] = useState(mocks.Modal.discountPercents[0]);
 
-  const [products] = useState(19783);
-  const [discounts] = useState(19783);
+  const [products] = useState(mocks.Modal.productsCount);
+  const [discounts] = useState(mocks.Modal.discountsCount);
 
-  const [address] = useState("г. Минск ул Беломорская дом 7");
+  const [address] = useState(mocks.Modal.address);
 
-  const [statusFilter, setStatusFilter] = useState("Активные");
+  const [statusFilter, setStatusFilter] = useState(mocks.Modal.statusFilter);
 
-  const [user] = useState({
-    name: "Владимировна И.А.",
-    position: "Администратор",
-  });
+  const [user] = useState(mocks.Modal.user);
 
-  const [notifications] = useState(3);
+  const [notifications] = useState(mocks.Modal.notifications);
 
   const toggleSearchVisible = () => setSearchVisible(!isSearchVisible);
 

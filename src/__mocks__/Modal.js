@@ -16,4 +16,13 @@ export const Modal = {
   desc: "Состав креветки (Pandalus borealis), вода (защитная глазурь). Краткое описание Варено-мороженые водные беспозвоночные. Глазурь не более 14%. Зона вылова: Северные районы Атлантического океана.",
   product: { article: "000000", name: null, discount: 0 },
   discountPercents: [10, 20, 30, 40],
+  productsCount: 19783,
+  discountsCount: 19783,
+  address: "г. Минск ул Беломорская дом 7",
+  statusFilter: "Активные",
+  user: {
+    name: "Владимировна И.А.",
+    position: "Администратор",
+  },
+  notifications: 3,
 };
