@@ -1,21 +1,6 @@
 import { useState } from "react";
 import "./index.scss";
 
-// Components
-import { Button } from "../Button";
-
-// Icons
-import {
-  CheckIcon,
-  DotIcon,
-  EditPencil,
-  PauseIcon,
-  PlayIcon,
-} from "../../assets/icons";
-
-// Inline SVG
-import InlineSVG from "svg-inline-react";
-
 // Immutable JS
 import { List } from "immutable";
 
@@ -28,9 +13,9 @@ export const Board = () => {
 
   const DrawDates = () =>
     mocks.dates.map(({ date, weekday }, index) => (
-      <div key={index} className="board__header-dates">
-        <div className="board__header-dates-date">{date}</div>
-        <div className="board__header-dates-weekday">{weekday}</div>
+      <div key={index} className="discount-board__header-dates">
+        <div className="discount-board__header-dates-date">{date}</div>
+        <div className="discount-board__header-dates-weekday">{weekday}</div>
       </div>
     ));
 
@@ -58,19 +43,19 @@ export const Board = () => {
     ));
 
   return (
-    <section className="board">
-      <div className="board-inner">
-        <div className="board__header">
-          <div className="board__header-left">
-            <div className="board__header-name">Сентябрь</div>
+    <section className="discount-board">
+      <div className="discount-board-inner">
+        <div className="discount-board__header">
+          <div className="discount-board__header-left">
+            <div className="discount-board__header-name">Сентябрь</div>
           </div>
 
-          <div className="board__header-right">
+          <div className="discount-board__header-right">
             <DrawDates />
           </div>
         </div>
 
-        <div className="board__body">
+        <div className="discount-board__body">
           <DrawActionData />
         </div>
       </div>

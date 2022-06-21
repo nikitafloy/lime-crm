@@ -58,7 +58,7 @@ export const App = () => {
   const CustomDateInput = forwardRef(({ value, onClick }, ref) => (
     <Input
       forwardedRef={ref}
-      className="font-weight-medium text-dark"
+      className="discount-font-weight-medium discount-text-dark"
       label="Период"
       defaultValue={value || mocks.Modal.period}
       onClick={onClick}
@@ -66,23 +66,23 @@ export const App = () => {
   ));
 
   return (
-    <main className="main">
-      <header className="header">
-        <div className="left">
-          <div className="top">
-            <div className="stats stats_disabled">
-              <div className="stats__name">Товары</div>
-              <div className="stats__count">{products}</div>
+    <main className="discount-main">
+      <header className="discount-header">
+        <div className="discount-left">
+          <div className="discount-top">
+            <div className="discount-stats discount-stats_disabled">
+              <div className="discount-stats__name">Товары</div>
+              <div className="discount-stats__count">{products}</div>
             </div>
 
-            <div className="stats">
-              <div className="stats__name">Скидки</div>
-              <div className="stats__count">{discounts}</div>
+            <div className="discount-stats">
+              <div className="discount-stats__name">Скидки</div>
+              <div className="discount-stats__count">{discounts}</div>
             </div>
           </div>
 
-          <div className="bottom">
-            <div className="bottom__icon">
+          <div className="discount-bottom">
+            <div className="discount-bottom__icon">
               <InlineSVG
                 element="div"
                 style={{ display: "flex" }}
@@ -90,12 +90,12 @@ export const App = () => {
               />
             </div>
 
-            <div className="bottom__address">{address}</div>
+            <div className="discount-bottom__address">{address}</div>
           </div>
         </div>
 
-        <div className="right">
-          <div className="user">
+        <div className="discount-right">
+          <div className="discount-user">
             <Button
               type="lg"
               className="font-weight-bold"
@@ -105,16 +105,20 @@ export const App = () => {
             />
           </div>
 
-          <div className="notification">
+          <div className="discount-notification">
             <Button type="lg" LeftIcon={BellIcon} />
-            <div className="notification__icon">{notifications}</div>
+            <div className="discount-notification__icon">{notifications}</div>
           </div>
         </div>
       </header>
 
-      <aside className="controls">
-        <div className="controls-inner">
-          <div className={`add ${isSearchVisible ? "add_hide" : ""}`}>
+      <aside className="discount-controls">
+        <div className="discount-controls-inner">
+          <div
+            className={`discount-add ${
+              isSearchVisible ? "discount-add_hide" : ""
+            }`}
+          >
             <Button
               theme="light-green"
               value="Добавить скидку"
@@ -122,7 +126,12 @@ export const App = () => {
               onClick={() => toggleModal(true)}
             />
           </div>
-          <div className={`active ${isSearchVisible ? "active_hide" : ""}`}>
+
+          <div
+            className={`discount-active ${
+              isSearchVisible ? "discount-active_hide" : ""
+            }`}
+          >
             {constants.activeButtonsName.map((name, index) => {
               const isActiveButton = statusFilter === name;
               return (
@@ -130,7 +139,7 @@ export const App = () => {
                   key={index}
                   style={isActiveButton ? { border: "2px solid #a1d214" } : {}}
                   type={isActiveButton && "outlined"}
-                  className="btn_md font-weight-bold"
+                  className="discount-btn_md font-weight-bold"
                   theme={!isActiveButton && "light-gray"}
                   value={name}
                   onClick={() => {
@@ -141,11 +150,15 @@ export const App = () => {
             })}
           </div>
 
-          <div className={`filters ${isSearchVisible ? "filters_hide" : ""}`}>
-            <div className="filters__type">
+          <div
+            className={`discount-filters ${
+              isSearchVisible ? "discount-filters_hide" : ""
+            }`}
+          >
+            <div className="discount-filters__type">
               <Select
                 value={type}
-                className="font-weight-medium"
+                className="discount-font-weight-medium"
                 label="Тип скидки"
                 variants={mocks.Modal.discountTypes}
                 onChange={(value) => {
@@ -154,10 +167,10 @@ export const App = () => {
               />
             </div>
 
-            <div className="filters__discount">
+            <div className="discount-filters__discount">
               <Select
                 value={discount}
-                className="font-weight-medium"
+                className="discount-font-weight-medium"
                 label="% скидки"
                 variants={mocks.Modal.discountPercents}
                 onChange={(value) => {
@@ -166,7 +179,7 @@ export const App = () => {
               />
             </div>
 
-            <div className="filters__period">
+            <div className="discount-filters__period">
               <DatePicker
                 selectsRange={true}
                 startDate={startDate}
@@ -177,10 +190,10 @@ export const App = () => {
               />
             </div>
 
-            <div className="filters__category">
+            <div className="discount-filters__category">
               <Select
                 value={category}
-                className="font-weight-medium"
+                className="discount-font-weight-medium"
                 label="Категория товаров"
                 variants={mocks.Modal.categories}
                 onChange={(value) => {
@@ -191,12 +204,14 @@ export const App = () => {
           </div>
 
           <div
-            className={`search-btn ${isSearchVisible ? "search-btn_lg" : ""}`}
+            className={`discount-search-btn ${
+              isSearchVisible ? "discount-search-btn_lg" : ""
+            }`}
           >
-            <div className="search-btn-inner">
-              <div className="search">
+            <div className="discount-search-btn-inner">
+              <div className="discount-search">
                 <div
-                  className="search__search-button"
+                  className="discount-search__search-button"
                   onClick={toggleSearchVisible}
                 >
                   <Button
@@ -206,24 +221,22 @@ export const App = () => {
                 </div>
 
                 <div
-                  className={`search__input ${
-                    isSearchVisible ? "search__input_show" : ""
+                  className={`discount-search__input ${
+                    isSearchVisible ? "discount-search__input_show" : ""
                   }`}
                 >
                   <Input />
                 </div>
 
                 <div
-                  className={`search__close-button ${
-                    isSearchVisible ? "search__close-button_show" : ""
+                  className={`discount-search__close-button ${
+                    isSearchVisible ? "discount-search__close-button_show" : ""
                   }`}
                   onClick={toggleSearchVisible}
                 >
                   <Button LeftIcon={CrossIcon} />
                 </div>
               </div>
-
-              {/*<Button LeftIcon={SearchIcon} onClick={toggleSearchVisible} />*/}
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-.modal {
+.discount-modal {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -99,7 +99,7 @@
     }
   }
 
-  .description {
+  .discount-description {
     &__toggle {
       display: flex;
       color: #a1d214;
@@ -109,7 +109,7 @@
       padding-bottom: 20px;
       align-items: center;
 
-      &.open .description__toggle-array {
+      &.open .discount-description__toggle-array {
         transform: rotate(180deg);
       }
 
@@ -244,18 +244,18 @@
       border-radius: 10px;
     }
 
-    & .btn:first-child {
+    & .discount-btn:first-child {
       width: 190px;
       font-size: 18px;
     }
 
-    & .btn:nth-child(2) {
+    & .discount-btn:nth-child(2) {
       width: 150px;
       color: #b6b6b6;
       font-size: 16px;
     }
 
-    & .btn:last-child {
+    & .discount-btn:last-child {
       margin-left: auto;
       color: #b6b6b6;
       width: 123px;

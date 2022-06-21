@@ -40,7 +40,7 @@ export const Input = (props) => {
 
     const $input = (customDateInputRef || imask.ref).current;
     if (theme && theme === "green") {
-      $input.classList.add("input-box__current_dark");
+      $input.classList.add("discount-input-box__current_dark");
     }
 
     const $div = inputDivRef.current;
@@ -55,7 +55,7 @@ export const Input = (props) => {
     }
 
     if (theme || type) {
-      $div.classList.add(`input-box_${theme || type}`);
+      $div.classList.add(`discount-input-box_${theme || type}`);
     }
 
     if (autoSize) {
@@ -68,15 +68,15 @@ export const Input = (props) => {
   useEffect(() => setValue(defaultValue), [defaultValue]);
 
   return (
-    <div ref={inputDivRef} style={style} className="input-box">
-      {Icon && <img src={Icon} className="input-box__icon" alt="Input Icon" />}
+    <div ref={inputDivRef} style={style} className="discount-input-box">
+      {Icon && <img src={Icon} className="discount-input-box__icon" alt="Input Icon" />}
 
-      {label && <div className="input-box__label">{label}</div>}
+      {label && <div className="discount-input-box__label">{label}</div>}
 
       <input
         ref={customDateInputRef}
         onBlur={onBlur}
-        className="input-box__current"
+        className="discount-input-box__current"
         value={value}
         onChange={(e) => {
           const value = e.target.value;

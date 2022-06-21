@@ -33,8 +33,8 @@ export const Item = ({
     inputRef.current.focus();
   }, [nameType]);
 
-  const nameClasses = `board__body-item-left-name ${
-    !status ? "board__body-item-left-name_disabled" : ""
+  const nameClasses = `discount-board__body-item-left-name ${
+    !status ? "discount-board__body-item-left-name_disabled" : ""
   }`;
 
   const changeNameTypeHandler = () => {
@@ -86,16 +86,16 @@ export const Item = ({
     <Input
       forwardedRef={ref}
       autoSize
-      className={!status ? "text-gray" : "text-dark"}
+      className={!status ? "discount-text-gray" : "discount-text-dark"}
       defaultValue={name}
       onBlur={changeNameTypeHandler}
     />
   ));
 
   return (
-    <div key={index} className="board__body-item">
-      <div className="board__body-item-left">
-        <div className="board__body-item-left-icon">
+    <div key={index} className="discount-board__body-item">
+      <div className="discount-board__body-item-left">
+        <div className="discount-board__body-item-left-icon">
           <Button
             theme={status ? "green" : "gray"}
             LeftIcon={status ? PlayIcon : PauseIcon}
@@ -107,7 +107,7 @@ export const Item = ({
           <>
             <div className={nameClasses}>{name}</div>
 
-            <div className="board__body-item-left-icon">
+            <div className="discount-board__body-item-left-icon">
               <InlineSVG
                 element="div"
                 style={{ display: "flex" }}
@@ -117,13 +117,13 @@ export const Item = ({
             </div>
           </>
         ) : (
-          <div className="board__body-item-left-name-input">
+          <div className="discount-board__body-item-left-name-input">
             <RefInput ref={inputRef} />
           </div>
         )}
       </div>
 
-      <div className="board__body-item-right">
+      <div className="discount-board__body-item-right">
         <DrawPromos promoId={index} promoStatus={status} promos={promos} />
       </div>
     </div>

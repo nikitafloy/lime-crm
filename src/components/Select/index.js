@@ -21,12 +21,12 @@ const SelectComponent = ({
   const selectBoxRef = useRef();
   const [open, setOpen] = useState(false);
 
-  const textClasses = `select-box__text ${
-    label ? "select-box__text_black select-box__text_sm" : ""
+  const textClasses = `discount-select-box__text ${
+    label ? "discount-select-box__text_black discount-select-box__text_sm" : ""
   }`;
 
-  const selectBoxIconClasses = `select-box__icon ${
-    label ? "select-box__icon_sm" : ""
+  const selectBoxIconClasses = `discount-select-box__icon ${
+    label ? "discount-select-box__icon_sm" : ""
   }`;
 
   useEffect(() => {
@@ -36,27 +36,27 @@ const SelectComponent = ({
     }
 
     if (type) {
-      $selectBox.classList.add(`select-box_${type}`);
+      $selectBox.classList.add(`discount-select-box_${type}`);
     }
 
     if (theme && theme === "green") {
-      $selectBox.classList.add("select-box_green");
+      $selectBox.classList.add("discount-select-box_green");
     }
   }, []);
 
   return (
-    <div ref={selectBoxRef} className="select-box" onClick={onClick}>
-      <div className="select-box-inner">
-        {label && <div className="select-box__label">{label}</div>}
+    <div ref={selectBoxRef} className="discount-select-box" onClick={onClick}>
+      <div className="discount-select-box-inner">
+        {label && <div className="discount-select-box__label">{label}</div>}
 
         <div
-          className={`select-box__current ${open ? "open" : ""}`}
+          className={`discount-select-box__current ${open ? "open" : ""}`}
           tabIndex="1"
           onClick={() => setOpen(!open)}
           onBlur={() => setOpen(false)}
         >
           {LeftIcon && (
-            <div className="select-box__icon-left">
+            <div className="discount-select-box__icon-left">
               <InlineSVG
                 element="div"
                 style={{ display: "flex" }}
@@ -65,7 +65,7 @@ const SelectComponent = ({
             </div>
           )}
 
-          <div className="select-box__value">
+          <div className="discount-select-box__value">
             <p className={textClasses}>{value}</p>
           </div>
 
@@ -77,10 +77,10 @@ const SelectComponent = ({
           />
         </div>
 
-        <ul className="select-box__list">
+        <ul className="discount-select-box__list">
           {variants.map((item, index) => (
             <li key={index} onClick={() => onChange(item)}>
-              <label className="select-box__option">{item}</label>
+              <label className="discount-select-box__option">{item}</label>
             </li>
           ))}
         </ul>
