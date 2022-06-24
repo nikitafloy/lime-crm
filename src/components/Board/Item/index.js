@@ -34,10 +34,6 @@ export const Item = ({
     }
   }, [type]);
 
-  const itemNameClasses = `discount-board__body-item-left-name ${
-    !status ? "discount-board__body-item-left-name_disabled" : ""
-  }`;
-
   const changeType = () => {
     setType(type === "text" ? "input" : "text");
   };
@@ -120,7 +116,13 @@ export const Item = ({
 
         {type === "text" ? (
           <>
-            <div className={itemNameClasses}>{name}</div>
+            <div
+              className={`discount-board__body-item-left-name ${
+                !status ? "discount-board__body-item-left-name_disabled" : ""
+              }`}
+            >
+              {name}
+            </div>
 
             <div className="discount-board__body-item-left-icon">
               <InlineSVG
