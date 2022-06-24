@@ -180,33 +180,29 @@ export const Modal = ({ toggleModal }) => {
               <DrawDaysFilters />
 
               <div className="discount-modal__promotion-weekday-days">
-                {weekdays.map(({ weekday, selected }, index) => {
-                  const buttonClasses = `discount-font-weight-bold ${
-                    selected ? "text-white" : "text-light-gray"
-                  }`;
-
-                  return (
-                    <Button
-                      key={index}
-                      className={buttonClasses}
-                      theme={selected ? "light-green" : "gray"}
-                      value={weekday}
-                      onClick={() =>
-                        setWeekdays(
-                          weekdays.map((item, _index) => {
-                            return {
-                              ...item,
-                              selected:
-                                _index === index
-                                  ? !item.selected
-                                  : item.selected,
-                            };
-                          })
-                        )
-                      }
-                    />
-                  );
-                })}
+                {weekdays.map(({ weekday, selected }, index) => (
+                  <Button
+                    key={index}
+                    className={`discount-font-weight-bold ${
+                      selected
+                        ? "discount-text-white"
+                        : "discount-text-light-gray"
+                    }`}
+                    theme={selected ? "light-green" : "gray"}
+                    value={weekday}
+                    onClick={() =>
+                      setWeekdays(
+                        weekdays.map((item, _index) => {
+                          return {
+                            ...item,
+                            selected:
+                              _index === index ? !item.selected : item.selected,
+                          };
+                        })
+                      )
+                    }
+                  />
+                ))}
               </div>
             </div>
           </div>
