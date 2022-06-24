@@ -15,17 +15,20 @@ export const Button = ({
 }) => {
   const [classes, setClasses] = useState(["discount-btn"]);
 
+  const updateClasses = (name) =>
+    setClasses((prevState) => [...prevState, name]);
+
   useEffect(() => {
     if (className) {
-      setClasses([...classes, className]);
+      updateClasses(className);
     }
 
     if (theme) {
-      setClasses([...classes, `discount-btn_${theme}`]);
+      updateClasses(`discount-btn_${theme}`);
     }
 
     if (type) {
-      setClasses([...classes, `discount-btn_${type}`]);
+      updateClasses(`discount-btn_${type}`);
     }
   }, [className, theme, type]);
 
