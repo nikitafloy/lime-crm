@@ -22,8 +22,8 @@ export const Controls = ({ toggleModal }) => {
   const [isSearchVisible, setSearchVisible] = useState(false);
 
   // Date
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   // Controls
   const [type, setType] = useState(mocks.Modal.discountTypes[0]);
@@ -125,14 +125,31 @@ export const Controls = ({ toggleModal }) => {
           </div>
 
           <div className="discount-filters__period">
-            <DatePicker
-              selectsRange={true}
-              startDate={startDate}
-              endDate={endDate}
-              onChange={setDateRange}
-              dateFormat="d.MM.y"
-              customInput={<CustomDateInput />}
-            />
+            <div className="discount-filters__period-inner discount-font-weight-medium">
+              <div className="discount-filters__period-label">Период</div>
+              <div className="discount-filters__period-datepicker">
+                <DatePicker
+                  selected={startDate}
+                  onChange={setStartDate}
+                  selectsStart
+                  startDate={startDate}
+                  endDate={endDate}
+                  dateFormat="dd.MM.yyyy"
+                />
+
+                <div className="discount-filters__period-divider">-</div>
+
+                <DatePicker
+                  selected={endDate}
+                  onChange={setEndDate}
+                  selectsEnd
+                  startDate={startDate}
+                  endDate={endDate}
+                  minDate={startDate}
+                  dateFormat="dd.MM.yyyy"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="discount-filters__category">
