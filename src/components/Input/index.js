@@ -63,8 +63,13 @@ export const Input = ({
     };
   }
 
-  useEffect(() => maskType && dispatch({ type: maskType }), []);
-  useEffect(() => setValue(defaultValue), [defaultValue]);
+  useEffect(() => {
+    maskType && dispatch({ type: maskType });
+  }, []);
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
 
   const onChangeHandler = (e) => {
     const value = e.target.value;
