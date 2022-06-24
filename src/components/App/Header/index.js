@@ -14,8 +14,11 @@ import { BellIcon, TargetPoint, UserIcon } from "../../../assets/icons";
 import mocks from "../../../__mocks__";
 
 export const Header = () => {
-  const [products] = useState(mocks.Modal.productsCount);
-  const [discounts] = useState(mocks.Modal.discountsCount);
+  const { productsCount, discountsCount } = mocks.Modal;
+
+  const [products] = useState(productsCount);
+  const [discounts] = useState(discountsCount);
+
   const [address] = useState(mocks.Modal.address);
   const [user] = useState(mocks.Modal.user);
   const [notifications] = useState(mocks.Modal.notifications);
