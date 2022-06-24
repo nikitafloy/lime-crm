@@ -1,15 +1,19 @@
 import { useState } from "react";
 import "./index.scss";
 
-// Mocks
-import mocks from "../../__mocks__";
+// Components
 import { Item } from "./Item";
 
-export const Board = () => {
-  const [promosData, setPromosData] = useState(mocks.promos);
+// Mocks
+import mocks from "../../__mocks__";
 
-  const DrawDates = () =>
-    mocks.dates.map(({ date, weekday }, index) => (
+export const Board = () => {
+  const { promos, dates } = mocks;
+
+  const [promosData, setPromosData] = useState(promos);
+
+  const Dates = () =>
+    dates.map(({ date, weekday }, index) => (
       <div key={index} className="discount-board__header-dates">
         <div className="discount-board__header-dates-date">{date}</div>
         <div className="discount-board__header-dates-weekday">{weekday}</div>
@@ -26,7 +30,7 @@ export const Board = () => {
       })
     );
 
-  const DrawActionData = () =>
+  const BoardBody = () =>
     promosData.map(({ name, status }, index) => (
       <Item
         index={index}
@@ -48,12 +52,12 @@ export const Board = () => {
           </div>
 
           <div className="discount-board__header-right">
-            <DrawDates />
+            <Dates />
           </div>
         </div>
 
         <div className="discount-board__body">
-          <DrawActionData />
+          <BoardBody />
         </div>
       </div>
     </section>
