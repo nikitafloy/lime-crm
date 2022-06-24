@@ -1,4 +1,4 @@
-import { createRef, forwardRef, useEffect, useState } from "react";
+import { useRef, forwardRef, useEffect, useState } from "react";
 import "./index.scss";
 
 // Components
@@ -25,7 +25,7 @@ export const Item = ({
   setPromosData,
   changePromoStatus,
 }) => {
-  const inputRef = createRef();
+  const inputRef = useRef();
   const [nameType, setNameType] = useState("text");
 
   useEffect(() => {
