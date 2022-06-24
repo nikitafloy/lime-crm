@@ -16,12 +16,12 @@ import mocks from "../../../__mocks__";
 export const Header = () => {
   const { productsCount, discountsCount } = mocks.Modal;
 
-  const [products] = useState(productsCount);
-  const [discounts] = useState(discountsCount);
+  const [products, setProductsCount] = useState(productsCount);
+  const [discounts, setDiscountsCount] = useState(discountsCount);
 
-  const [address] = useState(mocks.Modal.address);
-  const [user] = useState(mocks.Modal.user);
-  const [notifications] = useState(mocks.Modal.notifications);
+  const [address, setAddress] = useState(mocks.Modal.address);
+  const [user, setUser] = useState(mocks.Modal.user);
+  const [notifications, setNotifications] = useState(mocks.Modal.notifications);
 
   return (
     <header className="discount-header">
