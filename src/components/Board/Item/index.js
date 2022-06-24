@@ -20,40 +20,52 @@ export const Item = ({
   index,
   name,
   status,
-  promos,
   promosData,
   setPromosData,
   changePromoStatus,
 }) => {
   const inputRef = useRef();
 
-  const [nameType, setNameType] = useState("text");
+  const [type, setType] = useState("text");
 
   useEffect(() => {
-    if (!inputRef.current) return;
-    inputRef.current.focus();
-  }, [nameType]);
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [type]);
 
-  const nameClasses = `discount-board__body-item-left-name ${
+  const itemNameClasses = `discount-board__body-item-left-name ${
     !status ? "discount-board__body-item-left-name_disabled" : ""
   }`;
 
-  const changeNameTypeHandler = () => {
-    setNameType(nameType === "text" ? "input" : "text");
+  const changeType = () => {
+    setType(type === "text" ? "input" : "text");
   };
 
-  const changePromoStatusItem = (promoId, promoItemId, status) => {
-    if (status && status !== "active") return;
+  const onItemPromoButtonClickHandler = (promoId, itemPromoId) => {
+    const promoStatus = promosData[promoId].status;
+    if (!promoStatus) return;
+
+    const itemPromo = promosData[promoId].promos[itemPromoId];
+    const itemPromoStatus = itemPromo.status;
+
+    changeItemPromoStatus(itemPromo, itemPromoStatus);
+  };
+
+  const changeItemPromoStatus = (itemPromo, currentItemStatus) => {
+    if (currentItemStatus && currentItemStatus !== "active") return;
 
     const newPromosData = [...promosData];
-    const newStatus = !status ? "active" : null;
 
-    newPromosData[promoId].promos[promoItemId].status = newStatus;
+    const currentItemStatusIsActive = currentItemStatus === "active";
+    const newItemStatus = currentItemStatusIsActive ? null : "active";
+
+    itemPromo.status = newItemStatus;
 
     setPromosData(newPromosData);
   };
 
-  const getButtonTheme = (status, date) => {
+  const getItemPromoButtonTheme = (status, date) => {
     const weekday = new Date(date).getDay();
     if (status) {
       if (status === "active") {
@@ -68,19 +80,22 @@ export const Item = ({
     return "gray";
   };
 
-  const DrawPromos = ({ promoId, promos, promoStatus }) =>
-    promos.map(({ status, date }, index) => (
-      <Button
-        key={index}
-        type={!promoStatus && "disabled"}
-        theme={getButtonTheme(status, date)}
-        LeftIcon={status && (status === "active" ? CheckIcon : DotIcon)}
-        value={!status && "н"}
-        onClick={() =>
-          promoStatus && changePromoStatusItem(promoId, index, status)
-        }
-      />
-    ));
+  const DrawPromos = ({ promoId, promoStatus }) =>
+    promosData[promoId].promos.map(
+      ({ status: itemPromoStatus, date }, itemPromoId) => (
+        <Button
+          key={itemPromoId}
+          type={!promoStatus && "disabled"}
+          theme={getItemPromoButtonTheme(itemPromoStatus, date)}
+          LeftIcon={
+            itemPromoStatus &&
+            (itemPromoStatus === "active" ? CheckIcon : DotIcon)
+          }
+          value={!itemPromoStatus && "н"}
+          onClick={() => onItemPromoButtonClickHandler(promoId, itemPromoId)}
+        />
+      )
+    );
 
   const RefInput = forwardRef((props, ref) => (
     <Input
@@ -88,7 +103,7 @@ export const Item = ({
       autoSize
       className={!status ? "discount-text-gray" : "discount-text-dark"}
       defaultValue={name}
-      onBlur={changeNameTypeHandler}
+      onBlur={changeType}
     />
   ));
 
@@ -103,16 +118,16 @@ export const Item = ({
           />
         </div>
 
-        {nameType === "text" ? (
+        {type === "text" ? (
           <>
-            <div className={nameClasses}>{name}</div>
+            <div className={itemNameClasses}>{name}</div>
 
             <div className="discount-board__body-item-left-icon">
               <InlineSVG
                 element="div"
                 style={{ display: "flex" }}
                 src={EditPencil}
-                onClick={changeNameTypeHandler}
+                onClick={changeType}
               />
             </div>
           </>
@@ -124,7 +139,7 @@ export const Item = ({
       </div>
 
       <div className="discount-board__body-item-right">
-        <DrawPromos promoId={index} promoStatus={status} promos={promos} />
+        <DrawPromos promoId={index} promoStatus={status} />
       </div>
     </div>
   );

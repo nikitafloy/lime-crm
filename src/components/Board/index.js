@@ -27,13 +27,12 @@ export const Board = () => {
     );
 
   const DrawActionData = () =>
-    promosData.map(({ name, status, promos }, index) => (
+    promosData.map(({ name, status }, index) => (
       <Item
         index={index}
         key={index}
         name={name}
         status={status}
-        promos={promos}
         promosData={promosData}
         setPromosData={setPromosData}
         changePromoStatus={changePromoStatus}
