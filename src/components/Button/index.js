@@ -6,7 +6,7 @@ import InlineSVG from "svg-inline-react";
 const composeClassList = (className, theme, type) => {
   const classList = [];
   if (className) {
-    classList.push(className.split(" "));
+    classList.push(...className.split(" "));
   }
 
   if (theme) {
@@ -37,6 +37,12 @@ export const Button = ({
     if (classList) {
       $button.classList.add(...classList);
     }
+
+    return () => {
+      if (classList) {
+        $button.classList.remove(...classList);
+      }
+    };
   }, [className, theme, type]);
 
   return (
