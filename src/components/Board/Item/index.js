@@ -22,6 +22,7 @@ export const Item = ({ index, data, promos, setPromos, changePromoStatus }) => {
   const inputRef = useRef();
 
   const [type, setType] = useState("text");
+  const [promoItems, setPromoItems] = useState(promos[index].promos);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -71,22 +72,20 @@ export const Item = ({ index, data, promos, setPromos, changePromoStatus }) => {
     return "gray";
   };
 
-  const DrawPromos = ({ promoId, promoStatus }) =>
-    promos[promoId].promos.map(
-      ({ status: itemPromoStatus, date }, itemPromoId) => (
-        <Button
-          key={itemPromoId}
-          type={!promoStatus && "disabled"}
-          theme={getItemPromoButtonTheme(itemPromoStatus, date)}
-          LeftIcon={
-            itemPromoStatus &&
-            (itemPromoStatus === "active" ? CheckIcon : DotIcon)
-          }
-          value={!itemPromoStatus && "н"}
-          onClick={() => onItemPromoButtonClickHandler(promoId, itemPromoId)}
-        />
-      )
-    );
+  const DrawPromos = ({ promoStatus }) =>
+    promoItems.map(({ status: itemPromoStatus, date }, itemPromoId) => (
+      <Button
+        key={itemPromoId}
+        type={!promoStatus && "disabled"}
+        theme={getItemPromoButtonTheme(itemPromoStatus, date)}
+        LeftIcon={
+          itemPromoStatus &&
+          (itemPromoStatus === "active" ? CheckIcon : DotIcon)
+        }
+        value={!itemPromoStatus && "н"}
+        onClick={() => onItemPromoButtonClickHandler(index, itemPromoId)}
+      />
+    ));
 
   const RefInput = forwardRef((props, ref) => (
     <Input
@@ -136,7 +135,7 @@ export const Item = ({ index, data, promos, setPromos, changePromoStatus }) => {
       </div>
 
       <div className="discount-board__body-item-right">
-        <DrawPromos promoId={index} promoStatus={status} />
+        <DrawPromos promoStatus={status} />
       </div>
     </div>
   );
