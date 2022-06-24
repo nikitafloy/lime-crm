@@ -31,14 +31,13 @@ export const Board = () => {
     );
 
   const BoardBody = () =>
-    promosData.map(({ name, status }, index) => (
+    promosData.map((item, index) => (
       <Item
         index={index}
         key={index}
-        name={name}
-        status={status}
-        promosData={promosData}
-        setPromosData={setPromosData}
+        data={item}
+        promos={promosData}
+        setPromos={setPromosData}
         changePromoStatus={changePromoStatus}
       />
     ));

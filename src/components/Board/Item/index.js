@@ -16,14 +16,9 @@ import {
 // Inline SVG
 import InlineSVG from "svg-inline-react";
 
-export const Item = ({
-  index,
-  name,
-  status,
-  promosData,
-  setPromosData,
-  changePromoStatus,
-}) => {
+export const Item = ({ index, data, promos, setPromos, changePromoStatus }) => {
+  const { name, status } = data;
+
   const inputRef = useRef();
 
   const [type, setType] = useState("text");
@@ -39,10 +34,10 @@ export const Item = ({
   };
 
   const onItemPromoButtonClickHandler = (promoId, itemPromoId) => {
-    const promoStatus = promosData[promoId].status;
+    const promoStatus = promos[promoId].status;
     if (!promoStatus) return;
 
-    const itemPromo = promosData[promoId].promos[itemPromoId];
+    const itemPromo = promos[promoId].promos[itemPromoId];
     const itemPromoStatus = itemPromo.status;
 
     changeItemPromoStatus(itemPromo, itemPromoStatus);
@@ -51,14 +46,14 @@ export const Item = ({
   const changeItemPromoStatus = (itemPromo, currentItemStatus) => {
     if (currentItemStatus && currentItemStatus !== "active") return;
 
-    const newPromosData = [...promosData];
+    const newPromosData = [...promos];
 
     const currentItemStatusIsActive = currentItemStatus === "active";
     const newItemStatus = currentItemStatusIsActive ? null : "active";
 
     itemPromo.status = newItemStatus;
 
-    setPromosData(newPromosData);
+    setPromos(newPromosData);
   };
 
   const getItemPromoButtonTheme = (status, date) => {
@@ -77,7 +72,7 @@ export const Item = ({
   };
 
   const DrawPromos = ({ promoId, promoStatus }) =>
-    promosData[promoId].promos.map(
+    promos[promoId].promos.map(
       ({ status: itemPromoStatus, date }, itemPromoId) => (
         <Button
           key={itemPromoId}
