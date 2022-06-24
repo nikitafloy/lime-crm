@@ -18,6 +18,9 @@ import constants from "../../../const";
 import mocks from "../../../__mocks__";
 
 export const Controls = ({ toggleModal }) => {
+  // Mocks
+  const { discountTypes, categories, discountPercents } = mocks.Modal;
+
   // Toggles
   const [isSearchVisible, setSearchVisible] = useState(false);
 
@@ -26,52 +29,21 @@ export const Controls = ({ toggleModal }) => {
   const [endDate, setEndDate] = useState(new Date());
 
   // Controls
-  const [type, setType] = useState(mocks.Modal.discountTypes[0]);
-  const [category, setCategory] = useState(mocks.Modal.categories[0]);
-  const [discount, setDiscount] = useState(mocks.Modal.discountPercents[0]);
+  const [type, setType] = useState(discountTypes[0]);
+  const [category, setCategory] = useState(categories[0]);
+  const [discount, setDiscount] = useState(discountPercents[0]);
   const [statusFilter, setStatusFilter] = useState(mocks.Modal.statusFilter);
 
-  // Classes
-  const activeClasses = `discount-active ${
-    isSearchVisible ? "discount-active_hide" : ""
-  }`;
-
-  const addClasses = `discount-add ${
-    isSearchVisible ? "discount-add_hide" : ""
-  }`;
-
-  const filtersClasses = `discount-filters ${
-    isSearchVisible ? "discount-filters_hide" : ""
-  }`;
-
-  const searchBtnClasses = `discount-search-btn ${
-    isSearchVisible ? "discount-search-btn_lg" : ""
-  }`;
-
-  const searchInputClasses = `discount-search__input ${
-    isSearchVisible ? "discount-search__input_show" : ""
-  }`;
-
-  const searchBtnCloseClasses = `discount-search__close-button ${
-    isSearchVisible ? "discount-search__close-button_show" : ""
-  }`;
-
   const toggleSearchVisible = () => setSearchVisible(!isSearchVisible);
-
-  const CustomDateInput = forwardRef(({ value, onClick }, ref) => (
-    <Input
-      forwardedRef={ref}
-      className="discount-font-weight-medium discount-text-dark"
-      label="Период"
-      defaultValue={value || mocks.Modal.period}
-      onClick={onClick}
-    />
-  ));
 
   return (
     <aside className="discount-controls">
       <div className="discount-controls-inner">
-        <div className={addClasses}>
+        <div
+          className={`discount-add ${
+            isSearchVisible ? "discount-add_hide" : ""
+          }`}
+        >
           <Button
             theme="light-green"
             value="Добавить скидку"
@@ -80,7 +52,11 @@ export const Controls = ({ toggleModal }) => {
           />
         </div>
 
-        <div className={activeClasses}>
+        <div
+          className={`discount-active ${
+            isSearchVisible ? "discount-active_hide" : ""
+          }`}
+        >
           {constants.activeButtonsName.map((name, index) => {
             const isActiveButton = statusFilter === name;
             return (
@@ -99,13 +75,17 @@ export const Controls = ({ toggleModal }) => {
           })}
         </div>
 
-        <div className={filtersClasses}>
+        <div
+          className={`discount-filters ${
+            isSearchVisible ? "discount-filters_hide" : ""
+          }`}
+        >
           <div className="discount-filters__type">
             <Select
               value={type}
               className="discount-font-weight-medium"
               label="Тип скидки"
-              variants={mocks.Modal.discountTypes}
+              variants={discountTypes}
               onChange={(value) => {
                 setType(value);
               }}
@@ -117,7 +97,7 @@ export const Controls = ({ toggleModal }) => {
               value={discount}
               className="discount-font-weight-medium"
               label="% скидки"
-              variants={mocks.Modal.discountPercents}
+              variants={discountPercents}
               onChange={(value) => {
                 setDiscount(value);
               }}
@@ -157,7 +137,7 @@ export const Controls = ({ toggleModal }) => {
               value={category}
               className="discount-font-weight-medium"
               label="Категория товаров"
-              variants={mocks.Modal.categories}
+              variants={categories}
               onChange={(value) => {
                 setCategory(value);
               }}
@@ -165,7 +145,11 @@ export const Controls = ({ toggleModal }) => {
           </div>
         </div>
 
-        <div className={searchBtnClasses}>
+        <div
+          className={`discount-search-btn ${
+            isSearchVisible ? "discount-search-btn_lg" : ""
+          }`}
+        >
           <div className="discount-search-btn-inner">
             <div className="discount-search">
               <div
@@ -178,12 +162,18 @@ export const Controls = ({ toggleModal }) => {
                 />
               </div>
 
-              <div className={searchInputClasses}>
+              <div
+                className={`discount-search__input ${
+                  isSearchVisible ? "discount-search__input_show" : ""
+                }`}
+              >
                 <Input />
               </div>
 
               <div
-                className={searchBtnCloseClasses}
+                className={`discount-search__close-button ${
+                  isSearchVisible ? "discount-search__close-button_show" : ""
+                }`}
                 onClick={toggleSearchVisible}
               >
                 <Button LeftIcon={CrossIcon} />
