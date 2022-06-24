@@ -26,6 +26,7 @@ export const Item = ({
   changePromoStatus,
 }) => {
   const inputRef = useRef();
+
   const [nameType, setNameType] = useState("text");
 
   useEffect(() => {
@@ -42,41 +43,45 @@ export const Item = ({
     setNameType(value);
   };
 
-  const changePromoStatusDate = (promoId, promoListId, status) => {
-    const newPromosData = [...promosData];
+  const changePromoStatusItem = (promoId, promoItemId, status) => {
+    if (status && status !== "active") return;
 
-    newPromosData[promoId].promos[promoListId].status = status;
+    const newPromosData = [...promosData];
+    const newStatus = !status ? "active" : null;
+
+    newPromosData[promoId].promos[promoItemId].status = newStatus;
 
     setPromosData(newPromosData);
   };
 
-  const DrawPromos = ({ promoId, promos, promoStatus }) =>
-    promos.map(({ status, date }, index) => {
-      const weekday = new Date(date).getDay();
-      return (
-        <Button
-          key={index}
-          type={!promoStatus && "disabled"}
-          theme={
-            status
-              ? status === "active"
-                ? "black"
-                : "green"
-              : weekday === 4 || weekday === 5
-              ? "lighter-green"
-              : "gray"
-          }
-          LeftIcon={status && (status === "active" ? CheckIcon : DotIcon)}
-          value={!status && "н"}
-          onClick={() => {
-            if (!promoStatus) return;
-            if (status && status !== "active") return;
+  const getButtonTheme = (status, date) => {
+    const weekday = new Date(date).getDay();
+    if (status) {
+      if (status === "active") {
+        return "black";
+      }
+      return "green";
+    }
 
-            changePromoStatusDate(promoId, index, !status ? "active" : null);
-          }}
-        />
-      );
-    });
+    if (weekday === 4 || weekday === 5) {
+      return "lighter-green";
+    }
+    return "gray";
+  };
+
+  const DrawPromos = ({ promoId, promos, promoStatus }) =>
+    promos.map(({ status, date }, index) => (
+      <Button
+        key={index}
+        type={!promoStatus && "disabled"}
+        theme={getButtonTheme(status, date)}
+        LeftIcon={status && (status === "active" ? CheckIcon : DotIcon)}
+        value={!status && "н"}
+        onClick={() =>
+          promoStatus && changePromoStatusItem(promoId, index, status)
+        }
+      />
+    ));
 
   const RefInput = forwardRef((props, ref) => (
     <Input
