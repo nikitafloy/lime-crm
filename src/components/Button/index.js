@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./index.scss";
 
 import InlineSVG from "svg-inline-react";
@@ -12,21 +13,24 @@ export const Button = ({
   className,
   onClick,
 }) => {
-  const buttonClasses = ["discount-btn"];
-  if (className) {
-    buttonClasses.push(...className.split(" "));
-  }
+  const [classes, setClasses] = useState(["discount-btn"]);
 
-  if (theme) {
-    buttonClasses.push(`discount-btn_${theme}`);
-  }
+  useEffect(() => {
+    if (className) {
+      setClasses([...classes, className]);
+    }
 
-  if (type) {
-    buttonClasses.push(`discount-btn_${type}`);
-  }
+    if (theme) {
+      setClasses([...classes, `discount-btn_${theme}`]);
+    }
+
+    if (type) {
+      setClasses([...classes, `discount-btn_${type}`]);
+    }
+  }, [className, theme, type]);
 
   return (
-    <button className={buttonClasses.join(" ")} style={style} onClick={onClick}>
+    <button className={classes.join(" ")} style={style} onClick={onClick}>
       {LeftIcon && (
         <div className="discount-btn__icon-left">
           <InlineSVG element="div" style={{ display: "flex" }} src={LeftIcon} />
@@ -36,7 +40,9 @@ export const Button = ({
       {value && (
         <div className="discount-btn__text">
           {value}
-          {secondText && <div className="discount-btn__second-text">{secondText}</div>}
+          {secondText && (
+            <div className="discount-btn__second-text">{secondText}</div>
+          )}
         </div>
       )}
     </button>
