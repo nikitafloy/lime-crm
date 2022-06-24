@@ -1,15 +1,12 @@
 import { useState } from "react";
 import "./index.scss";
 
-// Immutable JS
-import { List } from "immutable";
-
 // Mocks
 import mocks from "../../__mocks__";
 import { Item } from "./Item";
 
 export const Board = () => {
-  const [promosData, setPromosData] = useState(List(mocks.promos));
+  const [promosData, setPromosData] = useState(mocks.promos);
 
   const DrawDates = () =>
     mocks.dates.map(({ date, weekday }, index) => (
@@ -19,14 +16,15 @@ export const Board = () => {
       </div>
     ));
 
-  const changePromoStatus = (promoId) => {
+  const changePromoStatus = (promoId) =>
     setPromosData(
-      promosData.set(promoId, {
-        ...promosData.get(promoId),
-        status: !promosData.get(promoId).status,
+      promosData.map((item, index) => {
+        if (index === promoId) {
+          return { ...item, status: !item.status };
+        }
+        return item;
       })
     );
-  };
 
   const DrawActionData = () =>
     promosData.map(({ name, status, promos }, index) => (

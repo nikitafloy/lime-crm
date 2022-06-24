@@ -43,15 +43,11 @@ export const Item = ({
   };
 
   const changePromoStatusDate = (promoId, promoListId, status) => {
-    const promos = promosData.get(promoId).promos;
-    promos[promoListId].status = status;
+    const newPromosData = [...promosData];
 
-    setPromosData(
-      promosData.set(promoId, {
-        ...promosData.get(promoId),
-        promos,
-      })
-    );
+    newPromosData[promoId].promos[promoListId].status = status;
+
+    setPromosData(newPromosData);
   };
 
   const DrawPromos = ({ promoId, promos, promoStatus }) =>
