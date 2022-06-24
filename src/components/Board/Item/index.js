@@ -39,8 +39,7 @@ export const Item = ({
   }`;
 
   const changeNameTypeHandler = () => {
-    const value = nameType === "text" ? "input" : "text";
-    setNameType(value);
+    setNameType(nameType === "text" ? "input" : "text");
   };
 
   const changePromoStatusItem = (promoId, promoItemId, status) => {
