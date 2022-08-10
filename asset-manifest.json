@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/lime-crm/static/css/main.18629485.css",
+    "main.js": "/lime-crm/static/js/main.2e744192.js",
+    "static/media/Raleway-Regular.woff": "/lime-crm/static/media/Raleway-Regular.7caf4b6f36b9284c2f43.woff",
+    "static/media/Raleway-Medium.woff": "/lime-crm/static/media/Raleway-Medium.ee78df4b5d600c504dfb.woff",
+    "index.html": "/lime-crm/index.html",
+    "main.18629485.css.map": "/lime-crm/static/css/main.18629485.css.map",
+    "main.2e744192.js.map": "/lime-crm/static/js/main.2e744192.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.18629485.css",
+    "static/js/main.2e744192.js"
+  ]
+}
